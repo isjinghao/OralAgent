@@ -55,13 +55,13 @@ class PanoramicXRayDiseaseSegmentationOutput(BaseModel):
 class PanoramicXRayDiseaseSegmentationTool(BaseTool):
     """Tool for performing disease segmentation analysis of panoramic X-ray images using MaskDINO."""
 
-    name: str = "panoramic_xray_disease_segmentation"
+    name: str = "panoramic_xray_condition_detection"
     description: str = (
         "Detects and segments regions of diseases and anatomical structures in panoramic X-ray images."
         "This tool can identify the following categories: "
         "Caries, Crown, Filling, Implant, Mandibular Canal, Missing teeth, Periapical lesion, "
         "Root Canal Treatment, Root Piece, Impacted tooth, and Maxillary sinus. "
-        "Returns segmentation visualization for each detected category."
+        "Returns visualization for each detected category."
     )
 
     args_schema: Type[BaseModel] = PanoramicXRayDiseaseSegmentationInput

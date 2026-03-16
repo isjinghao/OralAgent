@@ -176,11 +176,11 @@ class IntraoralImageConditionDetectionTool(BaseTool):
             output = IntraoralImageConditionDetectionOutput(detections=detections)
 
             # Save visualization
-            viz_path = None
-            # viz_path = self._save_visualization(
-            #         image_path=image_path,
-            #         output=output
-            #         )
+            # viz_path = None
+            viz_path = self._save_visualization(
+                    image_path=image_path,
+                    output=output
+                    )
 
             # convert boxes for detected conditions
             results = {}
@@ -270,7 +270,7 @@ class IntraoralImageConditionDetectionTool(BaseTool):
             # Draw the bounding box
             rect = patches.Rectangle(
                 (x_min, y_min), x_max - x_min, y_max - y_min,
-                linewidth=2, edgecolor=colors[i % len(colors)], facecolor='none'
+                linewidth=6, edgecolor=colors[i % len(colors)], facecolor='none'
             )
             ax.add_patch(rect)
 
@@ -278,7 +278,7 @@ class IntraoralImageConditionDetectionTool(BaseTool):
             label = f"{condition_type} ({score:.2f})"
             ax.text(
                 x_min, y_min - 5, label,
-                fontsize=9, color='white',
+                fontsize=14, color='white',
                 bbox=dict(facecolor=colors[i % len(colors)], alpha=0.5)
             )
 
