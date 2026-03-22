@@ -6,7 +6,11 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import AIMessage, ToolMessage
 from medrax.agent import Agent
-from medrax.utils import load_prompts_from_file
+from medrax.utils import (
+    load_prompts_from_file,
+    parse_bool_env,
+    apply_enriched_query_ablation,
+)
 from langgraph.checkpoint.memory import MemorySaver
 from medrax.tools import *
 from langchain_core.runnables import Runnable
@@ -136,6 +140,19 @@ def get_agent(
     intent_recognition_prompt = prompts["INTENT_RECOGNITION_ASSISTANT"]
     enriched_query_template = prompts.get("ENRICHED_QUERY_TEMPLATE")
     modality_section_template = prompts.get("MODALITY_SECTION_TEMPLATE")
+
+    # Optional ablation switches (default keeps original template unchanged)
+    include_intent_recognition = parse_bool_env(
+        "ORALAGENT_INCLUDE_INTENT_RECOGNITION_IN_PROMPT", default=True
+    )
+    include_modality_section = parse_bool_env(
+        "ORALAGENT_INCLUDE_MODALITY_SECTION_IN_PROMPT", default=True
+    )
+    enriched_query_template = apply_enriched_query_ablation(
+        enriched_query_template,
+        include_intent_recognition=include_intent_recognition,
+        include_modality_section=include_modality_section,
+    )
 
     # Initialize the agent
     checkpointer = MemorySaver()

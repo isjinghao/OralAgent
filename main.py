@@ -80,6 +80,19 @@ def initialize_agent(
     enriched_query_template = prompts.get("ENRICHED_QUERY_TEMPLATE")
     modality_section_template = prompts.get("MODALITY_SECTION_TEMPLATE")
 
+    # Optional ablation switches (default keeps original template unchanged)
+    include_intent_recognition = parse_bool_env(
+        "ORALAGENT_INCLUDE_INTENT_RECOGNITION_IN_PROMPT", default=True
+    )
+    include_modality_section = parse_bool_env(
+        "ORALAGENT_INCLUDE_MODALITY_SECTION_IN_PROMPT", default=True
+    )
+    enriched_query_template = apply_enriched_query_ablation(
+        enriched_query_template,
+        include_intent_recognition=include_intent_recognition,
+        include_modality_section=include_modality_section,
+    )
+
     # Get tool factories from single source of truth (medrax.tools.get_tools)
     all_tools = get_all_tools_factories(model_dir, temp_dir, device, rag_config)
     tools_to_use = tools_to_use or list(all_tools.keys())
@@ -138,7 +151,7 @@ if __name__ == "__main__":
         retriever_k=3,
         persist_dir="medrax/rag/",  # Base path for vector DB; subdir added when use_OralCorpus=True
         use_OralCorpus=True,  # Set to True to load Oral corpus when creating vectorstore
-        corpus_language="chinese",  # "english" -> vectorDB_OralCorpus_English, "chinese" -> vectorDB_OralCorpus_Chinese
+        corpus_language="english",  # "english" -> vectorDB_OralCorpus_English, "chinese" -> vectorDB_OralCorpus_Chinese
         local_docs_dir="",  # Path to Oral corpus (EN or CN) for RAG; also used for custom docs
         chunk_size=1000,  # Only valid for private documents
         chunk_overlap=100,  # Only valid for private documents

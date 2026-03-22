@@ -97,3 +97,43 @@ def load_system_prompt(
     tool_prompts = load_tool_prompts(tools, tools_json_path)
 
     return f"{system_prompt}\n\nTools:\n{tool_prompts}".strip()
+
+
+def parse_bool_env(name: str, default: bool) -> bool:
+    """
+    Parse a boolean-like environment variable.
+
+    Accepted truthy values: 1/true/t/yes/y/on (case-insensitive).
+    Everything else is treated as false.
+    """
+    val = os.getenv(name)
+    if val is None:
+        return default
+    return val.strip().lower() in ("1", "true", "t", "yes", "y", "on")
+
+
+def apply_enriched_query_ablation(
+    enriched_query_template: str,
+    *,
+    include_intent_recognition: bool,
+    include_modality_section: bool,
+) -> str:
+    """
+    Ablate the enriched query prompt by conditionally removing specific lines.
+
+    - Remove the line starting with `Intent recognition:` when `include_intent_recognition` is False.
+    - Remove any line containing `{modality_section}` when `include_modality_section` is False.
+    """
+    if not enriched_query_template:
+        return enriched_query_template
+
+    kept_lines: List[str] = []
+    for line in enriched_query_template.splitlines():
+        stripped = line.strip()
+        if not include_intent_recognition and stripped.startswith("Intent recognition:"):
+            continue
+        if not include_modality_section and "{modality_section}" in stripped:
+            continue
+        kept_lines.append(line)
+
+    return "\n".join(kept_lines).strip()

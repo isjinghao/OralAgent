@@ -37,31 +37,30 @@ from .rag import *
 
 # Default list of tool names to use when initializing the agent (to be used in main.py)
 DEFAULT_SELECTED_TOOL_NAMES: List[str] = [
-    # "PanoramicXRayToothIdDetectionTool",
-    # "PanoramicXRayBoneLossSegmentationTool",
-    # "PanoramicXRayDiseaseSegmentationTool",
-    # "PanoramicXRayPeriapicalLesionSubClassDetectionTool",
-    # "PanoramicXRayJawStructureSegmentationTool",
+    "PanoramicXRayToothIdDetectionTool",
+    "PanoramicXRayBoneLossSegmentationTool",
+    "PanoramicXRayDiseaseSegmentationTool",
+    "PanoramicXRayPeriapicalLesionSubClassDetectionTool",
+    "PanoramicXRayJawStructureSegmentationTool",
 
-    "PeriapicalXRayDiseaseSegmentationTool",
-    "PeriapicalXRayDiseaseClassificationTool",
+    # "PeriapicalXRayDiseaseSegmentationTool",
+    # "PeriapicalXRayDiseaseClassificationTool",
 
-    "CephalometricXRayLandmarkDetectionTool",
-    # "CephalometricXRayCVMstagesClassificationTool",
+    # "CephalometricXRayLandmarkDetectionTool",
 
-    "IntraoralImageConditionDetectionTool",
-    "IntraoralImageGingivitisDetectionTool",
-    "IntraoralImageFenestrationDetectionTool",
-    "IntraoralImageMalocclusionIssuesDetectionTool",
-    "IntraoralImageImageLevelConditionDetectionTool",
-    "IntraoralImageToothTypeDetectionTool",
+    # "IntraoralImageConditionDetectionTool",
+    # "IntraoralImageGingivitisDetectionTool",
+    # "IntraoralImageFenestrationDetectionTool",
+    # "IntraoralImageMalocclusionIssuesDetectionTool",
+    # "IntraoralImageImageLevelConditionDetectionTool",
+    # "IntraoralImageToothTypeDetectionTool",
 
-    "CytopathologyCellNucleusSegmentationTool",
-    "CytopathologyCellNucleusGradingTool",
+    # "CytopathologyCellNucleusSegmentationTool",
+    # "CytopathologyCellNucleusGradingTool",
     
-    "HistopathologyLeukoplakiaOSCCClassificationTool",
-    "HistopathologyOSMFOSCCClassificationTool",
-    "HistopathologyOSCCSegmentationTool",
+    # "HistopathologyLeukoplakiaOSCCClassificationTool",
+    # "HistopathologyOSMFOSCCClassificationTool",
+    # "HistopathologyOSCCSegmentationTool",
     
     "OralRAG",
 ]
@@ -122,7 +121,7 @@ def get_all_tools_factories(
             config_path=f"{model_dir}/config_Visual_Expert_Model_MaskDINO_SwinL_panoramic_x-ray_11diseases.yaml",
             checkpoint_path=f"{model_dir}/OralGPT_Visual_Expert_Model_MaskDINO_SwinL_panoramic_x-ray_11diseases.pth",
             coco_names_path=f"{model_dir}/categories_Visual_Expert_Model_MaskDINO_SwinL_panoramic_x-ray_11diseases.json",
-            confidence_threshold=0.5,
+            confidence_threshold=0.40,
             temp_dir=temp_dir,
             device=device,
         )
@@ -296,11 +295,11 @@ def get_all_tools_factories(
         return OralGPTOmniTool(excel_path=excel_path, load_excel_on_init=True)
 
     return {
-        # "PanoramicXRayToothIdDetectionTool": f_panoramic_tooth,
-        # "PanoramicXRayBoneLossSegmentationTool": f_panoramic_bone_loss,
-        # "PanoramicXRayPeriapicalLesionSubClassDetectionTool": f_panoramic_periapical_lesion,
-        # "PanoramicXRayDiseaseSegmentationTool": f_panoramic_disease_seg,
-        # "PanoramicXRayJawStructureSegmentationTool": f_panoramic_jaw_structure,
+        "PanoramicXRayToothIdDetectionTool": f_panoramic_tooth,
+        "PanoramicXRayBoneLossSegmentationTool": f_panoramic_bone_loss,
+        "PanoramicXRayPeriapicalLesionSubClassDetectionTool": f_panoramic_periapical_lesion,
+        "PanoramicXRayDiseaseSegmentationTool": f_panoramic_disease_seg,
+        "PanoramicXRayJawStructureSegmentationTool": f_panoramic_jaw_structure,
 
         "PeriapicalXRayDiseaseSegmentationTool": f_periapical_disease_seg,
         "PeriapicalXRayDiseaseClassificationTool": f_periapical_disease_cls,
@@ -357,7 +356,7 @@ def get_tools(
         config_path=f"{model_dir}/config_Visual_Expert_Model_MaskDINO_SwinL_panoramic_x-ray_11diseases.yaml",
         checkpoint_path=f"{model_dir}/OralGPT_Visual_Expert_Model_MaskDINO_SwinL_panoramic_x-ray_11diseases.pth",
         coco_names_path=f"{model_dir}/categories_Visual_Expert_Model_MaskDINO_SwinL_panoramic_x-ray_11diseases.json",
-        confidence_threshold=0.5,
+        confidence_threshold=0.40,
         temp_dir=temp_dir,
         device=device
     )
@@ -547,5 +546,6 @@ def get_tools(
         histopathology_leukoplakia_oscc_classification_tool,
 
         oralgpt_omni_tool,
+        
         # medical_rag_tool,
     ]

@@ -259,7 +259,7 @@ class Agent:
         Returns:
             AgentState: The same state, with user message content possibly replaced by the enriched query.
         """
-        print(f"state: {state}")
+        # print(f"state: {state}")
         user_input = state["messages"][-1]
 
         if isinstance(user_input, ToolMessage) or isinstance(user_input, AIMessage):
@@ -365,6 +365,12 @@ class Agent:
             user_intent=user_intent,
             modality_section=modality_section,
         )
+        # 当 ORALAGENT_INCLUDE_MODALITY_SECTION_IN_PROMPT=0 时，apply_enriched_query_ablation 会移除含 {modality_section} 的整行，
+        # 导致 image_path 与 benchmark_index 未被插入。此处补回这两项必要信息，避免模型拿不到图像路径和 case index。
+        if image_path and "Image file path" not in processed_user_query:
+            processed_user_query += f"\nImage file path (you MUST use this exact path for the image_path argument in tool calls): {image_path}"
+        if benchmark_index is not None and "Benchmark case index" not in processed_user_query:
+            processed_user_query += f"\nBenchmark case index: {benchmark_index}"
         print(f"enriched query:\n{processed_user_query}")
 
         # 把用于意图的 text 块替换为 enriched query；若无（仅图片无文字）则替换第一个 text 块，保证模型收到 modality/intent
