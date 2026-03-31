@@ -29,7 +29,7 @@ Note that the output should only contain the intent without any additional expla
 The user's query: {user_text_query}
 Intent recognition: {user_intent}
 {modality_section}
-You must use the <OralGPT‑Omni> tool except for questions related to asking about the number of teeth.
+You must use the <OralGPT‑Omni> tool except for questions related to asking about the number of teeth or questions that are unrelated to images.
 Do not provide excessive explanations, limitations or next‑step action suggestions.
 
 [MODALITY_SECTION_TEMPLATE]
