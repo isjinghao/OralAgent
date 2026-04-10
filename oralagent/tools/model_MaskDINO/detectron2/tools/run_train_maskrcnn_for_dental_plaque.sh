@@ -1,0 +1,2 @@
+python train_net.py --num-gpus 1 --resume \
+  --config-file ../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml  MODEL.WEIGHTS  /home/jinghao/projects/dental_plague_detection/MaskDINO/detectron2/tools/output/model_0004999.pth

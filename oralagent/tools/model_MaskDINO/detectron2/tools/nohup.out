@@ -1,0 +1,1223 @@
+Command Line Args: Namespace(config_file='../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml', resume=True, eval_only=False, num_gpus=1, num_machines=1, machine_rank=0, dist_url='tcp://127.0.0.1:50153', opts=['MODEL.WEIGHTS', '/home/jinghao/projects/dental_plague_detection/MaskDINO/detectron2/tools/output/model_0004999.pth'])
+[07/17 16:31:22 detectron2]: Rank of current process: 0. World size: 1
+[07/17 16:31:23 detectron2]: Environment info:
+-------------------------------  ----------------------------------------------------------------------------------------
+sys.platform                     linux
+Python                           3.10.16 (main, Dec 11 2024, 16:24:50) [GCC 11.2.0]
+numpy                            1.26.4
+detectron2                       0.6 @/home/jinghao/projects/dental_plague_detection/MaskDINO/detectron2/detectron2
+Compiler                         GCC 9.4
+CUDA compiler                    CUDA 12.4
+detectron2 arch flags            8.0
+DETECTRON2_ENV_MODULE            <not set>
+PyTorch                          2.5.1+cu124 @/home/jinghao/anaconda3/envs/sam2/lib/python3.10/site-packages/torch
+PyTorch debug build              False
+torch._C._GLIBCXX_USE_CXX11_ABI  False
+GPU available                    Yes
+GPU 0                            NVIDIA A100-SXM4-80GB (arch=8.0)
+Driver version                   550.163.01
+CUDA_HOME                        /usr/local/cuda
+Pillow                           11.1.0
+torchvision                      0.20.1+cu124 @/home/jinghao/anaconda3/envs/sam2/lib/python3.10/site-packages/torchvision
+torchvision arch flags           5.0, 6.0, 7.0, 7.5, 8.0, 8.6, 9.0
+fvcore                           0.1.5.post20221221
+iopath                           0.1.9
+cv2                              4.11.0
+-------------------------------  ----------------------------------------------------------------------------------------
+PyTorch built with:
+  - GCC 9.3
+  - C++ Version: 201703
+  - Intel(R) oneAPI Math Kernel Library Version 2024.2-Product Build 20240605 for Intel(R) 64 architecture applications
+  - Intel(R) MKL-DNN v3.5.3 (Git Hash 66f0cb9eb66affd2da3bf5f8d897376f04aae6af)
+  - OpenMP 201511 (a.k.a. OpenMP 4.5)
+  - LAPACK is enabled (usually provided by MKL)
+  - NNPACK is enabled
+  - CPU capability usage: AVX512
+  - CUDA Runtime 12.4
+  - NVCC architecture flags: -gencode;arch=compute_50,code=sm_50;-gencode;arch=compute_60,code=sm_60;-gencode;arch=compute_70,code=sm_70;-gencode;arch=compute_75,code=sm_75;-gencode;arch=compute_80,code=sm_80;-gencode;arch=compute_86,code=sm_86;-gencode;arch=compute_90,code=sm_90
+  - CuDNN 90.1
+  - Magma 2.6.1
+  - Build settings: BLAS_INFO=mkl, BUILD_TYPE=Release, CUDA_VERSION=12.4, CUDNN_VERSION=9.1.0, CXX_COMPILER=/opt/rh/devtoolset-9/root/usr/bin/c++, CXX_FLAGS= -D_GLIBCXX_USE_CXX11_ABI=0 -fabi-version=11 -fvisibility-inlines-hidden -DUSE_PTHREADPOOL -DNDEBUG -DUSE_KINETO -DLIBKINETO_NOROCTRACER -DLIBKINETO_NOXPUPTI=ON -DUSE_FBGEMM -DUSE_PYTORCH_QNNPACK -DUSE_XNNPACK -DSYMBOLICATE_MOBILE_DEBUG_HANDLE -O2 -fPIC -Wall -Wextra -Werror=return-type -Werror=non-virtual-dtor -Werror=bool-operation -Wnarrowing -Wno-missing-field-initializers -Wno-type-limits -Wno-array-bounds -Wno-unknown-pragmas -Wno-unused-parameter -Wno-strict-overflow -Wno-strict-aliasing -Wno-stringop-overflow -Wsuggest-override -Wno-psabi -Wno-error=old-style-cast -Wno-missing-braces -fdiagnostics-color=always -faligned-new -Wno-unused-but-set-variable -Wno-maybe-uninitialized -fno-math-errno -fno-trapping-math -Werror=format -Wno-stringop-overflow, LAPACK_INFO=mkl, PERF_WITH_AVX=1, PERF_WITH_AVX2=1, TORCH_VERSION=2.5.1, USE_CUDA=ON, USE_CUDNN=ON, USE_CUSPARSELT=1, USE_EXCEPTION_PTR=1, USE_GFLAGS=OFF, USE_GLOG=OFF, USE_GLOO=ON, USE_MKL=ON, USE_MKLDNN=ON, USE_MPI=OFF, USE_NCCL=1, USE_NNPACK=ON, USE_OPENMP=ON, USE_ROCM=OFF, USE_ROCM_KERNEL_ASSERT=OFF, 
+
+[07/17 16:31:23 detectron2]: Command line arguments: Namespace(config_file='../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml', resume=True, eval_only=False, num_gpus=1, num_machines=1, machine_rank=0, dist_url='tcp://127.0.0.1:50153', opts=['MODEL.WEIGHTS', '/home/jinghao/projects/dental_plague_detection/MaskDINO/detectron2/tools/output/model_0004999.pth'])
+[07/17 16:31:23 detectron2]: Contents of args.config_file=../configs/COCO-InstanceSegmentation/mask_rcnn_R_50_FPN_3x.yaml:
+[38;5;204m_BASE_[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186m../Base-RCNN-FPN.yaml[39m[38;5;186m"[39m
+[38;5;204mDATASETS[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mTRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m("dental_plague_dataset_train",)[39m
+[38;5;15m  [39m[38;5;204mTEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m("dental_plague_dataset_val",)[39m
+
+[38;5;204mMODEL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mWEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mdetectron2://ImageNetPretrained/MSRA/R-50.pkl[39m[38;5;186m"[39m
+[38;5;15m  [39m[38;5;204mMASK_ON[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mTrue[39m
+[38;5;15m  [39m[38;5;204mRESNETS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mDEPTH[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m50[39m
+[38;5;15m  [39m[38;5;204mROI_HEADS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mStandardROIHeads[39m[38;5;186m"[39m
+[38;5;15m    [39m[38;5;204mIN_FEATURES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;186m"[39m[38;5;186mp2[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mp3[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mp4[39m[38;5;186m"[39m[38;5;15m,[39m[38;5;15m [39m[38;5;186m"[39m[38;5;186mp5[39m[38;5;186m"[39m[38;5;15m][39m
+[38;5;15m    [39m[38;5;204mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m90[39m
+
+[38;5;204mSOLVER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mSTEPS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m(9000,[39m[38;5;141m [39m[38;5;141m9500)[39m
+[38;5;15m  [39m[38;5;204mMAX_ITER[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m10000[39m
+[38;5;15m  [39m[38;5;204mIMS_PER_BATCH[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m16[39m
+[38;5;15m  [39m[38;5;204mBASE_LR[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.02[39m
+
+[38;5;204mINPUT[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mMIN_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m(512,[39m[38;5;141m [39m[38;5;141m)[39m[38;5;15m [39m[38;5;245m# (640, 672, 704, 736, 768, 800)[39m
+[38;5;15m  [39m[38;5;204mMAX_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m  [39m[38;5;204mMIN_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m512[39m[38;5;15m  [39m[38;5;245m# 最小测试尺寸[39m
+[38;5;15m  [39m[38;5;204mMAX_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m512[39m[38;5;15m  [39m[38;5;245m# 最大测试尺寸[39m
+
+[07/17 16:31:23 detectron2]: Running with full config:
+[38;5;204mCUDNN_BENCHMARK[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;204mDATALOADER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mASPECT_RATIO_GROUPING[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m  [39m[38;5;204mFILTER_EMPTY_ANNOTATIONS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m  [39m[38;5;204mNUM_WORKERS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m4[39m
+[38;5;15m  [39m[38;5;204mREPEAT_SQRT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m  [39m[38;5;204mREPEAT_THRESHOLD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.0[39m
+[38;5;15m  [39m[38;5;204mSAMPLER_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mTrainingSampler[39m
+[38;5;204mDATASETS[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mPRECOMPUTED_PROPOSAL_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1000[39m
+[38;5;15m  [39m[38;5;204mPRECOMPUTED_PROPOSAL_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m2000[39m
+[38;5;15m  [39m[38;5;204mPROPOSAL_FILES_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;15m][39m
+[38;5;15m  [39m[38;5;204mPROPOSAL_FILES_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;15m][39m
+[38;5;15m  [39m[38;5;204mTEST[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mdental_plague_dataset_val[39m
+[38;5;15m  [39m[38;5;204mTRAIN[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mdental_plague_dataset_train[39m
+[38;5;204mFLOAT32_PRECISION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;204mGLOBAL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mHACK[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;204mINPUT[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mCROP[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mSIZE[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.9[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.9[39m
+[38;5;15m    [39m[38;5;204mTYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mrelative_range[39m
+[38;5;15m  [39m[38;5;204mFORMAT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mBGR[39m
+[38;5;15m  [39m[38;5;204mMASK_FORMAT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mpolygon[39m
+[38;5;15m  [39m[38;5;204mMAX_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m  [39m[38;5;204mMAX_SIZE_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m  [39m[38;5;204mMIN_SIZE_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m  [39m[38;5;204mMIN_SIZE_TRAIN[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m  [39m[38;5;204mMIN_SIZE_TRAIN_SAMPLING[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mchoice[39m
+[38;5;15m  [39m[38;5;204mRANDOM_FLIP[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mhorizontal[39m
+[38;5;204mMODEL[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mANCHOR_GENERATOR[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mANGLES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m-90[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m90[39m
+[38;5;15m    [39m[38;5;204mASPECT_RATIOS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m2.0[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mDefaultAnchorGenerator[39m
+[38;5;15m    [39m[38;5;204mOFFSET[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.0[39m
+[38;5;15m    [39m[38;5;204mSIZES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m32[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m64[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m128[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m  [39m[38;5;204mBACKBONE[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mFREEZE_AT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m2[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mbuild_resnet_fpn_backbone[39m
+[38;5;15m  [39m[38;5;204mDEVICE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mcuda[39m
+[38;5;15m  [39m[38;5;204mFPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mFUSE_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141msum[39m
+[38;5;15m    [39m[38;5;204mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mres2[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mres3[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mres4[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mres5[39m
+[38;5;15m    [39m[38;5;204mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;204mOUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m  [39m[38;5;204mKEYPOINT_ON[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m  [39m[38;5;204mLOAD_PROPOSALS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m  [39m[38;5;204mMASK_ON[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m  [39m[38;5;204mMETA_ARCHITECTURE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mGeneralizedRCNN[39m
+[38;5;15m  [39m[38;5;204mPANOPTIC_FPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mCOMBINE[39m[38;5;15m:[39m
+[38;5;15m      [39m[38;5;204mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m      [39m[38;5;204mINSTANCES_CONFIDENCE_THRESH[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m      [39m[38;5;204mOVERLAP_THRESH[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m      [39m[38;5;204mSTUFF_AREA_LIMIT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m4096[39m
+[38;5;15m    [39m[38;5;204mINSTANCE_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m  [39m[38;5;204mPIXEL_MEAN[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m103.53[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m116.28[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m123.675[39m
+[38;5;15m  [39m[38;5;204mPIXEL_STD[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m  [39m[38;5;204mPROPOSAL_GENERATOR[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mMIN_SIZE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mRPN[39m
+[38;5;15m  [39m[38;5;204mRESNETS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mDEFORM_MODULATED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mDEFORM_NUM_GROUPS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1[39m
+[38;5;15m    [39m[38;5;204mDEFORM_ON_PER_STAGE[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mDEPTH[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m50[39m
+[38;5;15m    [39m[38;5;204mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mFrozenBN[39m
+[38;5;15m    [39m[38;5;204mNUM_GROUPS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1[39m
+[38;5;15m    [39m[38;5;204mOUT_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mres2[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mres3[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mres4[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mres5[39m
+[38;5;15m    [39m[38;5;204mRES2_OUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m    [39m[38;5;204mRES5_DILATION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1[39m
+[38;5;15m    [39m[38;5;204mSTEM_OUT_CHANNELS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m64[39m
+[38;5;15m    [39m[38;5;204mSTRIDE_IN_1X1[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m    [39m[38;5;204mWIDTH_PER_GROUP[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m64[39m
+[38;5;15m  [39m[38;5;204mRETINANET[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141msmooth_l1[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m&id002[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;204mFOCAL_LOSS_ALPHA[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.25[39m
+[38;5;15m    [39m[38;5;204mFOCAL_LOSS_GAMMA[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m2.0[39m
+[38;5;15m    [39m[38;5;204mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp3[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp4[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp5[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp6[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp7[39m
+[38;5;15m    [39m[38;5;204mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m-1[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1[39m
+[38;5;15m    [39m[38;5;204mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.4[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m    [39m[38;5;204mNMS_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m    [39m[38;5;204mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;204mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m80[39m
+[38;5;15m    [39m[38;5;204mNUM_CONVS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m4[39m
+[38;5;15m    [39m[38;5;204mPRIOR_PROB[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.01[39m
+[38;5;15m    [39m[38;5;204mSCORE_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.05[39m
+[38;5;15m    [39m[38;5;204mSMOOTH_L1_LOSS_BETA[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.1[39m
+[38;5;15m    [39m[38;5;204mTOPK_CANDIDATES_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1000[39m
+[38;5;15m  [39m[38;5;204mROI_BOX_CASCADE_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m&id001[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m10.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m10.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m5.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m5.0[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m20.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m20.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m10.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m10.0[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m30.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m30.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m15.0[39m
+[38;5;15m      [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m15.0[39m
+[38;5;15m    [39m[38;5;204mIOUS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.6[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.7[39m
+[38;5;15m  [39m[38;5;204mROI_BOX_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141msmooth_l1[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m*id001[39m
+[38;5;15m    [39m[38;5;204mCLS_AGNOSTIC_BBOX_REG[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mCONV_DIM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m    [39m[38;5;204mFC_DIM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1024[39m
+[38;5;15m    [39m[38;5;204mFED_LOSS_FREQ_WEIGHT_POWER[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m    [39m[38;5;204mFED_LOSS_NUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m50[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mFastRCNNConvFCHead[39m
+[38;5;15m    [39m[38;5;204mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;204mNUM_CONV[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;204mNUM_FC[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m2[39m
+[38;5;15m    [39m[38;5;204mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m7[39m
+[38;5;15m    [39m[38;5;204mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;204mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mROIAlignV2[39m
+[38;5;15m    [39m[38;5;204mSMOOTH_L1_BETA[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.0[39m
+[38;5;15m    [39m[38;5;204mTRAIN_ON_PRED_BOXES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mUSE_FED_LOSS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mUSE_SIGMOID_CE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m  [39m[38;5;204mROI_HEADS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mBATCH_SIZE_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;204mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp2[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp3[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp4[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp5[39m
+[38;5;15m    [39m[38;5;204mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1[39m
+[38;5;15m    [39m[38;5;204mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mStandardROIHeads[39m
+[38;5;15m    [39m[38;5;204mNMS_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m    [39m[38;5;204mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m90[39m
+[38;5;15m    [39m[38;5;204mPOSITIVE_FRACTION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.25[39m
+[38;5;15m    [39m[38;5;204mPROPOSAL_APPEND_GT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m    [39m[38;5;204mSCORE_THRESH_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.05[39m
+[38;5;15m  [39m[38;5;204mROI_KEYPOINT_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mCONV_DIMS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m512[39m
+[38;5;15m    [39m[38;5;204mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;204mMIN_KEYPOINTS_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mKRCNNConvDeconvUpsampleHead[39m
+[38;5;15m    [39m[38;5;204mNORMALIZE_LOSS_BY_VISIBLE_KEYPOINTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m    [39m[38;5;204mNUM_KEYPOINTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m17[39m
+[38;5;15m    [39m[38;5;204mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m14[39m
+[38;5;15m    [39m[38;5;204mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;204mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mROIAlignV2[39m
+[38;5;15m  [39m[38;5;204mROI_MASK_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mCLS_AGNOSTIC_MASK[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mCONV_DIM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mMaskRCNNConvUpsampleHead[39m
+[38;5;15m    [39m[38;5;204mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;186m'[39m[38;5;186m'[39m
+[38;5;15m    [39m[38;5;204mNUM_CONV[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m4[39m
+[38;5;15m    [39m[38;5;204mPOOLER_RESOLUTION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m14[39m
+[38;5;15m    [39m[38;5;204mPOOLER_SAMPLING_RATIO[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;204mPOOLER_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mROIAlignV2[39m
+[38;5;15m  [39m[38;5;204mRPN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mBATCH_SIZE_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m256[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_LOSS_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141msmooth_l1[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_LOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;204mBBOX_REG_WEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m*id002[39m
+[38;5;15m    [39m[38;5;204mBOUNDARY_THRESH[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m-1[39m
+[38;5;15m    [39m[38;5;204mCONV_DIMS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m-1[39m
+[38;5;15m    [39m[38;5;204mHEAD_NAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mStandardRPNHead[39m
+[38;5;15m    [39m[38;5;204mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp2[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp3[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp4[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp5[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp6[39m
+[38;5;15m    [39m[38;5;204mIOU_LABELS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m-1[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1[39m
+[38;5;15m    [39m[38;5;204mIOU_THRESHOLDS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.3[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m0.7[39m
+[38;5;15m    [39m[38;5;204mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;204mNMS_THRESH[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.7[39m
+[38;5;15m    [39m[38;5;204mPOSITIVE_FRACTION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.5[39m
+[38;5;15m    [39m[38;5;204mPOST_NMS_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1000[39m
+[38;5;15m    [39m[38;5;204mPOST_NMS_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1000[39m
+[38;5;15m    [39m[38;5;204mPRE_NMS_TOPK_TEST[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1000[39m
+[38;5;15m    [39m[38;5;204mPRE_NMS_TOPK_TRAIN[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m2000[39m
+[38;5;15m    [39m[38;5;204mSMOOTH_L1_BETA[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.0[39m
+[38;5;15m  [39m[38;5;204mSEM_SEG_HEAD[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mCOMMON_STRIDE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m4[39m
+[38;5;15m    [39m[38;5;204mCONVS_DIM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m128[39m
+[38;5;15m    [39m[38;5;204mIGNORE_VALUE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m255[39m
+[38;5;15m    [39m[38;5;204mIN_FEATURES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp2[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp3[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp4[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141mp5[39m
+[38;5;15m    [39m[38;5;204mLOSS_WEIGHT[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;204mNAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mSemSegFPNHead[39m
+[38;5;15m    [39m[38;5;204mNORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mGN[39m
+[38;5;15m    [39m[38;5;204mNUM_CLASSES[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m54[39m
+[38;5;15m  [39m[38;5;204mWEIGHTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m/home/jinghao/projects/dental_plague_detection/MaskDINO/detectron2/tools/output/model_0004999.pth[39m
+[38;5;204mOUTPUT_DIR[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m./output[39m
+[38;5;204mSEED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m-1[39m
+[38;5;204mSOLVER[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mAMP[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m  [39m[38;5;204mBASE_LR[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.02[39m
+[38;5;15m  [39m[38;5;204mBASE_LR_END[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.0[39m
+[38;5;15m  [39m[38;5;204mBIAS_LR_FACTOR[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m  [39m[38;5;204mCHECKPOINT_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m5000[39m
+[38;5;15m  [39m[38;5;204mCLIP_GRADIENTS[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mCLIP_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mvalue[39m
+[38;5;15m    [39m[38;5;204mCLIP_VALUE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1.0[39m
+[38;5;15m    [39m[38;5;204mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mNORM_TYPE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m2.0[39m
+[38;5;15m  [39m[38;5;204mGAMMA[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.1[39m
+[38;5;15m  [39m[38;5;204mIMS_PER_BATCH[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m16[39m
+[38;5;15m  [39m[38;5;204mLR_SCHEDULER_NAME[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mWarmupMultiStepLR[39m
+[38;5;15m  [39m[38;5;204mMAX_ITER[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m10000[39m
+[38;5;15m  [39m[38;5;204mMOMENTUM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.9[39m
+[38;5;15m  [39m[38;5;204mNESTEROV[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m  [39m[38;5;204mNUM_DECAYS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m3[39m
+[38;5;15m  [39m[38;5;204mREFERENCE_WORLD_SIZE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m  [39m[38;5;204mRESCALE_INTERVAL[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m  [39m[38;5;204mSTEPS[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m9000[39m
+[38;5;15m  [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m9500[39m
+[38;5;15m  [39m[38;5;204mWARMUP_FACTOR[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.001[39m
+[38;5;15m  [39m[38;5;204mWARMUP_ITERS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m1000[39m
+[38;5;15m  [39m[38;5;204mWARMUP_METHOD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mlinear[39m
+[38;5;15m  [39m[38;5;204mWEIGHT_DECAY[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.0001[39m
+[38;5;15m  [39m[38;5;204mWEIGHT_DECAY_BIAS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mnull[39m
+[38;5;15m  [39m[38;5;204mWEIGHT_DECAY_NORM[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0.0[39m
+[38;5;204mTEST[39m[38;5;15m:[39m
+[38;5;15m  [39m[38;5;204mAUG[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mFLIP[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mtrue[39m
+[38;5;15m    [39m[38;5;204mMAX_SIZE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m4000[39m
+[38;5;15m    [39m[38;5;204mMIN_SIZES[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m400[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m500[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m600[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m700[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m800[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m900[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1000[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1100[39m
+[38;5;15m    [39m[38;5;15m-[39m[38;5;15m [39m[38;5;141m1200[39m
+[38;5;15m  [39m[38;5;204mDETECTIONS_PER_IMAGE[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m100[39m
+[38;5;15m  [39m[38;5;204mEVAL_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+[38;5;15m  [39m[38;5;204mEXPECTED_RESULTS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;15m][39m
+[38;5;15m  [39m[38;5;204mKEYPOINT_OKS_SIGMAS[39m[38;5;15m:[39m[38;5;15m [39m[38;5;15m[[39m[38;5;15m][39m
+[38;5;15m  [39m[38;5;204mPRECISE_BN[39m[38;5;15m:[39m
+[38;5;15m    [39m[38;5;204mENABLED[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141mfalse[39m
+[38;5;15m    [39m[38;5;204mNUM_ITER[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m200[39m
+[38;5;204mVERSION[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m2[39m
+[38;5;204mVIS_PERIOD[39m[38;5;15m:[39m[38;5;15m [39m[38;5;141m0[39m
+
+[07/17 16:31:23 detectron2]: Full config saved to ./output/config.yaml
+[07/17 16:31:23 d2.utils.env]: Using a generated random seed 25413910
+[07/17 16:31:23 d2.engine.defaults]: Model:
+GeneralizedRCNN(
+  (backbone): FPN(
+    (fpn_lateral2): Conv2d(256, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output2): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral3): Conv2d(512, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output3): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral4): Conv2d(1024, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output4): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (fpn_lateral5): Conv2d(2048, 256, kernel_size=(1, 1), stride=(1, 1))
+    (fpn_output5): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+    (top_block): LastLevelMaxPool()
+    (bottom_up): ResNet(
+      (stem): BasicStem(
+        (conv1): Conv2d(
+          3, 64, kernel_size=(7, 7), stride=(2, 2), padding=(3, 3), bias=False
+          (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+        )
+      )
+      (res2): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            64, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            256, 64, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=64, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            64, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+        )
+      )
+      (res3): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            256, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            256, 128, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            512, 128, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=128, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            128, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+        )
+      )
+      (res4): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            512, 1024, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            512, 256, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (3): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (4): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+        (5): BottleneckBlock(
+          (conv1): Conv2d(
+            1024, 256, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=256, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            256, 1024, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=1024, eps=1e-05)
+          )
+        )
+      )
+      (res5): Sequential(
+        (0): BottleneckBlock(
+          (shortcut): Conv2d(
+            1024, 2048, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+          (conv1): Conv2d(
+            1024, 512, kernel_size=(1, 1), stride=(2, 2), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (1): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+        (2): BottleneckBlock(
+          (conv1): Conv2d(
+            2048, 512, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv2): Conv2d(
+            512, 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=512, eps=1e-05)
+          )
+          (conv3): Conv2d(
+            512, 2048, kernel_size=(1, 1), stride=(1, 1), bias=False
+            (norm): FrozenBatchNorm2d(num_features=2048, eps=1e-05)
+          )
+        )
+      )
+    )
+  )
+  (proposal_generator): RPN(
+    (rpn_head): StandardRPNHead(
+      (conv): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (activation): ReLU()
+      )
+      (objectness_logits): Conv2d(256, 3, kernel_size=(1, 1), stride=(1, 1))
+      (anchor_deltas): Conv2d(256, 12, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (anchor_generator): DefaultAnchorGenerator(
+      (cell_anchors): BufferList()
+    )
+  )
+  (roi_heads): StandardROIHeads(
+    (box_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(7, 7), spatial_scale=0.25, sampling_ratio=0, aligned=True)
+        (1): ROIAlign(output_size=(7, 7), spatial_scale=0.125, sampling_ratio=0, aligned=True)
+        (2): ROIAlign(output_size=(7, 7), spatial_scale=0.0625, sampling_ratio=0, aligned=True)
+        (3): ROIAlign(output_size=(7, 7), spatial_scale=0.03125, sampling_ratio=0, aligned=True)
+      )
+    )
+    (box_head): FastRCNNConvFCHead(
+      (flatten): Flatten(start_dim=1, end_dim=-1)
+      (fc1): Linear(in_features=12544, out_features=1024, bias=True)
+      (fc_relu1): ReLU()
+      (fc2): Linear(in_features=1024, out_features=1024, bias=True)
+      (fc_relu2): ReLU()
+    )
+    (box_predictor): FastRCNNOutputLayers(
+      (cls_score): Linear(in_features=1024, out_features=91, bias=True)
+      (bbox_pred): Linear(in_features=1024, out_features=360, bias=True)
+    )
+    (mask_pooler): ROIPooler(
+      (level_poolers): ModuleList(
+        (0): ROIAlign(output_size=(14, 14), spatial_scale=0.25, sampling_ratio=0, aligned=True)
+        (1): ROIAlign(output_size=(14, 14), spatial_scale=0.125, sampling_ratio=0, aligned=True)
+        (2): ROIAlign(output_size=(14, 14), spatial_scale=0.0625, sampling_ratio=0, aligned=True)
+        (3): ROIAlign(output_size=(14, 14), spatial_scale=0.03125, sampling_ratio=0, aligned=True)
+      )
+    )
+    (mask_head): MaskRCNNConvUpsampleHead(
+      (mask_fcn1): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (activation): ReLU()
+      )
+      (mask_fcn2): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (activation): ReLU()
+      )
+      (mask_fcn3): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (activation): ReLU()
+      )
+      (mask_fcn4): Conv2d(
+        256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1)
+        (activation): ReLU()
+      )
+      (deconv): ConvTranspose2d(256, 256, kernel_size=(2, 2), stride=(2, 2))
+      (deconv_relu): ReLU()
+      (predictor): Conv2d(256, 90, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+)
+WARNING [07/17 16:31:24 d2.data.datasets.coco]: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[07/17 16:31:24 d2.data.datasets.coco]: Loaded 3402 images in COCO format from datasets/dental_plague_dataset/train/train_ins_ToI.json
+[07/17 16:31:24 d2.data.build]: Removed 0 images with no usable annotations. 3402 images left.
+[07/17 16:31:24 d2.data.build]: Distribution of instances among all 90 categories:
+|  category  | #instances   |  category  | #instances   |  category  | #instances   |
+|:----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+|    0_p     | 244          |    0_np    | 554          |  0_caries  | 77           |
+|    1_p     | 300          |    1_np    | 554          |  1_caries  | 32           |
+|    2_p     | 354          |    2_np    | 547          |  2_caries  | 12           |
+|    3_p     | 368          |    3_np    | 532          |  3_caries  | 3            |
+|    4_p     | 379          |    4_np    | 510          |  4_caries  | 1            |
+|    5_p     | 259          |    5_np    | 546          |  5_caries  | 77           |
+|    6_p     | 290          |    6_np    | 556          |  6_caries  | 32           |
+|    7_p     | 327          |    7_np    | 551          |  7_caries  | 13           |
+|    8_p     | 335          |    8_np    | 533          |  8_caries  | 10           |
+|    9_p     | 299          |    9_np    | 504          |  9_caries  | 1            |
+|    10_p    | 154          |   10_np    | 529          | 10_caries  | 3            |
+|    11_p    | 172          |   11_np    | 546          | 11_caries  | 3            |
+|    12_p    | 205          |   12_np    | 560          | 12_caries  | 7            |
+|    13_p    | 263          |   13_np    | 559          | 13_caries  | 9            |
+|    14_p    | 308          |   14_np    | 566          | 14_caries  | 7            |
+|    15_p    | 157          |   15_np    | 530          | 15_caries  | 1            |
+|    16_p    | 175          |   16_np    | 541          | 16_caries  | 7            |
+|    17_p    | 213          |   17_np    | 550          | 17_caries  | 7            |
+|    18_p    | 294          |   18_np    | 561          | 18_caries  | 11           |
+|    19_p    | 353          |   19_np    | 564          | 19_caries  | 6            |
+|    20_p    | 2            |   20_np    | 3            | 20_caries  | 0            |
+|    21_p    | 3            |   21_np    | 5            | 21_caries  | 0            |
+|    22_p    | 0            |   22_np    | 1            | 22_caries  | 0            |
+|    23_p    | 2            |   23_np    | 4            | 23_caries  | 0            |
+|    24_p    | 2            |   24_np    | 23           | 24_caries  | 0            |
+|    25_p    | 7            |   25_np    | 29           | 25_caries  | 0            |
+|    26_p    | 2            |   26_np    | 25           | 26_caries  | 0            |
+|    27_p    | 10           |   27_np    | 24           | 27_caries  | 0            |
+|    28_p    | 11           |   28_np    | 26           | 28_caries  | 0            |
+|    29_p    | 0            |   29_np    | 0            | 29_caries  | 0            |
+|            |              |            |              |            |              |
+|   total    | 16840        |            |              |            |              |
+[07/17 16:31:24 d2.data.dataset_mapper]: [DatasetMapper] Augmentations used in training: [Resize(shape=(512, 512)), RandomFlip(horizontal=True, vertical=False)]
+[07/17 16:31:24 d2.data.build]: Using training sampler TrainingSampler
+[07/17 16:31:24 d2.data.common]: Serializing the dataset using: <class 'detectron2.data.common._TorchSerializedList'>
+[07/17 16:31:24 d2.data.common]: Serializing 3402 elements to byte tensors and concatenating them all ...
+[07/17 16:31:24 d2.data.common]: Serialized dataset takes 8.54 MiB
+[07/17 16:31:24 d2.data.build]: Making batched data loader with batch_size=16
+[07/17 16:31:24 d2.checkpoint.detection_checkpoint]: [DetectionCheckpointer] Loading from ./output/model_0004999.pth ...
+[07/17 16:31:24 fvcore.common.checkpoint]: [Checkpointer] Loading from ./output/model_0004999.pth ...
+/home/jinghao/anaconda3/envs/sam2/lib/python3.10/site-packages/fvcore/common/checkpoint.py:252: FutureWarning: You are using `torch.load` with `weights_only=False` (the current default value), which uses the default pickle module implicitly. It is possible to construct malicious pickle data which will execute arbitrary code during unpickling (See https://github.com/pytorch/pytorch/blob/main/SECURITY.md#untrusted-models for more details). In a future release, the default value for `weights_only` will be flipped to `True`. This limits the functions that could be executed during unpickling. Arbitrary objects will no longer be allowed to be loaded via this mode unless they are explicitly allowlisted by the user via `torch.serialization.add_safe_globals`. We recommend you start setting `weights_only=True` for any use case where you don't have full control of the loaded file. Please open an issue on GitHub for any issues related to this experimental feature.
+  return torch.load(f, map_location=torch.device("cpu"))
+[07/17 16:31:24 fvcore.common.checkpoint]: Loading trainer from ./output/model_0004999.pth ...
+[07/17 16:31:24 d2.engine.hooks]: Loading scheduler from state_dict ...
+[07/17 16:31:24 d2.engine.train_loop]: Starting training from iteration 5000
+/home/jinghao/anaconda3/envs/sam2/lib/python3.10/site-packages/torch/functional.py:534: UserWarning: torch.meshgrid: in an upcoming release, it will be required to pass the indexing argument. (Triggered internally at ../aten/src/ATen/native/TensorShape.cpp:3595.)
+  return _VF.meshgrid(tensors, **kwargs)  # type: ignore[attr-defined]
+[07/17 16:31:40 d2.utils.events]:  eta: 0:56:10  iter: 5019  total_loss: 0.6077  loss_cls: 0.1737  loss_box_reg: 0.2422  loss_mask: 0.1422  loss_rpn_cls: 0.006495  loss_rpn_loc: 0.03088    time: 0.6757  last_time: 0.7104  data_time: 0.2298  last_data_time: 0.0871   lr: 0.02  max_mem: 9668M
+2025-07-17 16:31:40.739200: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2025-07-17 16:31:40.757444: E external/local_xla/xla/stream_executor/cuda/cuda_fft.cc:477] Unable to register cuFFT factory: Attempting to register factory for plugin cuFFT when one has already been registered
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 00:00:1752741100.781006 2237635 cuda_dnn.cc:8310] Unable to register cuDNN factory: Attempting to register factory for plugin cuDNN when one has already been registered
+E0000 00:00:1752741100.788128 2237635 cuda_blas.cc:1418] Unable to register cuBLAS factory: Attempting to register factory for plugin cuBLAS when one has already been registered
+2025-07-17 16:31:40.812223: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: AVX2 AVX512F AVX512_VNNI FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+[07/17 16:31:56 d2.utils.events]:  eta: 0:55:08  iter: 5039  total_loss: 0.575  loss_cls: 0.1483  loss_box_reg: 0.2351  loss_mask: 0.1498  loss_rpn_cls: 0.006831  loss_rpn_loc: 0.03035    time: 0.6612  last_time: 0.6131  data_time: 0.1914  last_data_time: 0.1988   lr: 0.02  max_mem: 9668M
+[07/17 16:32:10 d2.utils.events]:  eta: 0:55:36  iter: 5059  total_loss: 0.5563  loss_cls: 0.1403  loss_box_reg: 0.2278  loss_mask: 0.1437  loss_rpn_cls: 0.005819  loss_rpn_loc: 0.02651    time: 0.6746  last_time: 0.5409  data_time: 0.1708  last_data_time: 0.0166   lr: 0.02  max_mem: 9668M
+[07/17 16:32:24 d2.utils.events]:  eta: 0:56:14  iter: 5079  total_loss: 0.5862  loss_cls: 0.1577  loss_box_reg: 0.2412  loss_mask: 0.1525  loss_rpn_cls: 0.007813  loss_rpn_loc: 0.02643    time: 0.6841  last_time: 0.5275  data_time: 0.1896  last_data_time: 0.0179   lr: 0.02  max_mem: 9668M
+[07/17 16:32:39 d2.utils.events]:  eta: 0:56:53  iter: 5099  total_loss: 0.576  loss_cls: 0.1606  loss_box_reg: 0.2303  loss_mask: 0.1556  loss_rpn_cls: 0.006352  loss_rpn_loc: 0.02285    time: 0.6971  last_time: 0.6984  data_time: 0.2222  last_data_time: 0.2066   lr: 0.02  max_mem: 9668M
+[07/17 16:32:53 d2.utils.events]:  eta: 0:57:09  iter: 5119  total_loss: 0.5844  loss_cls: 0.1523  loss_box_reg: 0.2434  loss_mask: 0.1456  loss_rpn_cls: 0.00663  loss_rpn_loc: 0.02482    time: 0.6990  last_time: 0.7458  data_time: 0.1753  last_data_time: 0.2232   lr: 0.02  max_mem: 9668M
+[07/17 16:33:09 d2.utils.events]:  eta: 0:57:23  iter: 5139  total_loss: 0.5723  loss_cls: 0.1662  loss_box_reg: 0.236  loss_mask: 0.1401  loss_rpn_cls: 0.006341  loss_rpn_loc: 0.02794    time: 0.7115  last_time: 0.5789  data_time: 0.2505  last_data_time: 0.0573   lr: 0.02  max_mem: 9668M
+[07/17 16:33:24 d2.utils.events]:  eta: 0:57:42  iter: 5159  total_loss: 0.6083  loss_cls: 0.1799  loss_box_reg: 0.2393  loss_mask: 0.1537  loss_rpn_cls: 0.008238  loss_rpn_loc: 0.03095    time: 0.7149  last_time: 0.6167  data_time: 0.2182  last_data_time: 0.1120   lr: 0.02  max_mem: 9668M
+[07/17 16:33:39 d2.utils.events]:  eta: 0:57:41  iter: 5179  total_loss: 0.5385  loss_cls: 0.1456  loss_box_reg: 0.2307  loss_mask: 0.1344  loss_rpn_cls: 0.006811  loss_rpn_loc: 0.02587    time: 0.7194  last_time: 0.8572  data_time: 0.2298  last_data_time: 0.3329   lr: 0.02  max_mem: 9668M
+[07/17 16:33:54 d2.utils.events]:  eta: 0:57:40  iter: 5199  total_loss: 0.574  loss_cls: 0.147  loss_box_reg: 0.2316  loss_mask: 0.1424  loss_rpn_cls: 0.007886  loss_rpn_loc: 0.02705    time: 0.7239  last_time: 0.5268  data_time: 0.2397  last_data_time: 0.0096   lr: 0.02  max_mem: 9819M
+[07/17 16:34:09 d2.utils.events]:  eta: 0:57:34  iter: 5219  total_loss: 0.5879  loss_cls: 0.1695  loss_box_reg: 0.2386  loss_mask: 0.1429  loss_rpn_cls: 0.009105  loss_rpn_loc: 0.02814    time: 0.7243  last_time: 0.5137  data_time: 0.2060  last_data_time: 0.0141   lr: 0.02  max_mem: 9861M
+[07/17 16:34:23 d2.utils.events]:  eta: 0:57:35  iter: 5239  total_loss: 0.587  loss_cls: 0.1631  loss_box_reg: 0.2391  loss_mask: 0.1491  loss_rpn_cls: 0.007519  loss_rpn_loc: 0.02739    time: 0.7254  last_time: 0.4395  data_time: 0.2334  last_data_time: 0.0091   lr: 0.02  max_mem: 9861M
+[07/17 16:34:37 d2.utils.events]:  eta: 0:57:05  iter: 5259  total_loss: 0.5863  loss_cls: 0.1665  loss_box_reg: 0.2267  loss_mask: 0.1366  loss_rpn_cls: 0.007508  loss_rpn_loc: 0.02575    time: 0.7231  last_time: 0.7942  data_time: 0.1963  last_data_time: 0.2727   lr: 0.02  max_mem: 9926M
+[07/17 16:34:52 d2.utils.events]:  eta: 0:57:06  iter: 5279  total_loss: 0.57  loss_cls: 0.159  loss_box_reg: 0.2357  loss_mask: 0.1382  loss_rpn_cls: 0.007807  loss_rpn_loc: 0.0262    time: 0.7237  last_time: 0.5166  data_time: 0.1927  last_data_time: 0.0102   lr: 0.02  max_mem: 9926M
+[07/17 16:35:06 d2.utils.events]:  eta: 0:56:58  iter: 5299  total_loss: 0.5434  loss_cls: 0.1425  loss_box_reg: 0.2128  loss_mask: 0.1449  loss_rpn_cls: 0.007086  loss_rpn_loc: 0.02764    time: 0.7240  last_time: 0.7461  data_time: 0.2164  last_data_time: 0.2384   lr: 0.02  max_mem: 9926M
+[07/17 16:35:22 d2.utils.events]:  eta: 0:56:43  iter: 5319  total_loss: 0.5289  loss_cls: 0.1371  loss_box_reg: 0.2187  loss_mask: 0.1477  loss_rpn_cls: 0.008349  loss_rpn_loc: 0.02419    time: 0.7258  last_time: 0.8614  data_time: 0.2256  last_data_time: 0.3789   lr: 0.02  max_mem: 9926M
+[07/17 16:35:36 d2.utils.events]:  eta: 0:56:27  iter: 5339  total_loss: 0.5713  loss_cls: 0.157  loss_box_reg: 0.2383  loss_mask: 0.143  loss_rpn_cls: 0.006582  loss_rpn_loc: 0.02272    time: 0.7261  last_time: 0.6010  data_time: 0.2007  last_data_time: 0.0927   lr: 0.02  max_mem: 9926M
+[07/17 16:35:50 d2.utils.events]:  eta: 0:56:10  iter: 5359  total_loss: 0.5857  loss_cls: 0.1593  loss_box_reg: 0.2397  loss_mask: 0.1494  loss_rpn_cls: 0.006135  loss_rpn_loc: 0.02611    time: 0.7253  last_time: 0.7006  data_time: 0.1936  last_data_time: 0.1999   lr: 0.02  max_mem: 9926M
+[07/17 16:36:04 d2.utils.events]:  eta: 0:55:31  iter: 5379  total_loss: 0.5314  loss_cls: 0.1294  loss_box_reg: 0.2217  loss_mask: 0.1408  loss_rpn_cls: 0.006338  loss_rpn_loc: 0.02493    time: 0.7214  last_time: 0.7459  data_time: 0.1790  last_data_time: 0.2328   lr: 0.02  max_mem: 9926M
+[07/17 16:36:18 d2.utils.events]:  eta: 0:55:17  iter: 5399  total_loss: 0.5758  loss_cls: 0.1508  loss_box_reg: 0.2361  loss_mask: 0.1409  loss_rpn_cls: 0.006748  loss_rpn_loc: 0.02908    time: 0.7209  last_time: 0.7181  data_time: 0.1906  last_data_time: 0.1893   lr: 0.02  max_mem: 9926M
+[07/17 16:36:33 d2.utils.events]:  eta: 0:55:15  iter: 5419  total_loss: 0.5518  loss_cls: 0.1506  loss_box_reg: 0.2215  loss_mask: 0.1443  loss_rpn_cls: 0.006094  loss_rpn_loc: 0.02926    time: 0.7223  last_time: 1.1110  data_time: 0.2118  last_data_time: 0.3698   lr: 0.02  max_mem: 9926M
+[07/17 16:36:47 d2.utils.events]:  eta: 0:55:06  iter: 5439  total_loss: 0.5266  loss_cls: 0.1338  loss_box_reg: 0.234  loss_mask: 0.1403  loss_rpn_cls: 0.005927  loss_rpn_loc: 0.02975    time: 0.7224  last_time: 0.5675  data_time: 0.2066  last_data_time: 0.0202   lr: 0.02  max_mem: 9926M
+[07/17 16:37:02 d2.utils.events]:  eta: 0:55:01  iter: 5459  total_loss: 0.5321  loss_cls: 0.1346  loss_box_reg: 0.2277  loss_mask: 0.1383  loss_rpn_cls: 0.006216  loss_rpn_loc: 0.02936    time: 0.7236  last_time: 0.8096  data_time: 0.2134  last_data_time: 0.2856   lr: 0.02  max_mem: 9926M
+[07/17 16:37:17 d2.utils.events]:  eta: 0:54:45  iter: 5479  total_loss: 0.537  loss_cls: 0.1328  loss_box_reg: 0.2232  loss_mask: 0.1456  loss_rpn_cls: 0.006884  loss_rpn_loc: 0.02737    time: 0.7239  last_time: 0.8872  data_time: 0.2035  last_data_time: 0.3933   lr: 0.02  max_mem: 9926M
+[07/17 16:37:32 d2.utils.events]:  eta: 0:54:34  iter: 5499  total_loss: 0.4882  loss_cls: 0.1244  loss_box_reg: 0.2066  loss_mask: 0.1308  loss_rpn_cls: 0.006214  loss_rpn_loc: 0.02268    time: 0.7243  last_time: 0.7874  data_time: 0.2156  last_data_time: 0.2729   lr: 0.02  max_mem: 9926M
+[07/17 16:37:47 d2.utils.events]:  eta: 0:54:33  iter: 5519  total_loss: 0.5419  loss_cls: 0.1329  loss_box_reg: 0.2291  loss_mask: 0.1476  loss_rpn_cls: 0.006901  loss_rpn_loc: 0.02576    time: 0.7256  last_time: 0.7627  data_time: 0.2238  last_data_time: 0.2495   lr: 0.02  max_mem: 9926M
+[07/17 16:38:01 d2.utils.events]:  eta: 0:54:21  iter: 5539  total_loss: 0.53  loss_cls: 0.1297  loss_box_reg: 0.2294  loss_mask: 0.1345  loss_rpn_cls: 0.005514  loss_rpn_loc: 0.0274    time: 0.7255  last_time: 0.5236  data_time: 0.1953  last_data_time: 0.1020   lr: 0.02  max_mem: 9926M
+[07/17 16:38:14 d2.utils.events]:  eta: 0:53:47  iter: 5559  total_loss: 0.5359  loss_cls: 0.1338  loss_box_reg: 0.2278  loss_mask: 0.135  loss_rpn_cls: 0.006057  loss_rpn_loc: 0.02476    time: 0.7225  last_time: 0.6815  data_time: 0.1986  last_data_time: 0.1589   lr: 0.02  max_mem: 9926M
+[07/17 16:38:27 d2.utils.events]:  eta: 0:53:13  iter: 5579  total_loss: 0.5402  loss_cls: 0.1294  loss_box_reg: 0.2266  loss_mask: 0.1479  loss_rpn_cls: 0.006384  loss_rpn_loc: 0.02516    time: 0.7202  last_time: 0.5729  data_time: 0.1800  last_data_time: 0.0734   lr: 0.02  max_mem: 9926M
+[07/17 16:38:43 d2.utils.events]:  eta: 0:53:16  iter: 5599  total_loss: 0.5072  loss_cls: 0.1264  loss_box_reg: 0.2201  loss_mask: 0.1402  loss_rpn_cls: 0.006334  loss_rpn_loc: 0.02406    time: 0.7219  last_time: 0.7303  data_time: 0.2427  last_data_time: 0.2214   lr: 0.02  max_mem: 9926M
+[07/17 16:38:57 d2.utils.events]:  eta: 0:53:01  iter: 5619  total_loss: 0.5332  loss_cls: 0.1339  loss_box_reg: 0.2282  loss_mask: 0.1423  loss_rpn_cls: 0.007303  loss_rpn_loc: 0.02308    time: 0.7218  last_time: 0.5574  data_time: 0.1867  last_data_time: 0.0442   lr: 0.02  max_mem: 9926M
+[07/17 16:39:12 d2.utils.events]:  eta: 0:52:50  iter: 5639  total_loss: 0.572  loss_cls: 0.1511  loss_box_reg: 0.2252  loss_mask: 0.1444  loss_rpn_cls: 0.005263  loss_rpn_loc: 0.02346    time: 0.7219  last_time: 0.8283  data_time: 0.2062  last_data_time: 0.2885   lr: 0.02  max_mem: 9926M
+[07/17 16:39:26 d2.utils.events]:  eta: 0:52:37  iter: 5659  total_loss: 0.5352  loss_cls: 0.1351  loss_box_reg: 0.2245  loss_mask: 0.1401  loss_rpn_cls: 0.005532  loss_rpn_loc: 0.02573    time: 0.7217  last_time: 0.8728  data_time: 0.1866  last_data_time: 0.3478   lr: 0.02  max_mem: 9926M
+[07/17 16:39:40 d2.utils.events]:  eta: 0:52:22  iter: 5679  total_loss: 0.5761  loss_cls: 0.1385  loss_box_reg: 0.2419  loss_mask: 0.1517  loss_rpn_cls: 0.006198  loss_rpn_loc: 0.03266    time: 0.7212  last_time: 0.8983  data_time: 0.2125  last_data_time: 0.3601   lr: 0.02  max_mem: 9926M
+[07/17 16:39:55 d2.utils.events]:  eta: 0:52:08  iter: 5699  total_loss: 0.5465  loss_cls: 0.1336  loss_box_reg: 0.2431  loss_mask: 0.1456  loss_rpn_cls: 0.004947  loss_rpn_loc: 0.02253    time: 0.7215  last_time: 0.6956  data_time: 0.2011  last_data_time: 0.1733   lr: 0.02  max_mem: 9926M
+[07/17 16:40:09 d2.utils.events]:  eta: 0:51:52  iter: 5719  total_loss: 0.5679  loss_cls: 0.1512  loss_box_reg: 0.2273  loss_mask: 0.1476  loss_rpn_cls: 0.006867  loss_rpn_loc: 0.02615    time: 0.7209  last_time: 0.7257  data_time: 0.1774  last_data_time: 0.2453   lr: 0.02  max_mem: 9926M
+[07/17 16:40:23 d2.utils.events]:  eta: 0:51:39  iter: 5739  total_loss: 0.5532  loss_cls: 0.1455  loss_box_reg: 0.2297  loss_mask: 0.1459  loss_rpn_cls: 0.006468  loss_rpn_loc: 0.02503    time: 0.7213  last_time: 0.5412  data_time: 0.2028  last_data_time: 0.0091   lr: 0.02  max_mem: 9926M
+[07/17 16:40:38 d2.utils.events]:  eta: 0:51:23  iter: 5759  total_loss: 0.5489  loss_cls: 0.1429  loss_box_reg: 0.2283  loss_mask: 0.1414  loss_rpn_cls: 0.006307  loss_rpn_loc: 0.0246    time: 0.7211  last_time: 0.6668  data_time: 0.2004  last_data_time: 0.1695   lr: 0.02  max_mem: 9926M
+[07/17 16:40:53 d2.utils.events]:  eta: 0:51:10  iter: 5779  total_loss: 0.5271  loss_cls: 0.1298  loss_box_reg: 0.2265  loss_mask: 0.1393  loss_rpn_cls: 0.007009  loss_rpn_loc: 0.02795    time: 0.7215  last_time: 0.5366  data_time: 0.1928  last_data_time: 0.0158   lr: 0.02  max_mem: 9926M
+[07/17 16:41:08 d2.utils.events]:  eta: 0:51:01  iter: 5799  total_loss: 0.5352  loss_cls: 0.1308  loss_box_reg: 0.2252  loss_mask: 0.1365  loss_rpn_cls: 0.005246  loss_rpn_loc: 0.02389    time: 0.7231  last_time: 0.9036  data_time: 0.2399  last_data_time: 0.3629   lr: 0.02  max_mem: 9926M
+[07/17 16:41:24 d2.utils.events]:  eta: 0:50:54  iter: 5819  total_loss: 0.5249  loss_cls: 0.1303  loss_box_reg: 0.2305  loss_mask: 0.1342  loss_rpn_cls: 0.006177  loss_rpn_loc: 0.02501    time: 0.7246  last_time: 0.8572  data_time: 0.2400  last_data_time: 0.3066   lr: 0.02  max_mem: 9926M
+[07/17 16:41:38 d2.utils.events]:  eta: 0:50:41  iter: 5839  total_loss: 0.5188  loss_cls: 0.1305  loss_box_reg: 0.221  loss_mask: 0.1324  loss_rpn_cls: 0.00496  loss_rpn_loc: 0.02289    time: 0.7244  last_time: 0.6274  data_time: 0.2155  last_data_time: 0.1053   lr: 0.02  max_mem: 9926M
+[07/17 16:41:53 d2.utils.events]:  eta: 0:50:26  iter: 5859  total_loss: 0.5503  loss_cls: 0.1388  loss_box_reg: 0.2243  loss_mask: 0.1395  loss_rpn_cls: 0.006214  loss_rpn_loc: 0.02337    time: 0.7244  last_time: 0.7585  data_time: 0.1952  last_data_time: 0.2380   lr: 0.02  max_mem: 9926M
+[07/17 16:42:07 d2.utils.events]:  eta: 0:50:10  iter: 5879  total_loss: 0.5102  loss_cls: 0.116  loss_box_reg: 0.2212  loss_mask: 0.132  loss_rpn_cls: 0.006035  loss_rpn_loc: 0.02433    time: 0.7243  last_time: 0.8404  data_time: 0.2034  last_data_time: 0.3097   lr: 0.02  max_mem: 9926M
+[07/17 16:42:21 d2.utils.events]:  eta: 0:49:55  iter: 5899  total_loss: 0.5052  loss_cls: 0.1144  loss_box_reg: 0.2196  loss_mask: 0.1319  loss_rpn_cls: 0.005442  loss_rpn_loc: 0.02214    time: 0.7240  last_time: 0.5267  data_time: 0.1931  last_data_time: 0.0063   lr: 0.02  max_mem: 9926M
+[07/17 16:42:36 d2.utils.events]:  eta: 0:49:44  iter: 5919  total_loss: 0.4951  loss_cls: 0.1218  loss_box_reg: 0.2143  loss_mask: 0.1335  loss_rpn_cls: 0.005579  loss_rpn_loc: 0.02563    time: 0.7244  last_time: 0.5331  data_time: 0.2084  last_data_time: 0.0031   lr: 0.02  max_mem: 9926M
+[07/17 16:42:52 d2.utils.events]:  eta: 0:49:31  iter: 5939  total_loss: 0.54  loss_cls: 0.1187  loss_box_reg: 0.2322  loss_mask: 0.1381  loss_rpn_cls: 0.005763  loss_rpn_loc: 0.02855    time: 0.7261  last_time: 0.7308  data_time: 0.2606  last_data_time: 0.2032   lr: 0.02  max_mem: 9926M
+[07/17 16:43:07 d2.utils.events]:  eta: 0:49:17  iter: 5959  total_loss: 0.5264  loss_cls: 0.1281  loss_box_reg: 0.2185  loss_mask: 0.1337  loss_rpn_cls: 0.004957  loss_rpn_loc: 0.02545    time: 0.7260  last_time: 0.6738  data_time: 0.1939  last_data_time: 0.1547   lr: 0.02  max_mem: 9926M
+[07/17 16:43:21 d2.utils.events]:  eta: 0:49:02  iter: 5979  total_loss: 0.5326  loss_cls: 0.1293  loss_box_reg: 0.2146  loss_mask: 0.1402  loss_rpn_cls: 0.006769  loss_rpn_loc: 0.02742    time: 0.7258  last_time: 0.8398  data_time: 0.2023  last_data_time: 0.3134   lr: 0.02  max_mem: 9926M
+[07/17 16:43:34 d2.utils.events]:  eta: 0:48:43  iter: 5999  total_loss: 0.495  loss_cls: 0.1156  loss_box_reg: 0.2097  loss_mask: 0.1332  loss_rpn_cls: 0.006246  loss_rpn_loc: 0.02441    time: 0.7242  last_time: 0.9145  data_time: 0.1912  last_data_time: 0.4055   lr: 0.02  max_mem: 9926M
+[07/17 16:43:48 d2.utils.events]:  eta: 0:48:28  iter: 6019  total_loss: 0.5324  loss_cls: 0.1292  loss_box_reg: 0.2235  loss_mask: 0.142  loss_rpn_cls: 0.00599  loss_rpn_loc: 0.03182    time: 0.7230  last_time: 0.6709  data_time: 0.2000  last_data_time: 0.2350   lr: 0.02  max_mem: 9926M
+[07/17 16:44:02 d2.utils.events]:  eta: 0:48:20  iter: 6039  total_loss: 0.5354  loss_cls: 0.1289  loss_box_reg: 0.2246  loss_mask: 0.1414  loss_rpn_cls: 0.004824  loss_rpn_loc: 0.02313    time: 0.7229  last_time: 0.7433  data_time: 0.1938  last_data_time: 0.2453   lr: 0.02  max_mem: 9926M
+[07/17 16:44:16 d2.utils.events]:  eta: 0:48:03  iter: 6059  total_loss: 0.5013  loss_cls: 0.1195  loss_box_reg: 0.2097  loss_mask: 0.1357  loss_rpn_cls: 0.005591  loss_rpn_loc: 0.02498    time: 0.7225  last_time: 0.5557  data_time: 0.1790  last_data_time: 0.0097   lr: 0.02  max_mem: 9926M
+[07/17 16:44:31 d2.utils.events]:  eta: 0:47:51  iter: 6079  total_loss: 0.4966  loss_cls: 0.1106  loss_box_reg: 0.207  loss_mask: 0.1362  loss_rpn_cls: 0.005451  loss_rpn_loc: 0.02796    time: 0.7228  last_time: 0.5135  data_time: 0.2183  last_data_time: 0.0109   lr: 0.02  max_mem: 9926M
+[07/17 16:44:46 d2.utils.events]:  eta: 0:47:38  iter: 6099  total_loss: 0.5239  loss_cls: 0.1298  loss_box_reg: 0.2128  loss_mask: 0.1336  loss_rpn_cls: 0.006711  loss_rpn_loc: 0.0273    time: 0.7237  last_time: 0.9368  data_time: 0.2310  last_data_time: 0.1816   lr: 0.02  max_mem: 9926M
+[07/17 16:45:00 d2.utils.events]:  eta: 0:47:21  iter: 6119  total_loss: 0.4568  loss_cls: 0.1122  loss_box_reg: 0.2092  loss_mask: 0.1342  loss_rpn_cls: 0.005724  loss_rpn_loc: 0.02516    time: 0.7234  last_time: 0.7226  data_time: 0.1956  last_data_time: 0.1757   lr: 0.02  max_mem: 9926M
+[07/17 16:45:15 d2.utils.events]:  eta: 0:47:05  iter: 6139  total_loss: 0.5132  loss_cls: 0.1182  loss_box_reg: 0.2191  loss_mask: 0.1369  loss_rpn_cls: 0.004666  loss_rpn_loc: 0.02494    time: 0.7235  last_time: 0.6828  data_time: 0.2030  last_data_time: 0.1550   lr: 0.02  max_mem: 9926M
+[07/17 16:45:29 d2.utils.events]:  eta: 0:46:49  iter: 6159  total_loss: 0.503  loss_cls: 0.1185  loss_box_reg: 0.2135  loss_mask: 0.1421  loss_rpn_cls: 0.005522  loss_rpn_loc: 0.02196    time: 0.7234  last_time: 0.5126  data_time: 0.1901  last_data_time: 0.0030   lr: 0.02  max_mem: 9926M
+[07/17 16:45:43 d2.utils.events]:  eta: 0:46:34  iter: 6179  total_loss: 0.5021  loss_cls: 0.1195  loss_box_reg: 0.2019  loss_mask: 0.1362  loss_rpn_cls: 0.006434  loss_rpn_loc: 0.02655    time: 0.7231  last_time: 0.7200  data_time: 0.2039  last_data_time: 0.2240   lr: 0.02  max_mem: 9926M
+[07/17 16:45:58 d2.utils.events]:  eta: 0:46:16  iter: 6199  total_loss: 0.4932  loss_cls: 0.1167  loss_box_reg: 0.2076  loss_mask: 0.136  loss_rpn_cls: 0.00656  loss_rpn_loc: 0.02998    time: 0.7228  last_time: 0.5187  data_time: 0.1789  last_data_time: 0.0098   lr: 0.02  max_mem: 9926M
+[07/17 16:46:11 d2.utils.events]:  eta: 0:45:59  iter: 6219  total_loss: 0.4844  loss_cls: 0.1123  loss_box_reg: 0.2102  loss_mask: 0.1337  loss_rpn_cls: 0.00647  loss_rpn_loc: 0.02671    time: 0.7222  last_time: 0.7056  data_time: 0.1832  last_data_time: 0.2818   lr: 0.02  max_mem: 9926M
+[07/17 16:46:24 d2.utils.events]:  eta: 0:45:32  iter: 6239  total_loss: 0.4974  loss_cls: 0.116  loss_box_reg: 0.2123  loss_mask: 0.1353  loss_rpn_cls: 0.007212  loss_rpn_loc: 0.02404    time: 0.7211  last_time: 0.8125  data_time: 0.1725  last_data_time: 0.2172   lr: 0.02  max_mem: 9926M
+[07/17 16:46:38 d2.utils.events]:  eta: 0:45:20  iter: 6259  total_loss: 0.5012  loss_cls: 0.1124  loss_box_reg: 0.2189  loss_mask: 0.1382  loss_rpn_cls: 0.005966  loss_rpn_loc: 0.02484    time: 0.7205  last_time: 0.7767  data_time: 0.2059  last_data_time: 0.2706   lr: 0.02  max_mem: 9926M
+[07/17 16:46:53 d2.utils.events]:  eta: 0:45:04  iter: 6279  total_loss: 0.4913  loss_cls: 0.1123  loss_box_reg: 0.2074  loss_mask: 0.129  loss_rpn_cls: 0.005121  loss_rpn_loc: 0.02149    time: 0.7206  last_time: 0.6139  data_time: 0.1925  last_data_time: 0.0838   lr: 0.02  max_mem: 9926M
+[07/17 16:47:07 d2.utils.events]:  eta: 0:44:44  iter: 6299  total_loss: 0.4609  loss_cls: 0.09918  loss_box_reg: 0.2  loss_mask: 0.1259  loss_rpn_cls: 0.004901  loss_rpn_loc: 0.02467    time: 0.7206  last_time: 0.5958  data_time: 0.1950  last_data_time: 0.0890   lr: 0.02  max_mem: 9926M
+[07/17 16:47:22 d2.utils.events]:  eta: 0:44:28  iter: 6319  total_loss: 0.4864  loss_cls: 0.1056  loss_box_reg: 0.2111  loss_mask: 0.1287  loss_rpn_cls: 0.005699  loss_rpn_loc: 0.02554    time: 0.7207  last_time: 0.7112  data_time: 0.2226  last_data_time: 0.2791   lr: 0.02  max_mem: 9926M
+[07/17 16:47:35 d2.utils.events]:  eta: 0:44:11  iter: 6339  total_loss: 0.4759  loss_cls: 0.1047  loss_box_reg: 0.2076  loss_mask: 0.1286  loss_rpn_cls: 0.005375  loss_rpn_loc: 0.02621    time: 0.7202  last_time: 0.8254  data_time: 0.2034  last_data_time: 0.2971   lr: 0.02  max_mem: 9926M
+[07/17 16:47:50 d2.utils.events]:  eta: 0:44:00  iter: 6359  total_loss: 0.4852  loss_cls: 0.1039  loss_box_reg: 0.2164  loss_mask: 0.1327  loss_rpn_cls: 0.004368  loss_rpn_loc: 0.02271    time: 0.7205  last_time: 0.7061  data_time: 0.2059  last_data_time: 0.1928   lr: 0.02  max_mem: 9926M
+[07/17 16:48:05 d2.utils.events]:  eta: 0:43:54  iter: 6379  total_loss: 0.475  loss_cls: 0.1046  loss_box_reg: 0.201  loss_mask: 0.1232  loss_rpn_cls: 0.00506  loss_rpn_loc: 0.02673    time: 0.7204  last_time: 1.0910  data_time: 0.1830  last_data_time: 0.3463   lr: 0.02  max_mem: 9926M
+[07/17 16:48:19 d2.utils.events]:  eta: 0:43:42  iter: 6399  total_loss: 0.5111  loss_cls: 0.1131  loss_box_reg: 0.2186  loss_mask: 0.1327  loss_rpn_cls: 0.006336  loss_rpn_loc: 0.03235    time: 0.7202  last_time: 0.7397  data_time: 0.1781  last_data_time: 0.2088   lr: 0.02  max_mem: 9926M
+[07/17 16:48:33 d2.utils.events]:  eta: 0:43:24  iter: 6419  total_loss: 0.482  loss_cls: 0.106  loss_box_reg: 0.2109  loss_mask: 0.1305  loss_rpn_cls: 0.005303  loss_rpn_loc: 0.0235    time: 0.7203  last_time: 0.7985  data_time: 0.1927  last_data_time: 0.2813   lr: 0.02  max_mem: 9926M
+[07/17 16:48:48 d2.utils.events]:  eta: 0:43:08  iter: 6439  total_loss: 0.4762  loss_cls: 0.1069  loss_box_reg: 0.2024  loss_mask: 0.1249  loss_rpn_cls: 0.005302  loss_rpn_loc: 0.02612    time: 0.7205  last_time: 0.5140  data_time: 0.1920  last_data_time: 0.0031   lr: 0.02  max_mem: 9926M
+[07/17 16:49:03 d2.utils.events]:  eta: 0:42:48  iter: 6459  total_loss: 0.4897  loss_cls: 0.1025  loss_box_reg: 0.2151  loss_mask: 0.1342  loss_rpn_cls: 0.004978  loss_rpn_loc: 0.02124    time: 0.7207  last_time: 0.8083  data_time: 0.2203  last_data_time: 0.2640   lr: 0.02  max_mem: 9926M
+[07/17 16:49:17 d2.utils.events]:  eta: 0:42:42  iter: 6479  total_loss: 0.4729  loss_cls: 0.1069  loss_box_reg: 0.2061  loss_mask: 0.1348  loss_rpn_cls: 0.005242  loss_rpn_loc: 0.02998    time: 0.7208  last_time: 0.6610  data_time: 0.1937  last_data_time: 0.1407   lr: 0.02  max_mem: 9926M
+[07/17 16:49:31 d2.utils.events]:  eta: 0:42:17  iter: 6499  total_loss: 0.4707  loss_cls: 0.1057  loss_box_reg: 0.2071  loss_mask: 0.1294  loss_rpn_cls: 0.004955  loss_rpn_loc: 0.02233    time: 0.7204  last_time: 0.7642  data_time: 0.2029  last_data_time: 0.2342   lr: 0.02  max_mem: 9926M
+[07/17 16:49:45 d2.utils.events]:  eta: 0:42:01  iter: 6519  total_loss: 0.4667  loss_cls: 0.09964  loss_box_reg: 0.2061  loss_mask: 0.1338  loss_rpn_cls: 0.00529  loss_rpn_loc: 0.0227    time: 0.7201  last_time: 0.5984  data_time: 0.2160  last_data_time: 0.0019   lr: 0.02  max_mem: 9926M
+[07/17 16:49:59 d2.utils.events]:  eta: 0:41:44  iter: 6539  total_loss: 0.4797  loss_cls: 0.1009  loss_box_reg: 0.219  loss_mask: 0.1356  loss_rpn_cls: 0.004644  loss_rpn_loc: 0.02421    time: 0.7196  last_time: 0.5354  data_time: 0.2016  last_data_time: 0.0111   lr: 0.02  max_mem: 9926M
+[07/17 16:50:14 d2.utils.events]:  eta: 0:41:35  iter: 6559  total_loss: 0.4659  loss_cls: 0.09237  loss_box_reg: 0.1962  loss_mask: 0.1316  loss_rpn_cls: 0.004336  loss_rpn_loc: 0.0248    time: 0.7198  last_time: 0.5178  data_time: 0.2177  last_data_time: 0.0133   lr: 0.02  max_mem: 9926M
+[07/17 16:50:28 d2.utils.events]:  eta: 0:41:33  iter: 6579  total_loss: 0.4333  loss_cls: 0.09094  loss_box_reg: 0.191  loss_mask: 0.1271  loss_rpn_cls: 0.004955  loss_rpn_loc: 0.02265    time: 0.7201  last_time: 0.8089  data_time: 0.2151  last_data_time: 0.2933   lr: 0.02  max_mem: 9926M
+[07/17 16:50:42 d2.utils.events]:  eta: 0:41:09  iter: 6599  total_loss: 0.4763  loss_cls: 0.09329  loss_box_reg: 0.2046  loss_mask: 0.1312  loss_rpn_cls: 0.006168  loss_rpn_loc: 0.02787    time: 0.7197  last_time: 0.6811  data_time: 0.1758  last_data_time: 0.1772   lr: 0.02  max_mem: 9926M
+[07/17 16:50:56 d2.utils.events]:  eta: 0:40:52  iter: 6619  total_loss: 0.4304  loss_cls: 0.09615  loss_box_reg: 0.1929  loss_mask: 0.1229  loss_rpn_cls: 0.004174  loss_rpn_loc: 0.01771    time: 0.7195  last_time: 0.5758  data_time: 0.1876  last_data_time: 0.0586   lr: 0.02  max_mem: 9926M
+[07/17 16:51:10 d2.utils.events]:  eta: 0:40:35  iter: 6639  total_loss: 0.4621  loss_cls: 0.09867  loss_box_reg: 0.2005  loss_mask: 0.1334  loss_rpn_cls: 0.00503  loss_rpn_loc: 0.02372    time: 0.7193  last_time: 0.7575  data_time: 0.1900  last_data_time: 0.2497   lr: 0.02  max_mem: 9926M
+[07/17 16:51:24 d2.utils.events]:  eta: 0:40:12  iter: 6659  total_loss: 0.483  loss_cls: 0.1009  loss_box_reg: 0.2124  loss_mask: 0.1394  loss_rpn_cls: 0.005299  loss_rpn_loc: 0.02643    time: 0.7188  last_time: 0.5974  data_time: 0.1686  last_data_time: 0.1761   lr: 0.02  max_mem: 9926M
+[07/17 16:51:38 d2.utils.events]:  eta: 0:39:55  iter: 6679  total_loss: 0.4438  loss_cls: 0.0942  loss_box_reg: 0.1929  loss_mask: 0.1258  loss_rpn_cls: 0.005705  loss_rpn_loc: 0.02566    time: 0.7186  last_time: 0.5480  data_time: 0.1803  last_data_time: 0.0115   lr: 0.02  max_mem: 9926M
+[07/17 16:51:52 d2.utils.events]:  eta: 0:39:37  iter: 6699  total_loss: 0.5006  loss_cls: 0.1107  loss_box_reg: 0.2199  loss_mask: 0.124  loss_rpn_cls: 0.003906  loss_rpn_loc: 0.02116    time: 0.7186  last_time: 0.5353  data_time: 0.1951  last_data_time: 0.0173   lr: 0.02  max_mem: 9926M
+[07/17 16:52:07 d2.utils.events]:  eta: 0:39:23  iter: 6719  total_loss: 0.5006  loss_cls: 0.1143  loss_box_reg: 0.2203  loss_mask: 0.1374  loss_rpn_cls: 0.00598  loss_rpn_loc: 0.02576    time: 0.7185  last_time: 1.0042  data_time: 0.1868  last_data_time: 0.4609   lr: 0.02  max_mem: 9926M
+[07/17 16:52:21 d2.utils.events]:  eta: 0:39:08  iter: 6739  total_loss: 0.4555  loss_cls: 0.08765  loss_box_reg: 0.1996  loss_mask: 0.1319  loss_rpn_cls: 0.004317  loss_rpn_loc: 0.02691    time: 0.7187  last_time: 0.5296  data_time: 0.1981  last_data_time: 0.0239   lr: 0.02  max_mem: 9926M
+[07/17 16:52:35 d2.utils.events]:  eta: 0:38:59  iter: 6759  total_loss: 0.4604  loss_cls: 0.09123  loss_box_reg: 0.1962  loss_mask: 0.1324  loss_rpn_cls: 0.003654  loss_rpn_loc: 0.02527    time: 0.7186  last_time: 0.5130  data_time: 0.1833  last_data_time: 0.0168   lr: 0.02  max_mem: 9926M
+[07/17 16:52:49 d2.utils.events]:  eta: 0:38:40  iter: 6779  total_loss: 0.4504  loss_cls: 0.09528  loss_box_reg: 0.1939  loss_mask: 0.1274  loss_rpn_cls: 0.004874  loss_rpn_loc: 0.02614    time: 0.7181  last_time: 0.5268  data_time: 0.1875  last_data_time: 0.0035   lr: 0.02  max_mem: 9926M
+[07/17 16:53:03 d2.utils.events]:  eta: 0:38:22  iter: 6799  total_loss: 0.4367  loss_cls: 0.08736  loss_box_reg: 0.1884  loss_mask: 0.1262  loss_rpn_cls: 0.004498  loss_rpn_loc: 0.02514    time: 0.7180  last_time: 0.5598  data_time: 0.1927  last_data_time: 0.0187   lr: 0.02  max_mem: 9926M
+[07/17 16:53:17 d2.utils.events]:  eta: 0:38:05  iter: 6819  total_loss: 0.4431  loss_cls: 0.09964  loss_box_reg: 0.1986  loss_mask: 0.1196  loss_rpn_cls: 0.00416  loss_rpn_loc: 0.02206    time: 0.7180  last_time: 0.7469  data_time: 0.1952  last_data_time: 0.2225   lr: 0.02  max_mem: 9926M
+[07/17 16:53:32 d2.utils.events]:  eta: 0:37:53  iter: 6839  total_loss: 0.4759  loss_cls: 0.0992  loss_box_reg: 0.2044  loss_mask: 0.13  loss_rpn_cls: 0.004642  loss_rpn_loc: 0.02448    time: 0.7183  last_time: 0.7423  data_time: 0.2177  last_data_time: 0.2448   lr: 0.02  max_mem: 9926M
+[07/17 16:53:47 d2.utils.events]:  eta: 0:37:38  iter: 6859  total_loss: 0.466  loss_cls: 0.09618  loss_box_reg: 0.1977  loss_mask: 0.1302  loss_rpn_cls: 0.004809  loss_rpn_loc: 0.02389    time: 0.7182  last_time: 0.9458  data_time: 0.1939  last_data_time: 0.4125   lr: 0.02  max_mem: 9926M
+[07/17 16:54:02 d2.utils.events]:  eta: 0:37:24  iter: 6879  total_loss: 0.4622  loss_cls: 0.1043  loss_box_reg: 0.1899  loss_mask: 0.1328  loss_rpn_cls: 0.004306  loss_rpn_loc: 0.02336    time: 0.7186  last_time: 1.0482  data_time: 0.2304  last_data_time: 0.5036   lr: 0.02  max_mem: 9926M
+[07/17 16:54:15 d2.utils.events]:  eta: 0:37:05  iter: 6899  total_loss: 0.4519  loss_cls: 0.1052  loss_box_reg: 0.1978  loss_mask: 0.1227  loss_rpn_cls: 0.004361  loss_rpn_loc: 0.0236    time: 0.7180  last_time: 0.7945  data_time: 0.1971  last_data_time: 0.2768   lr: 0.02  max_mem: 9926M
+[07/17 16:54:29 d2.utils.events]:  eta: 0:36:48  iter: 6919  total_loss: 0.4323  loss_cls: 0.09171  loss_box_reg: 0.1882  loss_mask: 0.1288  loss_rpn_cls: 0.005224  loss_rpn_loc: 0.02909    time: 0.7179  last_time: 0.5417  data_time: 0.1930  last_data_time: 0.0210   lr: 0.02  max_mem: 9926M
+[07/17 16:54:44 d2.utils.events]:  eta: 0:36:32  iter: 6939  total_loss: 0.4601  loss_cls: 0.09631  loss_box_reg: 0.2028  loss_mask: 0.1282  loss_rpn_cls: 0.004761  loss_rpn_loc: 0.02667    time: 0.7178  last_time: 0.8013  data_time: 0.1817  last_data_time: 0.2579   lr: 0.02  max_mem: 9926M
+[07/17 16:54:58 d2.utils.events]:  eta: 0:36:17  iter: 6959  total_loss: 0.4254  loss_cls: 0.08735  loss_box_reg: 0.1912  loss_mask: 0.1222  loss_rpn_cls: 0.004113  loss_rpn_loc: 0.01886    time: 0.7181  last_time: 0.5554  data_time: 0.2111  last_data_time: 0.0186   lr: 0.02  max_mem: 9926M
+[07/17 16:55:13 d2.utils.events]:  eta: 0:36:02  iter: 6979  total_loss: 0.4417  loss_cls: 0.0902  loss_box_reg: 0.1899  loss_mask: 0.1238  loss_rpn_cls: 0.004459  loss_rpn_loc: 0.02316    time: 0.7180  last_time: 0.7534  data_time: 0.1910  last_data_time: 0.2354   lr: 0.02  max_mem: 9926M
+[07/17 16:55:26 d2.utils.events]:  eta: 0:35:50  iter: 6999  total_loss: 0.4382  loss_cls: 0.08975  loss_box_reg: 0.192  loss_mask: 0.1259  loss_rpn_cls: 0.005158  loss_rpn_loc: 0.02433    time: 0.7176  last_time: 0.8354  data_time: 0.2061  last_data_time: 0.4110   lr: 0.02  max_mem: 9926M
+[07/17 16:55:38 d2.utils.events]:  eta: 0:35:30  iter: 7019  total_loss: 0.3997  loss_cls: 0.08606  loss_box_reg: 0.1819  loss_mask: 0.1208  loss_rpn_cls: 0.004021  loss_rpn_loc: 0.02048    time: 0.7165  last_time: 0.5523  data_time: 0.1708  last_data_time: 0.0547   lr: 0.02  max_mem: 9926M
+[07/17 16:55:54 d2.utils.events]:  eta: 0:35:17  iter: 7039  total_loss: 0.4734  loss_cls: 0.1061  loss_box_reg: 0.1997  loss_mask: 0.1333  loss_rpn_cls: 0.005022  loss_rpn_loc: 0.02398    time: 0.7169  last_time: 0.8192  data_time: 0.2330  last_data_time: 0.3064   lr: 0.02  max_mem: 9926M
+[07/17 16:56:08 d2.utils.events]:  eta: 0:35:05  iter: 7059  total_loss: 0.4283  loss_cls: 0.09089  loss_box_reg: 0.1898  loss_mask: 0.1203  loss_rpn_cls: 0.004879  loss_rpn_loc: 0.02372    time: 0.7169  last_time: 0.7276  data_time: 0.1874  last_data_time: 0.1971   lr: 0.02  max_mem: 9926M
+[07/17 16:56:23 d2.utils.events]:  eta: 0:34:50  iter: 7079  total_loss: 0.4378  loss_cls: 0.09096  loss_box_reg: 0.1922  loss_mask: 0.1243  loss_rpn_cls: 0.00354  loss_rpn_loc: 0.02474    time: 0.7172  last_time: 0.5249  data_time: 0.2062  last_data_time: 0.0111   lr: 0.02  max_mem: 9926M
+[07/17 16:56:37 d2.utils.events]:  eta: 0:34:35  iter: 7099  total_loss: 0.4365  loss_cls: 0.08698  loss_box_reg: 0.1908  loss_mask: 0.1262  loss_rpn_cls: 0.003447  loss_rpn_loc: 0.02301    time: 0.7173  last_time: 0.6622  data_time: 0.1974  last_data_time: 0.1482   lr: 0.02  max_mem: 9926M
+[07/17 16:56:52 d2.utils.events]:  eta: 0:34:22  iter: 7119  total_loss: 0.4666  loss_cls: 0.09722  loss_box_reg: 0.1978  loss_mask: 0.1296  loss_rpn_cls: 0.004503  loss_rpn_loc: 0.02509    time: 0.7173  last_time: 0.6111  data_time: 0.2118  last_data_time: 0.0860   lr: 0.02  max_mem: 9926M
+[07/17 16:57:06 d2.utils.events]:  eta: 0:34:06  iter: 7139  total_loss: 0.4222  loss_cls: 0.08725  loss_box_reg: 0.1906  loss_mask: 0.1266  loss_rpn_cls: 0.004395  loss_rpn_loc: 0.02456    time: 0.7170  last_time: 0.6966  data_time: 0.2136  last_data_time: 0.2782   lr: 0.02  max_mem: 9926M
+[07/17 16:57:19 d2.utils.events]:  eta: 0:33:50  iter: 7159  total_loss: 0.4205  loss_cls: 0.08567  loss_box_reg: 0.1856  loss_mask: 0.1235  loss_rpn_cls: 0.004071  loss_rpn_loc: 0.02412    time: 0.7168  last_time: 0.6602  data_time: 0.2040  last_data_time: 0.1514   lr: 0.02  max_mem: 9926M
+[07/17 16:57:34 d2.utils.events]:  eta: 0:33:39  iter: 7179  total_loss: 0.4356  loss_cls: 0.09023  loss_box_reg: 0.1915  loss_mask: 0.1252  loss_rpn_cls: 0.004266  loss_rpn_loc: 0.02234    time: 0.7169  last_time: 0.8774  data_time: 0.2012  last_data_time: 0.3368   lr: 0.02  max_mem: 9926M
+[07/17 16:57:47 d2.utils.events]:  eta: 0:33:22  iter: 7199  total_loss: 0.4371  loss_cls: 0.08597  loss_box_reg: 0.1957  loss_mask: 0.1231  loss_rpn_cls: 0.003775  loss_rpn_loc: 0.02209    time: 0.7164  last_time: 0.7196  data_time: 0.1967  last_data_time: 0.2199   lr: 0.02  max_mem: 9926M
+[07/17 16:58:02 d2.utils.events]:  eta: 0:33:12  iter: 7219  total_loss: 0.4035  loss_cls: 0.07927  loss_box_reg: 0.1829  loss_mask: 0.1221  loss_rpn_cls: 0.003037  loss_rpn_loc: 0.01883    time: 0.7166  last_time: 0.8200  data_time: 0.2137  last_data_time: 0.2902   lr: 0.02  max_mem: 9926M
+[07/17 16:58:17 d2.utils.events]:  eta: 0:33:05  iter: 7239  total_loss: 0.4245  loss_cls: 0.08141  loss_box_reg: 0.184  loss_mask: 0.1203  loss_rpn_cls: 0.003631  loss_rpn_loc: 0.02447    time: 0.7168  last_time: 0.8142  data_time: 0.2117  last_data_time: 0.2967   lr: 0.02  max_mem: 9926M
+[07/17 16:58:31 d2.utils.events]:  eta: 0:32:53  iter: 7259  total_loss: 0.4672  loss_cls: 0.08665  loss_box_reg: 0.2092  loss_mask: 0.1299  loss_rpn_cls: 0.004123  loss_rpn_loc: 0.02583    time: 0.7167  last_time: 0.5102  data_time: 0.1913  last_data_time: 0.0195   lr: 0.02  max_mem: 9926M
+[07/17 16:58:46 d2.utils.events]:  eta: 0:32:41  iter: 7279  total_loss: 0.4338  loss_cls: 0.08368  loss_box_reg: 0.1948  loss_mask: 0.1202  loss_rpn_cls: 0.004307  loss_rpn_loc: 0.02189    time: 0.7171  last_time: 0.9948  data_time: 0.2343  last_data_time: 0.4662   lr: 0.02  max_mem: 9926M
+[07/17 16:59:00 d2.utils.events]:  eta: 0:32:26  iter: 7299  total_loss: 0.4334  loss_cls: 0.08663  loss_box_reg: 0.1944  loss_mask: 0.1163  loss_rpn_cls: 0.003805  loss_rpn_loc: 0.02113    time: 0.7170  last_time: 0.8035  data_time: 0.1707  last_data_time: 0.2796   lr: 0.02  max_mem: 9926M
+[07/17 16:59:14 d2.utils.events]:  eta: 0:32:13  iter: 7319  total_loss: 0.435  loss_cls: 0.08987  loss_box_reg: 0.1966  loss_mask: 0.1298  loss_rpn_cls: 0.003967  loss_rpn_loc: 0.02189    time: 0.7168  last_time: 0.6194  data_time: 0.1909  last_data_time: 0.1998   lr: 0.02  max_mem: 9926M
+[07/17 16:59:28 d2.utils.events]:  eta: 0:32:02  iter: 7339  total_loss: 0.4316  loss_cls: 0.08421  loss_box_reg: 0.1968  loss_mask: 0.1245  loss_rpn_cls: 0.00447  loss_rpn_loc: 0.02157    time: 0.7164  last_time: 0.6336  data_time: 0.1916  last_data_time: 0.1176   lr: 0.02  max_mem: 9926M
+[07/17 16:59:42 d2.utils.events]:  eta: 0:31:44  iter: 7359  total_loss: 0.4352  loss_cls: 0.08929  loss_box_reg: 0.1965  loss_mask: 0.1184  loss_rpn_cls: 0.003231  loss_rpn_loc: 0.02316    time: 0.7165  last_time: 0.6915  data_time: 0.2039  last_data_time: 0.2065   lr: 0.02  max_mem: 9926M
+[07/17 16:59:55 d2.utils.events]:  eta: 0:31:25  iter: 7379  total_loss: 0.4433  loss_cls: 0.09186  loss_box_reg: 0.2013  loss_mask: 0.1271  loss_rpn_cls: 0.004149  loss_rpn_loc: 0.02346    time: 0.7158  last_time: 0.7293  data_time: 0.1972  last_data_time: 0.2941   lr: 0.02  max_mem: 9926M
+[07/17 17:00:08 d2.utils.events]:  eta: 0:31:03  iter: 7399  total_loss: 0.4213  loss_cls: 0.07908  loss_box_reg: 0.1905  loss_mask: 0.1206  loss_rpn_cls: 0.003813  loss_rpn_loc: 0.02732    time: 0.7151  last_time: 0.6254  data_time: 0.1901  last_data_time: 0.2135   lr: 0.02  max_mem: 9926M
+[07/17 17:00:21 d2.utils.events]:  eta: 0:30:47  iter: 7419  total_loss: 0.4343  loss_cls: 0.08353  loss_box_reg: 0.1895  loss_mask: 0.1289  loss_rpn_cls: 0.003287  loss_rpn_loc: 0.02126    time: 0.7148  last_time: 0.5127  data_time: 0.1697  last_data_time: 0.0119   lr: 0.02  max_mem: 9926M
+[07/17 17:00:36 d2.utils.events]:  eta: 0:30:32  iter: 7439  total_loss: 0.4123  loss_cls: 0.07734  loss_box_reg: 0.1797  loss_mask: 0.1153  loss_rpn_cls: 0.003204  loss_rpn_loc: 0.02402    time: 0.7149  last_time: 0.6450  data_time: 0.1954  last_data_time: 0.1180   lr: 0.02  max_mem: 9926M
+[07/17 17:00:50 d2.utils.events]:  eta: 0:30:17  iter: 7459  total_loss: 0.4222  loss_cls: 0.07992  loss_box_reg: 0.1871  loss_mask: 0.1212  loss_rpn_cls: 0.003771  loss_rpn_loc: 0.02249    time: 0.7149  last_time: 0.6838  data_time: 0.1847  last_data_time: 0.1859   lr: 0.02  max_mem: 9926M
+[07/17 17:01:04 d2.utils.events]:  eta: 0:30:03  iter: 7479  total_loss: 0.4164  loss_cls: 0.07858  loss_box_reg: 0.1879  loss_mask: 0.1225  loss_rpn_cls: 0.003225  loss_rpn_loc: 0.01842    time: 0.7149  last_time: 0.7714  data_time: 0.1878  last_data_time: 0.2483   lr: 0.02  max_mem: 9926M
+[07/17 17:01:18 d2.utils.events]:  eta: 0:29:49  iter: 7499  total_loss: 0.4362  loss_cls: 0.08398  loss_box_reg: 0.1928  loss_mask: 0.1217  loss_rpn_cls: 0.004137  loss_rpn_loc: 0.02582    time: 0.7148  last_time: 0.6520  data_time: 0.2243  last_data_time: 0.2353   lr: 0.02  max_mem: 9926M
+[07/17 17:01:31 d2.utils.events]:  eta: 0:29:29  iter: 7519  total_loss: 0.4333  loss_cls: 0.08306  loss_box_reg: 0.1935  loss_mask: 0.1288  loss_rpn_cls: 0.004759  loss_rpn_loc: 0.02357    time: 0.7142  last_time: 0.6880  data_time: 0.1998  last_data_time: 0.2616   lr: 0.02  max_mem: 9926M
+[07/17 17:01:45 d2.utils.events]:  eta: 0:29:15  iter: 7539  total_loss: 0.4286  loss_cls: 0.08402  loss_box_reg: 0.1915  loss_mask: 0.1238  loss_rpn_cls: 0.003669  loss_rpn_loc: 0.02483    time: 0.7141  last_time: 0.5305  data_time: 0.1825  last_data_time: 0.0146   lr: 0.02  max_mem: 9926M
+[07/17 17:02:01 d2.utils.events]:  eta: 0:29:01  iter: 7559  total_loss: 0.4301  loss_cls: 0.08265  loss_box_reg: 0.1815  loss_mask: 0.1204  loss_rpn_cls: 0.004387  loss_rpn_loc: 0.02255    time: 0.7145  last_time: 0.5264  data_time: 0.2156  last_data_time: 0.0089   lr: 0.02  max_mem: 9926M
+[07/17 17:02:15 d2.utils.events]:  eta: 0:28:48  iter: 7579  total_loss: 0.3946  loss_cls: 0.075  loss_box_reg: 0.1842  loss_mask: 0.1123  loss_rpn_cls: 0.00334  loss_rpn_loc: 0.01994    time: 0.7147  last_time: 0.7541  data_time: 0.2154  last_data_time: 0.2380   lr: 0.02  max_mem: 9926M
+[07/17 17:02:31 d2.utils.events]:  eta: 0:28:37  iter: 7599  total_loss: 0.412  loss_cls: 0.07561  loss_box_reg: 0.1848  loss_mask: 0.1167  loss_rpn_cls: 0.003354  loss_rpn_loc: 0.02071    time: 0.7150  last_time: 0.8784  data_time: 0.2219  last_data_time: 0.3749   lr: 0.02  max_mem: 9926M
+[07/17 17:02:45 d2.utils.events]:  eta: 0:28:24  iter: 7619  total_loss: 0.4136  loss_cls: 0.07709  loss_box_reg: 0.1854  loss_mask: 0.12  loss_rpn_cls: 0.003793  loss_rpn_loc: 0.03139    time: 0.7150  last_time: 0.6985  data_time: 0.1783  last_data_time: 0.1587   lr: 0.02  max_mem: 9926M
+[07/17 17:02:59 d2.utils.events]:  eta: 0:28:10  iter: 7639  total_loss: 0.406  loss_cls: 0.0765  loss_box_reg: 0.1836  loss_mask: 0.1243  loss_rpn_cls: 0.003649  loss_rpn_loc: 0.02176    time: 0.7148  last_time: 0.6556  data_time: 0.1775  last_data_time: 0.2155   lr: 0.02  max_mem: 9926M
+[07/17 17:03:13 d2.utils.events]:  eta: 0:28:00  iter: 7659  total_loss: 0.4054  loss_cls: 0.07685  loss_box_reg: 0.1849  loss_mask: 0.1171  loss_rpn_cls: 0.004065  loss_rpn_loc: 0.01951    time: 0.7147  last_time: 0.7220  data_time: 0.1977  last_data_time: 0.2030   lr: 0.02  max_mem: 9926M
+[07/17 17:03:27 d2.utils.events]:  eta: 0:27:47  iter: 7679  total_loss: 0.4234  loss_cls: 0.07696  loss_box_reg: 0.1841  loss_mask: 0.1199  loss_rpn_cls: 0.004333  loss_rpn_loc: 0.02537    time: 0.7148  last_time: 0.5578  data_time: 0.1909  last_data_time: 0.0194   lr: 0.02  max_mem: 9926M
+[07/17 17:03:42 d2.utils.events]:  eta: 0:27:34  iter: 7699  total_loss: 0.4324  loss_cls: 0.08375  loss_box_reg: 0.1832  loss_mask: 0.1234  loss_rpn_cls: 0.003703  loss_rpn_loc: 0.02219    time: 0.7149  last_time: 0.8444  data_time: 0.2064  last_data_time: 0.3234   lr: 0.02  max_mem: 9926M
+[07/17 17:03:57 d2.utils.events]:  eta: 0:27:22  iter: 7719  total_loss: 0.4281  loss_cls: 0.08435  loss_box_reg: 0.1918  loss_mask: 0.1267  loss_rpn_cls: 0.004082  loss_rpn_loc: 0.02114    time: 0.7151  last_time: 0.9659  data_time: 0.2229  last_data_time: 0.4343   lr: 0.02  max_mem: 9926M
+[07/17 17:04:12 d2.utils.events]:  eta: 0:27:07  iter: 7739  total_loss: 0.4186  loss_cls: 0.08118  loss_box_reg: 0.1823  loss_mask: 0.1183  loss_rpn_cls: 0.004527  loss_rpn_loc: 0.02464    time: 0.7153  last_time: 0.5549  data_time: 0.2212  last_data_time: 0.1326   lr: 0.02  max_mem: 9926M
+[07/17 17:04:24 d2.utils.events]:  eta: 0:26:49  iter: 7759  total_loss: 0.4038  loss_cls: 0.07605  loss_box_reg: 0.1772  loss_mask: 0.1196  loss_rpn_cls: 0.003601  loss_rpn_loc: 0.02254    time: 0.7148  last_time: 0.8186  data_time: 0.1837  last_data_time: 0.3136   lr: 0.02  max_mem: 9926M
+[07/17 17:04:39 d2.utils.events]:  eta: 0:26:35  iter: 7779  total_loss: 0.4146  loss_cls: 0.07346  loss_box_reg: 0.1812  loss_mask: 0.1218  loss_rpn_cls: 0.003443  loss_rpn_loc: 0.02444    time: 0.7148  last_time: 0.6567  data_time: 0.2470  last_data_time: 0.1455   lr: 0.02  max_mem: 9926M
+[07/17 17:04:52 d2.utils.events]:  eta: 0:26:19  iter: 7799  total_loss: 0.409  loss_cls: 0.07469  loss_box_reg: 0.1851  loss_mask: 0.1214  loss_rpn_cls: 0.00298  loss_rpn_loc: 0.02516    time: 0.7143  last_time: 0.7926  data_time: 0.1912  last_data_time: 0.3797   lr: 0.02  max_mem: 9926M
+[07/17 17:05:06 d2.utils.events]:  eta: 0:26:05  iter: 7819  total_loss: 0.3885  loss_cls: 0.07092  loss_box_reg: 0.1769  loss_mask: 0.1146  loss_rpn_cls: 0.003293  loss_rpn_loc: 0.01671    time: 0.7144  last_time: 0.7669  data_time: 0.2119  last_data_time: 0.2575   lr: 0.02  max_mem: 9926M
+[07/17 17:05:21 d2.utils.events]:  eta: 0:25:49  iter: 7839  total_loss: 0.3996  loss_cls: 0.07469  loss_box_reg: 0.1777  loss_mask: 0.1181  loss_rpn_cls: 0.002728  loss_rpn_loc: 0.02315    time: 0.7145  last_time: 0.8152  data_time: 0.1933  last_data_time: 0.0219   lr: 0.02  max_mem: 9926M
+[07/17 17:05:35 d2.utils.events]:  eta: 0:25:36  iter: 7859  total_loss: 0.4034  loss_cls: 0.08047  loss_box_reg: 0.1823  loss_mask: 0.1188  loss_rpn_cls: 0.003068  loss_rpn_loc: 0.02075    time: 0.7144  last_time: 0.6882  data_time: 0.1854  last_data_time: 0.1670   lr: 0.02  max_mem: 9926M
+[07/17 17:05:50 d2.utils.events]:  eta: 0:25:22  iter: 7879  total_loss: 0.3928  loss_cls: 0.07198  loss_box_reg: 0.1744  loss_mask: 0.1195  loss_rpn_cls: 0.003875  loss_rpn_loc: 0.02352    time: 0.7147  last_time: 0.7276  data_time: 0.2306  last_data_time: 0.2194   lr: 0.02  max_mem: 9926M
+[07/17 17:06:05 d2.utils.events]:  eta: 0:25:12  iter: 7899  total_loss: 0.4088  loss_cls: 0.07226  loss_box_reg: 0.1774  loss_mask: 0.119  loss_rpn_cls: 0.003607  loss_rpn_loc: 0.02542    time: 0.7150  last_time: 0.7120  data_time: 0.2125  last_data_time: 0.1848   lr: 0.02  max_mem: 9926M
+[07/17 17:06:19 d2.utils.events]:  eta: 0:24:55  iter: 7919  total_loss: 0.3829  loss_cls: 0.0701  loss_box_reg: 0.1687  loss_mask: 0.1206  loss_rpn_cls: 0.003213  loss_rpn_loc: 0.01797    time: 0.7146  last_time: 0.6370  data_time: 0.1935  last_data_time: 0.1381   lr: 0.02  max_mem: 9926M
+[07/17 17:06:33 d2.utils.events]:  eta: 0:24:42  iter: 7939  total_loss: 0.3788  loss_cls: 0.06929  loss_box_reg: 0.1705  loss_mask: 0.1164  loss_rpn_cls: 0.003502  loss_rpn_loc: 0.02381    time: 0.7148  last_time: 0.7770  data_time: 0.2225  last_data_time: 0.2616   lr: 0.02  max_mem: 9926M
+[07/17 17:06:47 d2.utils.events]:  eta: 0:24:27  iter: 7959  total_loss: 0.3674  loss_cls: 0.06562  loss_box_reg: 0.1571  loss_mask: 0.1113  loss_rpn_cls: 0.003603  loss_rpn_loc: 0.02354    time: 0.7147  last_time: 0.6865  data_time: 0.1861  last_data_time: 0.1773   lr: 0.02  max_mem: 9926M
+[07/17 17:07:01 d2.utils.events]:  eta: 0:24:12  iter: 7979  total_loss: 0.3934  loss_cls: 0.07196  loss_box_reg: 0.1757  loss_mask: 0.1276  loss_rpn_cls: 0.003319  loss_rpn_loc: 0.02115    time: 0.7145  last_time: 0.7928  data_time: 0.1990  last_data_time: 0.2563   lr: 0.02  max_mem: 9926M
+[07/17 17:07:14 d2.utils.events]:  eta: 0:23:55  iter: 7999  total_loss: 0.3808  loss_cls: 0.07105  loss_box_reg: 0.1743  loss_mask: 0.116  loss_rpn_cls: 0.002504  loss_rpn_loc: 0.02151    time: 0.7141  last_time: 0.6341  data_time: 0.1841  last_data_time: 0.2149   lr: 0.02  max_mem: 9926M
+[07/17 17:07:29 d2.utils.events]:  eta: 0:23:45  iter: 8019  total_loss: 0.396  loss_cls: 0.07326  loss_box_reg: 0.1732  loss_mask: 0.1194  loss_rpn_cls: 0.003338  loss_rpn_loc: 0.02424    time: 0.7141  last_time: 0.9220  data_time: 0.1769  last_data_time: 0.3896   lr: 0.02  max_mem: 9926M
+[07/17 17:07:43 d2.utils.events]:  eta: 0:23:31  iter: 8039  total_loss: 0.3821  loss_cls: 0.06999  loss_box_reg: 0.1748  loss_mask: 0.1147  loss_rpn_cls: 0.003129  loss_rpn_loc: 0.01941    time: 0.7142  last_time: 0.7813  data_time: 0.1930  last_data_time: 0.2757   lr: 0.02  max_mem: 9926M
+[07/17 17:07:57 d2.utils.events]:  eta: 0:23:16  iter: 8059  total_loss: 0.3904  loss_cls: 0.06975  loss_box_reg: 0.1711  loss_mask: 0.1146  loss_rpn_cls: 0.003082  loss_rpn_loc: 0.02122    time: 0.7140  last_time: 0.7444  data_time: 0.1788  last_data_time: 0.2385   lr: 0.02  max_mem: 9926M
+[07/17 17:08:12 d2.utils.events]:  eta: 0:23:02  iter: 8079  total_loss: 0.3868  loss_cls: 0.07099  loss_box_reg: 0.1686  loss_mask: 0.1144  loss_rpn_cls: 0.002514  loss_rpn_loc: 0.02081    time: 0.7143  last_time: 0.8746  data_time: 0.2286  last_data_time: 0.3589   lr: 0.02  max_mem: 9926M
+[07/17 17:08:27 d2.utils.events]:  eta: 0:22:46  iter: 8099  total_loss: 0.4019  loss_cls: 0.07262  loss_box_reg: 0.1836  loss_mask: 0.119  loss_rpn_cls: 0.002873  loss_rpn_loc: 0.01991    time: 0.7144  last_time: 0.5345  data_time: 0.2074  last_data_time: 0.0165   lr: 0.02  max_mem: 9926M
+[07/17 17:08:41 d2.utils.events]:  eta: 0:22:30  iter: 8119  total_loss: 0.4042  loss_cls: 0.0718  loss_box_reg: 0.1818  loss_mask: 0.1182  loss_rpn_cls: 0.0034  loss_rpn_loc: 0.02654    time: 0.7143  last_time: 0.7933  data_time: 0.1985  last_data_time: 0.2711   lr: 0.02  max_mem: 9926M
+[07/17 17:08:54 d2.utils.events]:  eta: 0:22:18  iter: 8139  total_loss: 0.37  loss_cls: 0.06995  loss_box_reg: 0.1703  loss_mask: 0.1104  loss_rpn_cls: 0.003134  loss_rpn_loc: 0.02206    time: 0.7141  last_time: 0.6368  data_time: 0.1791  last_data_time: 0.2325   lr: 0.02  max_mem: 9926M
+[07/17 17:09:07 d2.utils.events]:  eta: 0:22:01  iter: 8159  total_loss: 0.3605  loss_cls: 0.06373  loss_box_reg: 0.1577  loss_mask: 0.1116  loss_rpn_cls: 0.003078  loss_rpn_loc: 0.01926    time: 0.7135  last_time: 0.4240  data_time: 0.1823  last_data_time: 0.0043   lr: 0.02  max_mem: 9926M
+[07/17 17:09:20 d2.utils.events]:  eta: 0:21:43  iter: 8179  total_loss: 0.4003  loss_cls: 0.07399  loss_box_reg: 0.1743  loss_mask: 0.119  loss_rpn_cls: 0.003082  loss_rpn_loc: 0.02083    time: 0.7132  last_time: 0.6052  data_time: 0.1849  last_data_time: 0.1869   lr: 0.02  max_mem: 9926M
+[07/17 17:09:35 d2.utils.events]:  eta: 0:21:31  iter: 8199  total_loss: 0.3572  loss_cls: 0.06606  loss_box_reg: 0.1583  loss_mask: 0.1142  loss_rpn_cls: 0.002415  loss_rpn_loc: 0.01873    time: 0.7133  last_time: 0.7628  data_time: 0.2266  last_data_time: 0.2588   lr: 0.02  max_mem: 9926M
+[07/17 17:09:49 d2.utils.events]:  eta: 0:21:15  iter: 8219  total_loss: 0.3755  loss_cls: 0.06364  loss_box_reg: 0.1638  loss_mask: 0.1148  loss_rpn_cls: 0.002617  loss_rpn_loc: 0.0184    time: 0.7133  last_time: 0.8813  data_time: 0.1932  last_data_time: 0.3583   lr: 0.02  max_mem: 9926M
+[07/17 17:10:03 d2.utils.events]:  eta: 0:21:00  iter: 8239  total_loss: 0.3771  loss_cls: 0.06453  loss_box_reg: 0.1673  loss_mask: 0.113  loss_rpn_cls: 0.002551  loss_rpn_loc: 0.02375    time: 0.7133  last_time: 0.7227  data_time: 0.1829  last_data_time: 0.2114   lr: 0.02  max_mem: 9926M
+[07/17 17:10:19 d2.utils.events]:  eta: 0:20:46  iter: 8259  total_loss: 0.3747  loss_cls: 0.06705  loss_box_reg: 0.172  loss_mask: 0.1127  loss_rpn_cls: 0.002819  loss_rpn_loc: 0.02114    time: 0.7136  last_time: 0.7303  data_time: 0.2378  last_data_time: 0.1960   lr: 0.02  max_mem: 9926M
+[07/17 17:10:34 d2.utils.events]:  eta: 0:20:31  iter: 8279  total_loss: 0.3966  loss_cls: 0.07358  loss_box_reg: 0.1751  loss_mask: 0.1211  loss_rpn_cls: 0.003409  loss_rpn_loc: 0.02501    time: 0.7138  last_time: 0.6433  data_time: 0.2154  last_data_time: 0.1285   lr: 0.02  max_mem: 9926M
+[07/17 17:10:48 d2.utils.events]:  eta: 0:20:16  iter: 8299  total_loss: 0.3745  loss_cls: 0.06087  loss_box_reg: 0.1577  loss_mask: 0.1202  loss_rpn_cls: 0.003498  loss_rpn_loc: 0.02712    time: 0.7139  last_time: 0.7869  data_time: 0.2287  last_data_time: 0.2577   lr: 0.02  max_mem: 9926M
+[07/17 17:11:01 d2.utils.events]:  eta: 0:20:00  iter: 8319  total_loss: 0.37  loss_cls: 0.06483  loss_box_reg: 0.1674  loss_mask: 0.1175  loss_rpn_cls: 0.003584  loss_rpn_loc: 0.02469    time: 0.7135  last_time: 0.5446  data_time: 0.1782  last_data_time: 0.1334   lr: 0.02  max_mem: 9926M
+[07/17 17:11:15 d2.utils.events]:  eta: 0:19:46  iter: 8339  total_loss: 0.3707  loss_cls: 0.06578  loss_box_reg: 0.1667  loss_mask: 0.118  loss_rpn_cls: 0.002659  loss_rpn_loc: 0.02189    time: 0.7133  last_time: 0.7970  data_time: 0.2301  last_data_time: 0.2826   lr: 0.02  max_mem: 9926M
+[07/17 17:11:29 d2.utils.events]:  eta: 0:19:32  iter: 8359  total_loss: 0.3845  loss_cls: 0.07126  loss_box_reg: 0.1731  loss_mask: 0.1135  loss_rpn_cls: 0.002396  loss_rpn_loc: 0.02057    time: 0.7134  last_time: 0.8982  data_time: 0.2374  last_data_time: 0.4837   lr: 0.02  max_mem: 9926M
+[07/17 17:11:42 d2.utils.events]:  eta: 0:19:18  iter: 8379  total_loss: 0.3766  loss_cls: 0.06329  loss_box_reg: 0.1725  loss_mask: 0.1159  loss_rpn_cls: 0.002475  loss_rpn_loc: 0.01836    time: 0.7130  last_time: 0.7578  data_time: 0.1813  last_data_time: 0.2360   lr: 0.02  max_mem: 9926M
+[07/17 17:11:55 d2.utils.events]:  eta: 0:19:05  iter: 8399  total_loss: 0.3741  loss_cls: 0.06846  loss_box_reg: 0.161  loss_mask: 0.1157  loss_rpn_cls: 0.00313  loss_rpn_loc: 0.02091    time: 0.7127  last_time: 0.7106  data_time: 0.1699  last_data_time: 0.2074   lr: 0.02  max_mem: 9926M
+[07/17 17:12:10 d2.utils.events]:  eta: 0:18:53  iter: 8419  total_loss: 0.3819  loss_cls: 0.06639  loss_box_reg: 0.1629  loss_mask: 0.1184  loss_rpn_cls: 0.003006  loss_rpn_loc: 0.02159    time: 0.7127  last_time: 0.8708  data_time: 0.2239  last_data_time: 0.3528   lr: 0.02  max_mem: 9926M
+[07/17 17:12:25 d2.utils.events]:  eta: 0:18:39  iter: 8439  total_loss: 0.3709  loss_cls: 0.06782  loss_box_reg: 0.1652  loss_mask: 0.1098  loss_rpn_cls: 0.002677  loss_rpn_loc: 0.01823    time: 0.7128  last_time: 0.7486  data_time: 0.2231  last_data_time: 0.2365   lr: 0.02  max_mem: 9926M
+[07/17 17:12:39 d2.utils.events]:  eta: 0:18:25  iter: 8459  total_loss: 0.3688  loss_cls: 0.06879  loss_box_reg: 0.1665  loss_mask: 0.1109  loss_rpn_cls: 0.002623  loss_rpn_loc: 0.021    time: 0.7130  last_time: 0.8975  data_time: 0.2126  last_data_time: 0.3825   lr: 0.02  max_mem: 9926M
+[07/17 17:12:54 d2.utils.events]:  eta: 0:18:10  iter: 8479  total_loss: 0.3831  loss_cls: 0.0701  loss_box_reg: 0.1755  loss_mask: 0.1159  loss_rpn_cls: 0.002624  loss_rpn_loc: 0.02234    time: 0.7132  last_time: 0.5389  data_time: 0.2053  last_data_time: 0.0091   lr: 0.02  max_mem: 9926M
+[07/17 17:13:09 d2.utils.events]:  eta: 0:17:56  iter: 8499  total_loss: 0.3991  loss_cls: 0.078  loss_box_reg: 0.1798  loss_mask: 0.1203  loss_rpn_cls: 0.003261  loss_rpn_loc: 0.02234    time: 0.7132  last_time: 0.7333  data_time: 0.1904  last_data_time: 0.2150   lr: 0.02  max_mem: 9926M
+[07/17 17:13:23 d2.utils.events]:  eta: 0:17:42  iter: 8519  total_loss: 0.3751  loss_cls: 0.06955  loss_box_reg: 0.1681  loss_mask: 0.1172  loss_rpn_cls: 0.003427  loss_rpn_loc: 0.02015    time: 0.7133  last_time: 0.6473  data_time: 0.2298  last_data_time: 0.1174   lr: 0.02  max_mem: 9926M
+[07/17 17:13:37 d2.utils.events]:  eta: 0:17:29  iter: 8539  total_loss: 0.3734  loss_cls: 0.06964  loss_box_reg: 0.1631  loss_mask: 0.1129  loss_rpn_cls: 0.003339  loss_rpn_loc: 0.028    time: 0.7132  last_time: 0.7278  data_time: 0.1844  last_data_time: 0.2104   lr: 0.02  max_mem: 9926M
+[07/17 17:13:51 d2.utils.events]:  eta: 0:17:14  iter: 8559  total_loss: 0.3683  loss_cls: 0.06802  loss_box_reg: 0.165  loss_mask: 0.1147  loss_rpn_cls: 0.002929  loss_rpn_loc: 0.0213    time: 0.7130  last_time: 0.7113  data_time: 0.1896  last_data_time: 0.2757   lr: 0.02  max_mem: 9926M
+[07/17 17:14:05 d2.utils.events]:  eta: 0:16:59  iter: 8579  total_loss: 0.3731  loss_cls: 0.06812  loss_box_reg: 0.1692  loss_mask: 0.1128  loss_rpn_cls: 0.002397  loss_rpn_loc: 0.01829    time: 0.7130  last_time: 0.7670  data_time: 0.1891  last_data_time: 0.2313   lr: 0.02  max_mem: 9926M
+[07/17 17:14:19 d2.utils.events]:  eta: 0:16:44  iter: 8599  total_loss: 0.374  loss_cls: 0.06727  loss_box_reg: 0.1678  loss_mask: 0.1178  loss_rpn_cls: 0.003375  loss_rpn_loc: 0.02172    time: 0.7130  last_time: 0.7348  data_time: 0.1907  last_data_time: 0.2190   lr: 0.02  max_mem: 9926M
+[07/17 17:14:34 d2.utils.events]:  eta: 0:16:30  iter: 8619  total_loss: 0.3668  loss_cls: 0.0686  loss_box_reg: 0.1665  loss_mask: 0.1084  loss_rpn_cls: 0.002852  loss_rpn_loc: 0.02106    time: 0.7131  last_time: 0.5350  data_time: 0.2143  last_data_time: 0.0032   lr: 0.02  max_mem: 9926M
+[07/17 17:14:49 d2.utils.events]:  eta: 0:16:16  iter: 8639  total_loss: 0.3766  loss_cls: 0.07205  loss_box_reg: 0.175  loss_mask: 0.1128  loss_rpn_cls: 0.002285  loss_rpn_loc: 0.01749    time: 0.7134  last_time: 0.7074  data_time: 0.2247  last_data_time: 0.1767   lr: 0.02  max_mem: 9926M
+[07/17 17:15:03 d2.utils.events]:  eta: 0:16:00  iter: 8659  total_loss: 0.3753  loss_cls: 0.06739  loss_box_reg: 0.1677  loss_mask: 0.1124  loss_rpn_cls: 0.002171  loss_rpn_loc: 0.01857    time: 0.7131  last_time: 0.7658  data_time: 0.1912  last_data_time: 0.2599   lr: 0.02  max_mem: 9926M
+[07/17 17:15:16 d2.utils.events]:  eta: 0:15:45  iter: 8679  total_loss: 0.3578  loss_cls: 0.06468  loss_box_reg: 0.16  loss_mask: 0.1104  loss_rpn_cls: 0.002777  loss_rpn_loc: 0.02083    time: 0.7129  last_time: 0.6533  data_time: 0.1781  last_data_time: 0.1366   lr: 0.02  max_mem: 9926M
+[07/17 17:15:31 d2.utils.events]:  eta: 0:15:31  iter: 8699  total_loss: 0.3883  loss_cls: 0.07166  loss_box_reg: 0.1743  loss_mask: 0.1139  loss_rpn_cls: 0.002222  loss_rpn_loc: 0.02189    time: 0.7130  last_time: 0.7881  data_time: 0.1972  last_data_time: 0.2614   lr: 0.02  max_mem: 9926M
+[07/17 17:15:45 d2.utils.events]:  eta: 0:15:17  iter: 8719  total_loss: 0.3865  loss_cls: 0.07428  loss_box_reg: 0.1724  loss_mask: 0.1137  loss_rpn_cls: 0.002862  loss_rpn_loc: 0.02216    time: 0.7131  last_time: 0.7821  data_time: 0.1982  last_data_time: 0.2789   lr: 0.02  max_mem: 9926M
+[07/17 17:15:59 d2.utils.events]:  eta: 0:15:02  iter: 8739  total_loss: 0.3898  loss_cls: 0.07419  loss_box_reg: 0.1776  loss_mask: 0.1148  loss_rpn_cls: 0.002761  loss_rpn_loc: 0.02459    time: 0.7129  last_time: 0.6032  data_time: 0.1691  last_data_time: 0.0927   lr: 0.02  max_mem: 9926M
+[07/17 17:16:13 d2.utils.events]:  eta: 0:14:49  iter: 8759  total_loss: 0.3772  loss_cls: 0.07347  loss_box_reg: 0.1707  loss_mask: 0.11  loss_rpn_cls: 0.002856  loss_rpn_loc: 0.02186    time: 0.7130  last_time: 0.7062  data_time: 0.1972  last_data_time: 0.1724   lr: 0.02  max_mem: 9926M
+[07/17 17:16:29 d2.utils.events]:  eta: 0:14:36  iter: 8779  total_loss: 0.3885  loss_cls: 0.0728  loss_box_reg: 0.1735  loss_mask: 0.1133  loss_rpn_cls: 0.00367  loss_rpn_loc: 0.02205    time: 0.7133  last_time: 0.8518  data_time: 0.2354  last_data_time: 0.3052   lr: 0.02  max_mem: 9926M
+[07/17 17:16:44 d2.utils.events]:  eta: 0:14:24  iter: 8799  total_loss: 0.369  loss_cls: 0.06814  loss_box_reg: 0.1649  loss_mask: 0.1146  loss_rpn_cls: 0.002676  loss_rpn_loc: 0.02377    time: 0.7136  last_time: 1.1429  data_time: 0.2357  last_data_time: 0.3221   lr: 0.02  max_mem: 9926M
+[07/17 17:16:58 d2.utils.events]:  eta: 0:14:10  iter: 8819  total_loss: 0.3835  loss_cls: 0.06863  loss_box_reg: 0.165  loss_mask: 0.1128  loss_rpn_cls: 0.003199  loss_rpn_loc: 0.02234    time: 0.7135  last_time: 0.6763  data_time: 0.1785  last_data_time: 0.1436   lr: 0.02  max_mem: 9961M
+[07/17 17:17:13 d2.utils.events]:  eta: 0:13:54  iter: 8839  total_loss: 0.3776  loss_cls: 0.06896  loss_box_reg: 0.1592  loss_mask: 0.1089  loss_rpn_cls: 0.00361  loss_rpn_loc: 0.02472    time: 0.7136  last_time: 0.7127  data_time: 0.1927  last_data_time: 0.1880   lr: 0.02  max_mem: 9961M
+[07/17 17:17:27 d2.utils.events]:  eta: 0:13:38  iter: 8859  total_loss: 0.3676  loss_cls: 0.0643  loss_box_reg: 0.1689  loss_mask: 0.1119  loss_rpn_cls: 0.003326  loss_rpn_loc: 0.02279    time: 0.7136  last_time: 0.6656  data_time: 0.1930  last_data_time: 0.1492   lr: 0.02  max_mem: 9961M
+[07/17 17:17:40 d2.utils.events]:  eta: 0:13:22  iter: 8879  total_loss: 0.3472  loss_cls: 0.06019  loss_box_reg: 0.1556  loss_mask: 0.1076  loss_rpn_cls: 0.002629  loss_rpn_loc: 0.01912    time: 0.7131  last_time: 0.6325  data_time: 0.1700  last_data_time: 0.2250   lr: 0.02  max_mem: 9961M
+[07/17 17:17:53 d2.utils.events]:  eta: 0:13:05  iter: 8899  total_loss: 0.3566  loss_cls: 0.06359  loss_box_reg: 0.1588  loss_mask: 0.1145  loss_rpn_cls: 0.002179  loss_rpn_loc: 0.01858    time: 0.7129  last_time: 0.8002  data_time: 0.2070  last_data_time: 0.2919   lr: 0.02  max_mem: 9961M
+[07/17 17:18:06 d2.utils.events]:  eta: 0:12:50  iter: 8919  total_loss: 0.3505  loss_cls: 0.06252  loss_box_reg: 0.1556  loss_mask: 0.1094  loss_rpn_cls: 0.002649  loss_rpn_loc: 0.02167    time: 0.7124  last_time: 0.5474  data_time: 0.1683  last_data_time: 0.1267   lr: 0.02  max_mem: 9961M
+[07/17 17:18:18 d2.utils.events]:  eta: 0:12:33  iter: 8939  total_loss: 0.3687  loss_cls: 0.0662  loss_box_reg: 0.1582  loss_mask: 0.1128  loss_rpn_cls: 0.002727  loss_rpn_loc: 0.0204    time: 0.7120  last_time: 0.6276  data_time: 0.1789  last_data_time: 0.1049   lr: 0.02  max_mem: 9961M
+[07/17 17:18:33 d2.utils.events]:  eta: 0:12:20  iter: 8959  total_loss: 0.3814  loss_cls: 0.07023  loss_box_reg: 0.1687  loss_mask: 0.1125  loss_rpn_cls: 0.002733  loss_rpn_loc: 0.02493    time: 0.7121  last_time: 0.6761  data_time: 0.2048  last_data_time: 0.1517   lr: 0.02  max_mem: 9961M
+[07/17 17:18:47 d2.utils.events]:  eta: 0:12:06  iter: 8979  total_loss: 0.377  loss_cls: 0.06848  loss_box_reg: 0.1685  loss_mask: 0.1136  loss_rpn_cls: 0.002712  loss_rpn_loc: 0.02751    time: 0.7122  last_time: 0.7741  data_time: 0.1964  last_data_time: 0.2532   lr: 0.02  max_mem: 9961M
+[07/17 17:19:01 d2.utils.events]:  eta: 0:11:52  iter: 8999  total_loss: 0.346  loss_cls: 0.06475  loss_box_reg: 0.1543  loss_mask: 0.1085  loss_rpn_cls: 0.002991  loss_rpn_loc: 0.02239    time: 0.7120  last_time: 0.5194  data_time: 0.1752  last_data_time: 0.0101   lr: 0.02  max_mem: 9961M
+[07/17 17:19:15 d2.utils.events]:  eta: 0:11:38  iter: 9019  total_loss: 0.3375  loss_cls: 0.06295  loss_box_reg: 0.1443  loss_mask: 0.109  loss_rpn_cls: 0.00238  loss_rpn_loc: 0.01674    time: 0.7120  last_time: 0.8589  data_time: 0.2313  last_data_time: 0.3608   lr: 0.002  max_mem: 9961M
+[07/17 17:19:30 d2.utils.events]:  eta: 0:11:24  iter: 9039  total_loss: 0.341  loss_cls: 0.06123  loss_box_reg: 0.1436  loss_mask: 0.1112  loss_rpn_cls: 0.002392  loss_rpn_loc: 0.0201    time: 0.7122  last_time: 0.5210  data_time: 0.2212  last_data_time: 0.0114   lr: 0.002  max_mem: 9961M
+[07/17 17:19:45 d2.utils.events]:  eta: 0:11:09  iter: 9059  total_loss: 0.311  loss_cls: 0.05733  loss_box_reg: 0.1348  loss_mask: 0.1054  loss_rpn_cls: 0.002011  loss_rpn_loc: 0.01556    time: 0.7123  last_time: 0.7274  data_time: 0.2038  last_data_time: 0.2049   lr: 0.002  max_mem: 9961M
+[07/17 17:19:59 d2.utils.events]:  eta: 0:10:55  iter: 9079  total_loss: 0.3166  loss_cls: 0.05429  loss_box_reg: 0.1299  loss_mask: 0.1055  loss_rpn_cls: 0.002551  loss_rpn_loc: 0.01736    time: 0.7122  last_time: 0.5416  data_time: 0.1778  last_data_time: 0.0166   lr: 0.002  max_mem: 9961M
+[07/17 17:20:14 d2.utils.events]:  eta: 0:10:41  iter: 9099  total_loss: 0.3092  loss_cls: 0.05205  loss_box_reg: 0.1328  loss_mask: 0.1072  loss_rpn_cls: 0.001725  loss_rpn_loc: 0.01463    time: 0.7124  last_time: 1.0165  data_time: 0.2129  last_data_time: 0.5119   lr: 0.002  max_mem: 9961M
+[07/17 17:20:28 d2.utils.events]:  eta: 0:10:27  iter: 9119  total_loss: 0.3047  loss_cls: 0.0521  loss_box_reg: 0.1283  loss_mask: 0.1018  loss_rpn_cls: 0.001744  loss_rpn_loc: 0.0158    time: 0.7123  last_time: 0.8076  data_time: 0.1968  last_data_time: 0.3935   lr: 0.002  max_mem: 9961M
+[07/17 17:20:41 d2.utils.events]:  eta: 0:10:12  iter: 9139  total_loss: 0.296  loss_cls: 0.0502  loss_box_reg: 0.1223  loss_mask: 0.0985  loss_rpn_cls: 0.002254  loss_rpn_loc: 0.02038    time: 0.7121  last_time: 0.5314  data_time: 0.1704  last_data_time: 0.0172   lr: 0.002  max_mem: 9961M
+[07/17 17:20:54 d2.utils.events]:  eta: 0:09:57  iter: 9159  total_loss: 0.2846  loss_cls: 0.04679  loss_box_reg: 0.117  loss_mask: 0.101  loss_rpn_cls: 0.001497  loss_rpn_loc: 0.0167    time: 0.7118  last_time: 0.6672  data_time: 0.2038  last_data_time: 0.2610   lr: 0.002  max_mem: 9961M
+[07/17 17:21:09 d2.utils.events]:  eta: 0:09:44  iter: 9179  total_loss: 0.2997  loss_cls: 0.05167  loss_box_reg: 0.1271  loss_mask: 0.1034  loss_rpn_cls: 0.001454  loss_rpn_loc: 0.0158    time: 0.7119  last_time: 0.5101  data_time: 0.1992  last_data_time: 0.0072   lr: 0.002  max_mem: 9961M
+[07/17 17:21:24 d2.utils.events]:  eta: 0:09:30  iter: 9199  total_loss: 0.312  loss_cls: 0.0515  loss_box_reg: 0.1291  loss_mask: 0.1032  loss_rpn_cls: 0.001893  loss_rpn_loc: 0.02094    time: 0.7120  last_time: 0.7929  data_time: 0.2179  last_data_time: 0.2986   lr: 0.002  max_mem: 9961M
+[07/17 17:21:37 d2.utils.events]:  eta: 0:09:16  iter: 9219  total_loss: 0.2846  loss_cls: 0.04637  loss_box_reg: 0.1192  loss_mask: 0.101  loss_rpn_cls: 0.0017  loss_rpn_loc: 0.01686    time: 0.7119  last_time: 0.5155  data_time: 0.1755  last_data_time: 0.0077   lr: 0.002  max_mem: 9961M
+[07/17 17:21:52 d2.utils.events]:  eta: 0:09:02  iter: 9239  total_loss: 0.3017  loss_cls: 0.04986  loss_box_reg: 0.1257  loss_mask: 0.1031  loss_rpn_cls: 0.001601  loss_rpn_loc: 0.01792    time: 0.7119  last_time: 0.7409  data_time: 0.1842  last_data_time: 0.2320   lr: 0.002  max_mem: 9961M
+[07/17 17:22:04 d2.utils.events]:  eta: 0:08:46  iter: 9259  total_loss: 0.3095  loss_cls: 0.04997  loss_box_reg: 0.1248  loss_mask: 0.1032  loss_rpn_cls: 0.001753  loss_rpn_loc: 0.021    time: 0.7116  last_time: 0.5901  data_time: 0.1617  last_data_time: 0.1804   lr: 0.002  max_mem: 9961M
+[07/17 17:22:18 d2.utils.events]:  eta: 0:08:31  iter: 9279  total_loss: 0.2911  loss_cls: 0.05098  loss_box_reg: 0.1233  loss_mask: 0.1011  loss_rpn_cls: 0.001809  loss_rpn_loc: 0.01599    time: 0.7115  last_time: 0.6443  data_time: 0.1849  last_data_time: 0.1315   lr: 0.002  max_mem: 9961M
+[07/17 17:22:32 d2.utils.events]:  eta: 0:08:16  iter: 9299  total_loss: 0.2862  loss_cls: 0.04773  loss_box_reg: 0.1198  loss_mask: 0.1029  loss_rpn_cls: 0.001807  loss_rpn_loc: 0.01703    time: 0.7113  last_time: 0.5240  data_time: 0.1980  last_data_time: 0.1178   lr: 0.002  max_mem: 9961M
+[07/17 17:22:45 d2.utils.events]:  eta: 0:08:02  iter: 9319  total_loss: 0.2886  loss_cls: 0.04689  loss_box_reg: 0.1171  loss_mask: 0.1018  loss_rpn_cls: 0.001548  loss_rpn_loc: 0.01904    time: 0.7110  last_time: 0.6476  data_time: 0.1897  last_data_time: 0.1346   lr: 0.002  max_mem: 9961M
+[07/17 17:22:59 d2.utils.events]:  eta: 0:07:48  iter: 9339  total_loss: 0.2879  loss_cls: 0.04817  loss_box_reg: 0.1173  loss_mask: 0.1  loss_rpn_cls: 0.001807  loss_rpn_loc: 0.01604    time: 0.7109  last_time: 0.5292  data_time: 0.1937  last_data_time: 0.0115   lr: 0.002  max_mem: 9961M
+[07/17 17:23:13 d2.utils.events]:  eta: 0:07:33  iter: 9359  total_loss: 0.2794  loss_cls: 0.04431  loss_box_reg: 0.1142  loss_mask: 0.0989  loss_rpn_cls: 0.001232  loss_rpn_loc: 0.017    time: 0.7109  last_time: 0.6051  data_time: 0.1811  last_data_time: 0.0918   lr: 0.002  max_mem: 9961M
+[07/17 17:23:27 d2.utils.events]:  eta: 0:07:20  iter: 9379  total_loss: 0.2983  loss_cls: 0.05059  loss_box_reg: 0.1219  loss_mask: 0.1025  loss_rpn_cls: 0.001837  loss_rpn_loc: 0.01726    time: 0.7109  last_time: 0.9352  data_time: 0.1974  last_data_time: 0.4113   lr: 0.002  max_mem: 9961M
+[07/17 17:23:42 d2.utils.events]:  eta: 0:07:07  iter: 9399  total_loss: 0.2857  loss_cls: 0.04849  loss_box_reg: 0.1185  loss_mask: 0.1003  loss_rpn_cls: 0.00197  loss_rpn_loc: 0.01519    time: 0.7112  last_time: 0.5466  data_time: 0.2463  last_data_time: 0.0106   lr: 0.002  max_mem: 9961M
+[07/17 17:23:58 d2.utils.events]:  eta: 0:06:53  iter: 9419  total_loss: 0.3009  loss_cls: 0.05021  loss_box_reg: 0.1214  loss_mask: 0.1067  loss_rpn_cls: 0.002043  loss_rpn_loc: 0.01678    time: 0.7115  last_time: 0.8638  data_time: 0.2431  last_data_time: 0.3477   lr: 0.002  max_mem: 9961M
+[07/17 17:24:11 d2.utils.events]:  eta: 0:06:38  iter: 9439  total_loss: 0.2756  loss_cls: 0.04578  loss_box_reg: 0.1133  loss_mask: 0.09602  loss_rpn_cls: 0.001812  loss_rpn_loc: 0.01741    time: 0.7112  last_time: 0.8334  data_time: 0.2074  last_data_time: 0.3213   lr: 0.002  max_mem: 9961M
+[07/17 17:24:24 d2.utils.events]:  eta: 0:06:23  iter: 9459  total_loss: 0.2894  loss_cls: 0.04801  loss_box_reg: 0.1177  loss_mask: 0.09928  loss_rpn_cls: 0.001582  loss_rpn_loc: 0.01892    time: 0.7110  last_time: 0.9270  data_time: 0.1876  last_data_time: 0.1709   lr: 0.002  max_mem: 9961M
+[07/17 17:24:39 d2.utils.events]:  eta: 0:06:09  iter: 9479  total_loss: 0.2869  loss_cls: 0.04617  loss_box_reg: 0.1143  loss_mask: 0.1007  loss_rpn_cls: 0.001584  loss_rpn_loc: 0.01979    time: 0.7111  last_time: 0.7098  data_time: 0.2025  last_data_time: 0.1878   lr: 0.002  max_mem: 9961M
+[07/17 17:24:53 d2.utils.events]:  eta: 0:05:55  iter: 9499  total_loss: 0.2907  loss_cls: 0.04614  loss_box_reg: 0.1174  loss_mask: 0.102  loss_rpn_cls: 0.001542  loss_rpn_loc: 0.01671    time: 0.7111  last_time: 0.7396  data_time: 0.1961  last_data_time: 0.2290   lr: 0.002  max_mem: 9961M
+[07/17 17:25:08 d2.utils.events]:  eta: 0:05:41  iter: 9519  total_loss: 0.2698  loss_cls: 0.04336  loss_box_reg: 0.1111  loss_mask: 0.09472  loss_rpn_cls: 0.002155  loss_rpn_loc: 0.01713    time: 0.7113  last_time: 0.7582  data_time: 0.2111  last_data_time: 0.2538   lr: 0.0002  max_mem: 9961M
+[07/17 17:25:23 d2.utils.events]:  eta: 0:05:27  iter: 9539  total_loss: 0.2717  loss_cls: 0.04651  loss_box_reg: 0.1124  loss_mask: 0.09683  loss_rpn_cls: 0.002014  loss_rpn_loc: 0.01478    time: 0.7113  last_time: 0.5229  data_time: 0.2003  last_data_time: 0.0062   lr: 0.0002  max_mem: 9961M
+[07/17 17:25:37 d2.utils.events]:  eta: 0:05:13  iter: 9559  total_loss: 0.2562  loss_cls: 0.04261  loss_box_reg: 0.1061  loss_mask: 0.09453  loss_rpn_cls: 0.001525  loss_rpn_loc: 0.01489    time: 0.7114  last_time: 0.7428  data_time: 0.2222  last_data_time: 0.2184   lr: 0.0002  max_mem: 9961M
+[07/17 17:25:52 d2.utils.events]:  eta: 0:04:59  iter: 9579  total_loss: 0.2682  loss_cls: 0.04521  loss_box_reg: 0.1105  loss_mask: 0.09925  loss_rpn_cls: 0.001447  loss_rpn_loc: 0.01618    time: 0.7115  last_time: 0.6914  data_time: 0.2162  last_data_time: 0.1822   lr: 0.0002  max_mem: 9961M
+[07/17 17:26:07 d2.utils.events]:  eta: 0:04:45  iter: 9599  total_loss: 0.2716  loss_cls: 0.04566  loss_box_reg: 0.113  loss_mask: 0.09813  loss_rpn_cls: 0.001462  loss_rpn_loc: 0.01576    time: 0.7116  last_time: 0.5792  data_time: 0.2218  last_data_time: 0.0679   lr: 0.0002  max_mem: 9961M
+[07/17 17:26:22 d2.utils.events]:  eta: 0:04:31  iter: 9619  total_loss: 0.283  loss_cls: 0.04845  loss_box_reg: 0.1173  loss_mask: 0.1026  loss_rpn_cls: 0.001372  loss_rpn_loc: 0.01287    time: 0.7119  last_time: 0.8511  data_time: 0.2373  last_data_time: 0.3201   lr: 0.0002  max_mem: 9961M
+[07/17 17:26:37 d2.utils.events]:  eta: 0:04:16  iter: 9639  total_loss: 0.2767  loss_cls: 0.04532  loss_box_reg: 0.1101  loss_mask: 0.09844  loss_rpn_cls: 0.001313  loss_rpn_loc: 0.01607    time: 0.7120  last_time: 0.5296  data_time: 0.2295  last_data_time: 0.0150   lr: 0.0002  max_mem: 9961M
+[07/17 17:26:52 d2.utils.events]:  eta: 0:04:02  iter: 9659  total_loss: 0.2743  loss_cls: 0.04708  loss_box_reg: 0.1097  loss_mask: 0.09626  loss_rpn_cls: 0.001431  loss_rpn_loc: 0.01598    time: 0.7121  last_time: 0.5529  data_time: 0.1967  last_data_time: 0.0191   lr: 0.0002  max_mem: 9961M
+[07/17 17:27:06 d2.utils.events]:  eta: 0:03:49  iter: 9679  total_loss: 0.2727  loss_cls: 0.04707  loss_box_reg: 0.1136  loss_mask: 0.09608  loss_rpn_cls: 0.002494  loss_rpn_loc: 0.01954    time: 0.7121  last_time: 0.7214  data_time: 0.1820  last_data_time: 0.2102   lr: 0.0002  max_mem: 9961M
+[07/17 17:27:19 d2.utils.events]:  eta: 0:03:33  iter: 9699  total_loss: 0.27  loss_cls: 0.04438  loss_box_reg: 0.1111  loss_mask: 0.09882  loss_rpn_cls: 0.001345  loss_rpn_loc: 0.01692    time: 0.7119  last_time: 0.7928  data_time: 0.1631  last_data_time: 0.2748   lr: 0.0002  max_mem: 9961M
+[07/17 17:27:34 d2.utils.events]:  eta: 0:03:19  iter: 9719  total_loss: 0.2711  loss_cls: 0.04389  loss_box_reg: 0.1084  loss_mask: 0.09567  loss_rpn_cls: 0.001843  loss_rpn_loc: 0.01956    time: 0.7119  last_time: 0.5316  data_time: 0.1918  last_data_time: 0.0170   lr: 0.0002  max_mem: 9961M
+[07/17 17:27:49 d2.utils.events]:  eta: 0:03:05  iter: 9739  total_loss: 0.2854  loss_cls: 0.04598  loss_box_reg: 0.1129  loss_mask: 0.09996  loss_rpn_cls: 0.002214  loss_rpn_loc: 0.01812    time: 0.7121  last_time: 0.5303  data_time: 0.2273  last_data_time: 0.0189   lr: 0.0002  max_mem: 9961M
+[07/17 17:28:04 d2.utils.events]:  eta: 0:02:51  iter: 9759  total_loss: 0.2871  loss_cls: 0.04748  loss_box_reg: 0.1137  loss_mask: 0.1034  loss_rpn_cls: 0.001934  loss_rpn_loc: 0.01884    time: 0.7122  last_time: 0.6058  data_time: 0.2239  last_data_time: 0.1043   lr: 0.0002  max_mem: 9961M
+[07/17 17:28:19 d2.utils.events]:  eta: 0:02:36  iter: 9779  total_loss: 0.277  loss_cls: 0.04412  loss_box_reg: 0.1128  loss_mask: 0.1007  loss_rpn_cls: 0.001597  loss_rpn_loc: 0.01759    time: 0.7124  last_time: 0.7251  data_time: 0.2188  last_data_time: 0.1988   lr: 0.0002  max_mem: 9961M
+[07/17 17:28:33 d2.utils.events]:  eta: 0:02:22  iter: 9799  total_loss: 0.2668  loss_cls: 0.04441  loss_box_reg: 0.1077  loss_mask: 0.1027  loss_rpn_cls: 0.001289  loss_rpn_loc: 0.01617    time: 0.7125  last_time: 0.7784  data_time: 0.1989  last_data_time: 0.2740   lr: 0.0002  max_mem: 9961M
+[07/17 17:28:48 d2.utils.events]:  eta: 0:02:08  iter: 9819  total_loss: 0.2717  loss_cls: 0.04653  loss_box_reg: 0.1125  loss_mask: 0.0964  loss_rpn_cls: 0.001267  loss_rpn_loc: 0.01246    time: 0.7126  last_time: 0.5692  data_time: 0.2322  last_data_time: 0.1485   lr: 0.0002  max_mem: 9961M
+[07/17 17:29:00 d2.utils.events]:  eta: 0:01:53  iter: 9839  total_loss: 0.2719  loss_cls: 0.04549  loss_box_reg: 0.1078  loss_mask: 0.1012  loss_rpn_cls: 0.001021  loss_rpn_loc: 0.01423    time: 0.7121  last_time: 0.6964  data_time: 0.1644  last_data_time: 0.1937   lr: 0.0002  max_mem: 9961M
+[07/17 17:29:15 d2.utils.events]:  eta: 0:01:39  iter: 9859  total_loss: 0.2714  loss_cls: 0.04668  loss_box_reg: 0.1103  loss_mask: 0.09957  loss_rpn_cls: 0.001807  loss_rpn_loc: 0.01605    time: 0.7121  last_time: 0.5237  data_time: 0.1879  last_data_time: 0.0099   lr: 0.0002  max_mem: 9961M
+[07/17 17:29:29 d2.utils.events]:  eta: 0:01:25  iter: 9879  total_loss: 0.2793  loss_cls: 0.04594  loss_box_reg: 0.1104  loss_mask: 0.1046  loss_rpn_cls: 0.001496  loss_rpn_loc: 0.01429    time: 0.7122  last_time: 0.4105  data_time: 0.2278  last_data_time: 0.0053   lr: 0.0002  max_mem: 9961M
+[07/17 17:29:44 d2.utils.events]:  eta: 0:01:11  iter: 9899  total_loss: 0.2726  loss_cls: 0.0468  loss_box_reg: 0.1108  loss_mask: 0.09771  loss_rpn_cls: 0.00138  loss_rpn_loc: 0.01771    time: 0.7123  last_time: 0.8914  data_time: 0.2135  last_data_time: 0.3452   lr: 0.0002  max_mem: 9961M
+[07/17 17:29:58 d2.utils.events]:  eta: 0:00:57  iter: 9919  total_loss: 0.2706  loss_cls: 0.04596  loss_box_reg: 0.1094  loss_mask: 0.09731  loss_rpn_cls: 0.001462  loss_rpn_loc: 0.01359    time: 0.7122  last_time: 0.8440  data_time: 0.2366  last_data_time: 0.4240   lr: 0.0002  max_mem: 9961M
+[07/17 17:30:12 d2.utils.events]:  eta: 0:00:43  iter: 9939  total_loss: 0.2689  loss_cls: 0.04444  loss_box_reg: 0.1139  loss_mask: 0.09826  loss_rpn_cls: 0.001434  loss_rpn_loc: 0.01519    time: 0.7123  last_time: 0.6805  data_time: 0.2211  last_data_time: 0.1654   lr: 0.0002  max_mem: 9961M
+[07/17 17:30:27 d2.utils.events]:  eta: 0:00:28  iter: 9959  total_loss: 0.2672  loss_cls: 0.04698  loss_box_reg: 0.1068  loss_mask: 0.09528  loss_rpn_cls: 0.001347  loss_rpn_loc: 0.01453    time: 0.7124  last_time: 0.7602  data_time: 0.2089  last_data_time: 0.2464   lr: 0.0002  max_mem: 9961M
+[07/17 17:30:42 d2.utils.events]:  eta: 0:00:14  iter: 9979  total_loss: 0.2862  loss_cls: 0.04489  loss_box_reg: 0.1089  loss_mask: 0.09797  loss_rpn_cls: 0.002034  loss_rpn_loc: 0.019    time: 0.7125  last_time: 0.7777  data_time: 0.2220  last_data_time: 0.2611   lr: 0.0002  max_mem: 9961M
+[07/17 17:30:57 fvcore.common.checkpoint]: Saving checkpoint to ./output/model_0009999.pth
+[07/17 17:30:57 fvcore.common.checkpoint]: Saving checkpoint to ./output/model_final.pth
+[07/17 17:30:58 d2.utils.events]:  eta: 0:00:00  iter: 9999  total_loss: 0.2704  loss_cls: 0.04588  loss_box_reg: 0.1136  loss_mask: 0.1009  loss_rpn_cls: 0.001279  loss_rpn_loc: 0.01261    time: 0.7126  last_time: 1.2091  data_time: 0.1809  last_data_time: 0.4138   lr: 0.0002  max_mem: 9961M
+[07/17 17:30:58 d2.engine.hooks]: Overall training speed: 4998 iterations in 0:59:21 (0.7126 s / it)
+[07/17 17:30:58 d2.engine.hooks]: Total training time: 0:59:30 (0:00:08 on hooks)
+WARNING [07/17 17:30:58 d2.data.datasets.coco]: 
+Category ids in annotations are not in [1, #categories]! We'll apply a mapping for you.
+
+[07/17 17:30:58 d2.data.datasets.coco]: Loaded 486 images in COCO format from datasets/dental_plague_dataset/test_2025_July_revised/test_ins_ToI.json
+[07/17 17:30:58 d2.data.build]: Distribution of instances among all 90 categories:
+|  category  | #instances   |  category  | #instances   |  category  | #instances   |
+|:----------:|:-------------|:----------:|:-------------|:----------:|:-------------|
+|    0_p     | 45           |    0_np    | 81           |  0_caries  | 11           |
+|    1_p     | 41           |    1_np    | 78           |  1_caries  | 6            |
+|    2_p     | 53           |    2_np    | 78           |  2_caries  | 4            |
+|    3_p     | 62           |    3_np    | 76           |  3_caries  | 3            |
+|    4_p     | 52           |    4_np    | 71           |  4_caries  | 0            |
+|    5_p     | 38           |    5_np    | 80           |  5_caries  | 9            |
+|    6_p     | 41           |    6_np    | 80           |  6_caries  | 5            |
+|    7_p     | 52           |    7_np    | 79           |  7_caries  | 5            |
+|    8_p     | 49           |    8_np    | 75           |  8_caries  | 3            |
+|    9_p     | 45           |    9_np    | 78           |  9_caries  | 0            |
+|    10_p    | 21           |   10_np    | 78           | 10_caries  | 2            |
+|    11_p    | 23           |   11_np    | 77           | 11_caries  | 3            |
+|    12_p    | 38           |   12_np    | 80           | 12_caries  | 1            |
+|    13_p    | 51           |   13_np    | 81           | 13_caries  | 0            |
+|    14_p    | 58           |   14_np    | 81           | 14_caries  | 1            |
+|    15_p    | 26           |   15_np    | 77           | 15_caries  | 2            |
+|    16_p    | 24           |   16_np    | 76           | 16_caries  | 2            |
+|    17_p    | 35           |   17_np    | 77           | 17_caries  | 2            |
+|    18_p    | 47           |   18_np    | 81           | 18_caries  | 2            |
+|    19_p    | 51           |   19_np    | 81           | 19_caries  | 2            |
+|    20_p    | 0            |   20_np    | 0            | 20_caries  | 0            |
+|    21_p    | 2            |   21_np    | 2            | 21_caries  | 0            |
+|    22_p    | 0            |   22_np    | 0            | 22_caries  | 0            |
+|    23_p    | 1            |   23_np    | 2            | 23_caries  | 0            |
+|    24_p    | 0            |   24_np    | 2            | 24_caries  | 0            |
+|    25_p    | 1            |   25_np    | 5            | 25_caries  | 0            |
+|    26_p    | 0            |   26_np    | 3            | 26_caries  | 0            |
+|    27_p    | 2            |   27_np    | 4            | 27_caries  | 0            |
+|    28_p    | 2            |   28_np    | 3            | 28_caries  | 0            |
+|    29_p    | 0            |   29_np    | 0            | 29_caries  | 0            |
+|            |              |            |              |            |              |
+|   total    | 2509         |            |              |            |              |
+[07/17 17:30:58 d2.data.dataset_mapper]: [DatasetMapper] Augmentations used in inference: [Resize(shape=(512, 512))]
+[07/17 17:30:58 d2.data.common]: Serializing the dataset using: <class 'detectron2.data.common._TorchSerializedList'>
+[07/17 17:30:58 d2.data.common]: Serializing 486 elements to byte tensors and concatenating them all ...
+[07/17 17:30:58 d2.data.common]: Serialized dataset takes 1.31 MiB
+[07/17 17:30:58 d2.evaluation.evaluator]: Start inference on 486 batches
+[07/17 17:31:00 d2.evaluation.evaluator]: Inference done 11/486. Dataloading: 0.0009 s/iter. Inference: 0.0342 s/iter. Eval: 0.0581 s/iter. Total: 0.0932 s/iter. ETA=0:00:44
+[07/17 17:31:05 d2.evaluation.evaluator]: Inference done 106/486. Dataloading: 0.0010 s/iter. Inference: 0.0247 s/iter. Eval: 0.0297 s/iter. Total: 0.0555 s/iter. ETA=0:00:21
+[07/17 17:31:10 d2.evaluation.evaluator]: Inference done 194/486. Dataloading: 0.0010 s/iter. Inference: 0.0240 s/iter. Eval: 0.0312 s/iter. Total: 0.0562 s/iter. ETA=0:00:16
+[07/17 17:31:15 d2.evaluation.evaluator]: Inference done 277/486. Dataloading: 0.0011 s/iter. Inference: 0.0250 s/iter. Eval: 0.0315 s/iter. Total: 0.0576 s/iter. ETA=0:00:12
+[07/17 17:31:20 d2.evaluation.evaluator]: Inference done 341/486. Dataloading: 0.0012 s/iter. Inference: 0.0260 s/iter. Eval: 0.0344 s/iter. Total: 0.0616 s/iter. ETA=0:00:08
+[07/17 17:31:25 d2.evaluation.evaluator]: Inference done 422/486. Dataloading: 0.0013 s/iter. Inference: 0.0262 s/iter. Eval: 0.0342 s/iter. Total: 0.0617 s/iter. ETA=0:00:03
+[07/17 17:31:29 d2.evaluation.evaluator]: Total inference time: 0:00:29.712279 (0.061772 s / iter per device, on 1 devices)
+[07/17 17:31:29 d2.evaluation.evaluator]: Total inference pure compute time: 0:00:12 (0.025749 s / iter per device, on 1 devices)
+[07/17 17:31:29 d2.evaluation.coco_evaluation]: Preparing results for COCO format ...
+[07/17 17:31:29 d2.evaluation.coco_evaluation]: Saving results to ./output/inference/coco_instances_results.json
+[07/17 17:31:29 d2.evaluation.coco_evaluation]: Evaluating predictions with unofficial COCO API...
+Loading and preparing results...
+DONE (t=0.00s)
+creating index...
+index created!
+[07/17 17:31:29 d2.evaluation.fast_eval_api]: Evaluate annotation type *bbox*
+[07/17 17:31:30 d2.evaluation.fast_eval_api]: COCOeval_opt.evaluate() finished in 0.51 seconds.
+[07/17 17:31:30 d2.evaluation.fast_eval_api]: Accumulating evaluation results...
+[07/17 17:31:30 d2.evaluation.fast_eval_api]: COCOeval_opt.accumulate() finished in 0.13 seconds.
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.251
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.386
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.267
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.047
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.299
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.335
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.341
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.390
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.390
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.052
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.365
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.573
+[07/17 17:31:30 d2.evaluation.coco_evaluation]: Evaluation results for bbox: 
+|   AP   |  AP50  |  AP75  |  APs  |  APm   |  APl   |
+|:------:|:------:|:------:|:-----:|:------:|:------:|
+| 25.080 | 38.595 | 26.704 | 4.727 | 29.944 | 33.493 |
+[07/17 17:31:30 d2.evaluation.coco_evaluation]: Per-category bbox AP: 
+| category   | AP     | category   | AP     | category   | AP     |
+|:-----------|:-------|:-----------|:-------|:-----------|:-------|
+| 0_p        | 7.574  | 0_np       | 53.876 | 0_caries   | 11.105 |
+| 1_p        | 14.511 | 1_np       | 51.908 | 1_caries   | 13.336 |
+| 2_p        | 18.610 | 2_np       | 46.266 | 2_caries   | 20.594 |
+| 3_p        | 21.066 | 3_np       | 40.140 | 3_caries   | 1.122  |
+| 4_p        | 24.608 | 4_np       | 27.993 | 4_caries   | nan    |
+| 5_p        | 11.926 | 5_np       | 51.658 | 5_caries   | 4.838  |
+| 6_p        | 12.386 | 6_np       | 47.183 | 6_caries   | 9.526  |
+| 7_p        | 19.229 | 7_np       | 52.901 | 7_caries   | 24.917 |
+| 8_p        | 16.389 | 8_np       | 41.140 | 8_caries   | 26.257 |
+| 9_p        | 29.917 | 9_np       | 34.181 | 9_caries   | nan    |
+| 10_p       | 22.135 | 10_np      | 67.054 | 10_caries  | 0.000  |
+| 11_p       | 11.537 | 11_np      | 61.861 | 11_caries  | 0.000  |
+| 12_p       | 6.860  | 12_np      | 52.240 | 12_caries  | 0.000  |
+| 13_p       | 21.604 | 13_np      | 63.263 | 13_caries  | nan    |
+| 14_p       | 23.190 | 14_np      | 53.667 | 14_caries  | 0.000  |
+| 15_p       | 17.387 | 15_np      | 63.732 | 15_caries  | 0.000  |
+| 16_p       | 9.857  | 16_np      | 54.294 | 16_caries  | 0.000  |
+| 17_p       | 26.056 | 17_np      | 56.431 | 17_caries  | 0.000  |
+| 18_p       | 14.121 | 18_np      | 63.226 | 18_caries  | 0.000  |
+| 19_p       | 22.810 | 19_np      | 56.793 | 19_caries  | 0.000  |
+| 20_p       | nan    | 20_np      | nan    | 20_caries  | nan    |
+| 21_p       | 0.000  | 21_np      | 0.000  | 21_caries  | nan    |
+| 22_p       | nan    | 22_np      | nan    | 22_caries  | nan    |
+| 23_p       | 0.000  | 23_np      | 0.000  | 23_caries  | nan    |
+| 24_p       | nan    | 24_np      | 40.545 | 24_caries  | nan    |
+| 25_p       | 0.000  | 25_np      | 51.716 | 25_caries  | nan    |
+| 26_p       | nan    | 26_np      | 40.509 | 26_caries  | nan    |
+| 27_p       | 15.149 | 27_np      | 31.089 | 27_caries  | nan    |
+| 28_p       | 5.050  | 28_np      | 43.168 | 28_caries  | nan    |
+| 29_p       | nan    | 29_np      | nan    | 29_caries  | nan    |
+Loading and preparing results...
+DONE (t=0.03s)
+creating index...
+index created!
+[07/17 17:31:30 d2.evaluation.fast_eval_api]: Evaluate annotation type *segm*
+[07/17 17:31:30 d2.evaluation.fast_eval_api]: COCOeval_opt.evaluate() finished in 0.60 seconds.
+[07/17 17:31:30 d2.evaluation.fast_eval_api]: Accumulating evaluation results...
+[07/17 17:31:30 d2.evaluation.fast_eval_api]: COCOeval_opt.accumulate() finished in 0.13 seconds.
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.220
+ Average Precision  (AP) @[ IoU=0.50      | area=   all | maxDets=100 ] = 0.355
+ Average Precision  (AP) @[ IoU=0.75      | area=   all | maxDets=100 ] = 0.221
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.021
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.193
+ Average Precision  (AP) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.341
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=  1 ] = 0.300
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets= 10 ] = 0.342
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=   all | maxDets=100 ] = 0.342
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= small | maxDets=100 ] = 0.034
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area=medium | maxDets=100 ] = 0.288
+ Average Recall     (AR) @[ IoU=0.50:0.95 | area= large | maxDets=100 ] = 0.493
+[07/17 17:31:31 d2.evaluation.coco_evaluation]: Evaluation results for segm: 
+|   AP   |  AP50  |  AP75  |  APs  |  APm   |  APl   |
+|:------:|:------:|:------:|:-----:|:------:|:------:|
+| 21.998 | 35.473 | 22.072 | 2.054 | 19.300 | 34.115 |
+[07/17 17:31:31 d2.evaluation.coco_evaluation]: Per-category segm AP: 
+| category   | AP     | category   | AP     | category   | AP     |
+|:-----------|:-------|:-----------|:-------|:-----------|:-------|
+| 0_p        | 2.838  | 0_np       | 52.987 | 0_caries   | 6.243  |
+| 1_p        | 8.804  | 1_np       | 51.043 | 1_caries   | 7.768  |
+| 2_p        | 11.986 | 2_np       | 42.225 | 2_caries   | 20.707 |
+| 3_p        | 11.446 | 3_np       | 34.818 | 3_caries   | 2.244  |
+| 4_p        | 23.570 | 4_np       | 27.698 | 4_caries   | nan    |
+| 5_p        | 3.849  | 5_np       | 49.423 | 5_caries   | 3.143  |
+| 6_p        | 4.484  | 6_np       | 46.421 | 6_caries   | 9.450  |
+| 7_p        | 12.345 | 7_np       | 52.868 | 7_caries   | 27.107 |
+| 8_p        | 10.309 | 8_np       | 39.263 | 8_caries   | 36.277 |
+| 9_p        | 26.743 | 9_np       | 35.589 | 9_caries   | nan    |
+| 10_p       | 5.885  | 10_np      | 65.018 | 10_caries  | 0.000  |
+| 11_p       | 1.946  | 11_np      | 60.899 | 11_caries  | 0.000  |
+| 12_p       | 5.573  | 12_np      | 50.525 | 12_caries  | 0.000  |
+| 13_p       | 5.886  | 13_np      | 63.844 | 13_caries  | nan    |
+| 14_p       | 9.005  | 14_np      | 53.445 | 14_caries  | 0.000  |
+| 15_p       | 3.229  | 15_np      | 61.247 | 15_caries  | 0.000  |
+| 16_p       | 3.514  | 16_np      | 52.264 | 16_caries  | 5.050  |
+| 17_p       | 16.665 | 17_np      | 53.284 | 17_caries  | 0.000  |
+| 18_p       | 9.369  | 18_np      | 63.339 | 18_caries  | 0.000  |
+| 19_p       | 8.240  | 19_np      | 56.124 | 19_caries  | 0.000  |
+| 20_p       | nan    | 20_np      | nan    | 20_caries  | nan    |
+| 21_p       | 0.000  | 21_np      | 0.000  | 21_caries  | nan    |
+| 22_p       | nan    | 22_np      | nan    | 22_caries  | nan    |
+| 23_p       | 0.000  | 23_np      | 0.000  | 23_caries  | nan    |
+| 24_p       | nan    | 24_np      | 43.069 | 24_caries  | nan    |
+| 25_p       | 0.000  | 25_np      | 56.007 | 25_caries  | nan    |
+| 26_p       | nan    | 26_np      | 40.736 | 26_caries  | nan    |
+| 27_p       | 10.099 | 27_np      | 24.851 | 27_caries  | nan    |
+| 28_p       | 0.000  | 28_np      | 27.069 | 28_caries  | nan    |
+| 29_p       | nan    | 29_np      | nan    | 29_caries  | nan    |
+[07/17 17:31:31 d2.engine.defaults]: Evaluation results for dental_plague_dataset_val in csv format:
+[07/17 17:31:31 d2.evaluation.testing]: copypaste: Task: bbox
+[07/17 17:31:31 d2.evaluation.testing]: copypaste: AP,AP50,AP75,APs,APm,APl
+[07/17 17:31:31 d2.evaluation.testing]: copypaste: 25.0798,38.5954,26.7041,4.7272,29.9436,33.4929
+[07/17 17:31:31 d2.evaluation.testing]: copypaste: Task: segm
+[07/17 17:31:31 d2.evaluation.testing]: copypaste: AP,AP50,AP75,APs,APm,APl
+[07/17 17:31:31 d2.evaluation.testing]: copypaste: 21.9976,35.4734,22.0722,2.0535,19.3000,34.1149
