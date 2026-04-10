@@ -6,10 +6,10 @@
 
 **A multimodal reasoning agent for dental image analysis** — tool use, RAG over oral corpora, and a Gradio UI or OpenAI-compatible HTTP API.
 
-[![ToolHub](https://img.shields.io/badge/HuggingFace-Tool_Hub-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/OralGPT/OralAgent-ToolHub)
-[![OralCorpus](https://img.shields.io/badge/HuggingFace-OralCorpus-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/datasets/OralGPT/OralCorpus)
-[![OralQA-ZH](https://img.shields.io/badge/HuggingFace-OralQA_ZH-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/datasets/OralGPT/OralQA-ZH)
-[![License](https://img.shields.io/badge/License-See%20LICENSE-blue?style=flat-square)](LICENSE)
+[![ToolHub](https://img.shields.io/badge/HuggingFace-Tool_Hub-f59e0b?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/OralGPT/OralAgent-ToolHub)
+[![OralCorpus](https://img.shields.io/badge/HuggingFace-OralCorpus-059669?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/datasets/OralGPT/OralCorpus)
+[![OralQA-ZH](https://img.shields.io/badge/HuggingFace-OralQA_ZH-6366f1?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/datasets/OralGPT/OralQA-ZH)
+[![License](https://img.shields.io/badge/License-See%20LICENSE-1d4ed8?style=flat-square)](LICENSE)
 
 [English](#oralagent) · [Custom links](#custom-links-table) · [快速配置（中文）](#quick-config-zh)
 
