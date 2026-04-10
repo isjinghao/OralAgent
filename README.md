@@ -6,7 +6,7 @@
 
 **A multimodal reasoning agent for dental image analysis** — tool use, RAG over oral corpora, and a Gradio UI or OpenAI-compatible HTTP API.
 
-[![111](https://img.shields.io/badge/HuggingFace-Models-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/OralGPT/OralAgent-ToolHub)
+[![Model weights](https://img.shields.io/badge/HuggingFace-Tool_Hub-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/OralGPT/OralAgent-ToolHub)
 [![Model weights](https://img.shields.io/badge/HuggingFace-Models-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](YOUR_HF_MODEL_URL)
 [![Benchmark / data](https://img.shields.io/badge/HuggingFace-Benchmark-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](YOUR_HF_BENCHMARK_OR_DATASET_URL)
 [![License](https://img.shields.io/badge/License-See%20LICENSE-blue?style=flat-square)](LICENSE)
