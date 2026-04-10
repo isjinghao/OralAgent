@@ -4,6 +4,8 @@
 
 # OralAgent
 
+[**OralAgent: Integrating Reasoning, Tools, and Knowledge for Interactive Dental Image Analysis**](YOUR_ORALAGENT_PAPER_URL)
+
 **A multimodal reasoning agent for dental image analysis** — tool use, RAG over oral corpora, and a Gradio UI or OpenAI-compatible HTTP API.
 
 [![ToolHub](https://img.shields.io/badge/HuggingFace-Tool_Hub-f59e0b?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/OralGPT/OralAgent-ToolHub)
@@ -33,6 +35,7 @@ OralAgent orchestrates **vision–language reasoning** with **modality-aware rou
 
 | Resource | URL (replace `YOUR_*`) |
 |----------|-------------------------|
+| OralAgent (this system) paper | `YOUR_ORALAGENT_PAPER_URL` |
 | MMOral (NeurIPS 2025) paper | `https://arxiv.org/pdf/2509.09254` |
 | OralGPT-Omni (CVPR 2026) paper | `https://arxiv.org/abs/2511.22055` |
 | OralGPT-Plus (CVPR 2026) paper | `https://arxiv.org/abs/2603.06366` |
