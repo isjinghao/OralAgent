@@ -1,16 +1,14 @@
 <div align="center">
 
-<img src="assets/logo_OralAgent.png" alt="OralAgent logo" width="320"/>
+<img src="assets/logo_OralAgent.png" alt="OralAgent logo" width="200"/>
 
 # OralAgent
 
-**A multimodal reasoning agent for dental and oral-maxillofacial imaging** — tool use, RAG over oral corpora, and a Gradio UI or OpenAI-compatible HTTP API.
+**A multimodal reasoning agent for dental image analysis** — tool use, RAG over oral corpora, and a Gradio UI or OpenAI-compatible HTTP API.
 
-[![Paper MMOral](https://img.shields.io/badge/Paper-MMOral-NeurIPS%202025-6366f1?style=flat-square)](YOUR_MMORAL_PAPER_URL)
-[![Paper OralGPT-Omni](https://img.shields.io/badge/Paper-OralGPT--Omni-CVPR%202026-0ea5e9?style=flat-square)](YOUR_ORALGPT_OMNI_PAPER_URL)
+[![Model weights](https://img.shields.io/badge/HuggingFace-Models-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/OralGPT/OralAgent-ToolHub)
 [![Model weights](https://img.shields.io/badge/HuggingFace-Models-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](YOUR_HF_MODEL_URL)
 [![Benchmark / data](https://img.shields.io/badge/HuggingFace-Benchmark-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](YOUR_HF_BENCHMARK_OR_DATASET_URL)
-[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](YOUR_GITHUB_REPO_URL)
 [![License](https://img.shields.io/badge/License-See%20LICENSE-blue?style=flat-square)](LICENSE)
 
 [English](#oralagent) · [Custom links](#custom-links-table) · [快速配置（中文）](#quick-config-zh)
