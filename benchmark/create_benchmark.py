@@ -22,7 +22,7 @@ from benchmark.utils import load_eurorad_dataset
 from benchmark.llm import get_llm_response
 
 # Constants
-DATA_DIR = "set your data directory here, e.g. /home/MedRAX/data"
+DATA_DIR = "set your data directory here, e.g. /home/OralAgent/data"
 DATASET_PATH = os.path.join(DATA_DIR, "eurorad_metadata.json")
 
 SYSTEM_PROMPT = """

@@ -43,7 +43,7 @@ If you find this work useful, please cite our paper:
 <!--
 
 <h1 align="center">
-🤖 MedRAX: Medical Reasoning Agent for Chest X-ray
+🤖 OralAgent: Medical Reasoning Agent for Chest X-ray
 </h1>
 <p align="center"> <a href="https://arxiv.org/abs/2502.02673" target="_blank"><img src="https://img.shields.io/badge/arXiv-ICML 2025-FF6B6B?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv"></a> <a href="https://github.com/bowang-lab/MedRAX"><img src="https://img.shields.io/badge/GitHub-Code-4A90E2?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a> <a href="https://huggingface.co/datasets/wanglab/chest-agent-bench"><img src="https://img.shields.io/badge/HuggingFace-Dataset-FFBF00?style=for-the-badge&logo=huggingface&logoColor=white" alt="HuggingFace Dataset"></a> </p>
 
@@ -52,12 +52,12 @@ If you find this work useful, please cite our paper:
 <br>
 
 ## Abstract
-Chest X-rays (CXRs) play an integral role in driving critical decisions in disease management and patient care. While recent innovations have led to specialized models for various CXR interpretation tasks, these solutions often operate in isolation, limiting their practical utility in clinical practice. We present MedRAX, the first versatile AI agent that seamlessly integrates state-of-the-art CXR analysis tools and multimodal large language models into a unified framework. MedRAX dynamically leverages these models to address complex medical queries without requiring additional training. To rigorously evaluate its capabilities, we introduce ChestAgentBench, a comprehensive benchmark containing 2,500 complex medical queries across 7 diverse categories. Our experiments demonstrate that MedRAX achieves state-of-the-art performance compared to both open-source and proprietary models, representing a significant step toward the practical deployment of automated CXR interpretation systems.
+Chest X-rays (CXRs) play an integral role in driving critical decisions in disease management and patient care. While recent innovations have led to specialized models for various CXR interpretation tasks, these solutions often operate in isolation, limiting their practical utility in clinical practice. We present OralAgent, the first versatile AI agent that seamlessly integrates state-of-the-art CXR analysis tools and multimodal large language models into a unified framework. OralAgent dynamically leverages these models to address complex medical queries without requiring additional training. To rigorously evaluate its capabilities, we introduce ChestAgentBench, a comprehensive benchmark containing 2,500 complex medical queries across 7 diverse categories. Our experiments demonstrate that OralAgent achieves state-of-the-art performance compared to both open-source and proprietary models, representing a significant step toward the practical deployment of automated CXR interpretation systems.
 <br><br>
 
 
-## MedRAX
-MedRAX is built on a robust technical foundation:
+## OralAgent
+OralAgent is built on a robust technical foundation:
 - **Core Architecture**: Built on LangChain and LangGraph frameworks
 - **Language Model**: Uses GPT-4o with vision capabilities as the backbone LLM
 - **Deployment**: Supports both local and cloud-based deployments
@@ -118,8 +118,8 @@ python quickstart.py \
 ### Installation Steps
 ```bash
 # Clone the repository
-git clone https://github.com/bowang-lab/MedRAX.git
-cd MedRAX
+git clone https://github.com/<your-org>/OralAgent.git
+cd OralAgent
 
 # Install package
 pip install -e .
@@ -142,7 +142,7 @@ Make sure to setup your OpenAI API key in `.env` file!
 
 ## Tool Selection and Initialization
 
-MedRAX supports selective tool initialization, allowing you to use only the tools you need. Tools can be specified when initializing the agent (look at `main.py`):
+OralAgent supports selective tool initialization, allowing you to use only the tools you need. Tools can be specified when initializing the agent (look at `main.py`):
 
 ```python
 selected_tools = [
@@ -153,7 +153,7 @@ selected_tools = [
 ]
 
 agent, tools_dict = initialize_agent(
-    "medrax/docs/system_prompts.txt",
+    "oralagent/docs/system_prompts.txt",
     tools_to_use=selected_tools,
     model_dir="/model-weights"
 )
@@ -266,7 +266,7 @@ export OPENAI_API_KEY="ollama"
 
 ### Optional: OpenAI-compatible Providers
 
-MedRAX supports OpenAI-compatible APIs, allowing regional or local LLM providers to serve as alternative backends.
+OralAgent supports OpenAI-compatible APIs, allowing regional or local LLM providers to serve as alternative backends.
 
 For example, to use **Qwen3-VL** via [Alibaba Cloud DashScope](https://bailian.console.aliyun.com/?tab=model#/model-market), set the following environment variables:
 

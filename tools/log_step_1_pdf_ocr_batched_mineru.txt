@@ -359,3 +359,33 @@ Using 4 parallel worker(s).
 [354/376] Adult Orthodontics__Birte Melsen.pdf -> OK (elapsed: 730826.8s, ETA: 45418.6s)
 [355/376] 现代口腔正畸学-科学与艺术的统一（第4版）__林久祥.pdf -> OK (elapsed: 734415.0s, ETA: 43444.3s)
 [356/376] Biomechanics and Esthetic Strategies in Clinical Orthodontics__Ravindra Nanda.pdf -> OK (elapsed: 737850.1s, ETA: 41452.3s)
+[357/376] Early Orthodontic Treatment__Antonio Patti.pdf -> OK (elapsed: 739165.1s, ETA: 39339.3s)
+[358/376] Contemporary Orthodontics 6th Edition__William R.Proffit.pdf -> OK (elapsed: 743628.8s, ETA: 37389.2s)
+[359/376] Evidence Based Orthodontics (2ed)__Greg J. Huang.pdf -> OK (elapsed: 744839.4s, ETA: 35270.9s)
+[360/376] Invisible Orthodontics Current Concepts and Solutions in Lingual Orthodontics__Giuseppe Scuzzo.pdf -> OK (elapsed: 745298.8s, ETA: 33124.4s)
+[361/376] Orthodontic Management of Uncrowded Class II Division One Malocclusion in Children__John C. Bennett.pdf -> OK (elapsed: 746909.0s, ETA: 31035.0s)
+[362/376] 非依从性Ⅱ类患者的正畸治疗-现代原理和技术__Moschos A.Papadopulos.pdf -> OK (elapsed: 751975.8s, ETA: 29081.9s)
+[363/376] Orthodontics in the Vertical Dimension-A case-based review__Thomas E.Southard.pdf -> OK (elapsed: 754368.7s, ETA: 27016.0s)
+[364/376] Self-Ligation in Orthodontics__Theodore Eliades.pdf -> OK (elapsed: 754778.5s, ETA: 24882.8s)
+[365/376] Orthodontic treatment of the class II noncompliant patient  current principles and techniques__Papadopoulos.pdf -> OK (elapsed: 756645.2s, ETA: 22803.0s)
+[366/376] The 20 Principles of the Alexander Discipline__R. G. Alexander.pdf -> OK (elapsed: 758864.2s, ETA: 20734.0s)
+[367/376] Systemized Orthodontic Treatment Mechanics__Richard P. McLaughlin.pdf -> OK (elapsed: 759051.8s, ETA: 18614.3s)
+[368/376] 临床儿童口腔科学__文玲英.pdf -> OK (elapsed: 760752.7s, ETA: 16538.1s)
+[369/376] 儿童口腔医学（北医第2版）__葛立宏.pdf -> OK (elapsed: 764922.2s, ETA: 14510.7s)
+[370/376] 儿童口腔医学（人卫十三五第2版）__葛立宏.pdf -> OK (elapsed: 765231.7s, ETA: 12409.2s)
+[371/376] 儿童口腔医学（北医第3版）__秦满.pdf -> OK (elapsed: 767204.7s, ETA: 10339.7s)
+[372/376] 儿童龋病学__Chris Deery.pdf -> OK (elapsed: 769007.3s, ETA: 8268.9s)
+[373/376] 家庭育儿顾问-儿童口腔常见病问答__陈志文.pdf -> OK (elapsed: 770097.4s, ETA: 6193.8s)
+[374/376] 如何让儿童配合口腔治疗__Barbara L Chadwick.pdf -> OK (elapsed: 770313.9s, ETA: 4119.3s)
+[375/376] 儿童口腔科诊疗必修技术.pdf -> OK (elapsed: 771326.0s, ETA: 2056.9s)
+[376/376] 实用口腔颌面X线诊断学__王培喆.pdf -> FAILED (elapsed: 802762.9s, ETA: 0.0s)
+
+============================================================
+Processing summary:
+Root: /data/OralGPT/OralGPT-text-corpus
+Output base: /data/OralGPT/OralGPT-text-corpus-processed
+Total files: 376
+Successfully processed: 374
+Failed: 2
+Total time: 802762.92 seconds
+============================================================

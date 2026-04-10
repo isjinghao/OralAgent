@@ -26,6 +26,22 @@ plt.rcParams["figure.dpi"] = 150
 plt.rcParams["savefig.dpi"] = 300
 plt.rcParams["savefig.bbox"] = "tight"
 
+# 论文友好的中等清新风：比马卡龙更稳重，比医疗高对比更柔和
+PALETTE_FRESH_BALANCED = [
+    "#5FA8D3",  # fresh sky blue (for largest first slice)
+    "#59A14F",  # fresh green
+    "#F28E8C",  # soft coral
+    "#76B7B2",  # teal
+    "#9C93D5",  # soft violet
+    "#EDC948",  # warm yellow
+    "#86BCB6",  # mint teal
+    "#E39C6B",  # apricot
+    "#A0CBE8",  # light azure
+    "#8CD17D",  # light green
+    "#B699D8",  # lilac
+    "#F1CE63",  # sand yellow
+]
+
 CORPUS_ROOT = Path("/home/jinghao/projects/OralGPT-Agent/Corpus/OralCorpus")
 CH_DIR = CORPUS_ROOT / "CH"
 EN_DIR = CORPUS_ROOT / "EN"
@@ -36,6 +52,13 @@ OUTPUT_DIR.mkdir(exist_ok=True)
 def load_tiktoken_encoder():
     """使用 GPT 常用 tokenizer (cl100k_base, 用于 GPT-3.5/4)"""
     return tiktoken.get_encoding("cl100k_base")
+
+
+def repeat_palette(n, palette):
+    """按需循环扩展调色板，保证类别数超过预设颜色时仍可绘图。"""
+    if n <= 0:
+        return []
+    return [palette[i % len(palette)] for i in range(n)]
 
 
 def iter_jsonl_records(dir_path, content_key="内容", lang_key="原版语言", subject_key="学科", subject_id_key="学科_ID"):
@@ -168,12 +191,7 @@ def main():
     fig2, ax2 = plt.subplots(figsize=(7.2, 7.2))
     labels2 = [x[0] for x in subject_labels]
     sizes2 = [x[1] for x in subject_labels]
-    # 颜色序列（tab20 共 20 色，循环使用）
-    try:
-        cmap = plt.colormaps["tab20"]
-    except AttributeError:
-        cmap = plt.cm.get_cmap("tab20")
-    colors2 = [cmap((i % 20) / 19.0) for i in range(len(sizes2))]
+    colors2 = repeat_palette(len(sizes2), PALETTE_FRESH_BALANCED)
     wedges2, texts2, autotexts2 = ax2.pie(
         sizes2,
         labels=None,
@@ -181,6 +199,7 @@ def main():
         startangle=90,
         colors=colors2,
         pctdistance=0.6,
+        wedgeprops={"edgecolor": "white", "linewidth": 1.2},
     )
     # 图例放在图下方，横向排列；固定每行 2 个类别
     ncol2 = 2
@@ -204,7 +223,7 @@ def main():
         frame.set_linewidth(0.8)
         frame.set_alpha(1.0)
     for t in autotexts2:
-        t.set_fontsize(15.5)
+        t.set_fontsize(14.5)
         t.set_color("white")
         t.set_weight("bold")
     # ax2.set_title("Distribution of Books by Subject", fontsize=12)
@@ -213,7 +232,7 @@ def main():
     plt.savefig(OUTPUT_DIR / "pie2_subject_book_distribution.png", bbox_inches="tight")
     plt.close()
 
-    # 图3：Token 数量分布（CH vs EN），TMI 期刊风格配色，图例带 token 数量(M)
+    # 图3：Token 数量分布（CH vs EN），中等清新配色，图例带 token 数量(M)
     # 两段图例文字位置可手动设置（饼图坐标系：圆心 (0,0)，半径约 1，可填小数如 0.5）
     PIE3_LABEL_POSITIONS = [(-0.44, -0.34), (0.5, 0.35)]  # (CH 文字, EN 文字) 的 (x, y)
     fig3, ax3 = plt.subplots(figsize=(5, 5))
@@ -221,7 +240,7 @@ def main():
     en_m = en_tokens / 1e6
     token_labels = [f"(Chinese {ch_m:.1f}M)", f"(English {en_m:.1f}M)"]
     token_sizes = [ch_tokens, en_tokens]
-    colors3 = ["#2E6A8B", "#B85450"]
+    colors3 = ["#6BB8D6", "#F28E8C"]  # CH: 清新蓝青, EN: 柔和珊瑚
     explode = (0.02, 0.02)
     wedges3, texts3, autotexts3 = ax3.pie(
         token_sizes,
@@ -231,6 +250,7 @@ def main():
         colors=colors3,
         explode=explode,
         pctdistance=0.48,
+        wedgeprops={"edgecolor": "white", "linewidth": 1.4},
     )
     for t in autotexts3:
         t.set_fontsize(10)

@@ -5,14 +5,14 @@ from datetime import datetime
 from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from langchain_core.messages import AIMessage, ToolMessage
-from medrax.agent import Agent
-from medrax.utils import (
+from oralagent.agent import Agent
+from oralagent.utils import (
     load_prompts_from_file,
     parse_bool_env,
     apply_enriched_query_ablation,
 )
 from langgraph.checkpoint.memory import MemorySaver
-from medrax.tools import *
+from oralagent.tools import *
 from langchain_core.runnables import Runnable
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
@@ -156,7 +156,10 @@ def get_agent(
 
     # Initialize the agent
     checkpointer = MemorySaver()
-    model = ChatOpenAI(model=model_name, temperature=temperature, top_p=0.95)
+    # Bedrock Claude endpoints may reject requests when temperature and top_p
+    # are both provided. Keep only temperature by default.
+    # model = ChatOpenAI(model=model_name, temperature=temperature, top_p=0.95)
+    model = ChatOpenAI(model=model_name, temperature=temperature)
 
     intent_classifier_model = BioMedCLIPClassifier(
         checkpoint_path=f"{model_dir}/OralGPT_Modality_Identification_BioMedCLIP_8modalities.pth",
@@ -293,11 +296,11 @@ async def startup_event():
     temp_dir = "temp"
     # 单进程时用默认 "cuda"；多 worker 时由 gunicorn_conf 的 post_fork 设置 CUDA_VISIBLE_DEVICES，本进程内 cuda:0 即对应分配的那张卡
     device = "cuda"
-    model_name = "gpt-5-nano"
+    model_name = "qwen3.5-27b"
     temperature = 0.2
 
     ROOT = "/home/jinghao/projects/OralGPT-Agent/OralAgent"
-    PROMPT_FILE = f"{ROOT}/medrax/docs/system_prompts.txt"
+    PROMPT_FILE = f"{ROOT}/oralagent/docs/system_prompts.txt"
 
     tools = get_tools(
         model_dir=expert_model_dir,

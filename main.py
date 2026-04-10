@@ -1,6 +1,6 @@
 """
-MedRAX Application Main Module
-This module serves as the entry point for the MedRAX medical imaging AI assistant.
+OralAgent Application Main Module
+This module serves as the entry point for the OralAgent medical imaging AI assistant.
 It provides functionality to initialize an AI agent with various medical imaging tools
 and launch a web interface for interacting with the system.
 The system uses OpenAI's language models for reasoning and can be configured
@@ -33,10 +33,10 @@ from langgraph.checkpoint.memory import MemorySaver
 from langchain_openai import ChatOpenAI
 
 from interface import create_demo
-from medrax.agent import *
-from medrax.tools import *
-from medrax.tools.get_tools import get_all_tools_factories, DEFAULT_SELECTED_TOOL_NAMES
-from medrax.utils import *
+from oralagent.agent import *
+from oralagent.tools import *
+from oralagent.tools.get_tools import get_all_tools_factories, DEFAULT_SELECTED_TOOL_NAMES
+from oralagent.utils import *
 
 warnings.filterwarnings("ignore")
 logging.set_verbosity_error()
@@ -55,7 +55,7 @@ def initialize_agent(
     rag_config: Optional[RAGConfig] = None,
     openai_kwargs={}
 ):
-    """Initialize the MedRAX agent with specified tools and configuration.
+    """Initialize the OralAgent agent with specified tools and configuration.
 
     Args:
         prompt_file (str): Path to file containing system prompts
@@ -93,7 +93,7 @@ def initialize_agent(
         include_modality_section=include_modality_section,
     )
 
-    # Get tool factories from single source of truth (medrax.tools.get_tools)
+    # Get tool factories from single source of truth (oralagent.tools.get_tools)
     all_tools = get_all_tools_factories(model_dir, temp_dir, device, rag_config)
     tools_to_use = tools_to_use or list(all_tools.keys())
     tools_dict: Dict[str, BaseTool] = {}
@@ -132,12 +132,12 @@ def initialize_agent(
 
 if __name__ == "__main__":
     """
-    This is the main entry point for the MedRAX application.
+    This is the main entry point for the OralAgent application.
     It initializes the agent with the selected tools and creates the demo.
     """
     print("Starting server...")
 
-    # Use default tool list from medrax.tools.get_tools (customize DEFAULT_SELECTED_TOOL_NAMES there)
+    # Use default tool list from oralagent.tools.get_tools (customize DEFAULT_SELECTED_TOOL_NAMES there)
     selected_tools = DEFAULT_SELECTED_TOOL_NAMES
 
     ################## for RAG ##################
@@ -148,10 +148,10 @@ if __name__ == "__main__":
         embedding_model="Qwen/Qwen3-Embedding-8B",  # "0.6B, 4B, 8B"
         rerank_model="Qwen/Qwen3-Reranker-8B",  # "0.6B, 4B, 8B"
         temperature=0.7,
-        retriever_k=3,
-        persist_dir="medrax/rag/",  # Base path for vector DB; subdir added when use_OralCorpus=True
+        retriever_k=7,
+        persist_dir="oralagent/rag/",  # Base path for vector DB; subdir added when use_OralCorpus=True
         use_OralCorpus=True,  # Set to True to load Oral corpus when creating vectorstore
-        corpus_language="english",  # "english" -> vectorDB_OralCorpus_English, "chinese" -> vectorDB_OralCorpus_Chinese
+        corpus_language="chinese",  # "english" -> vectorDB_OralCorpus_English, "chinese" -> vectorDB_OralCorpus_Chinese
         local_docs_dir="",  # Path to Oral corpus (EN or CN) for RAG; also used for custom docs
         chunk_size=1000,  # Only valid for private documents
         chunk_overlap=100,  # Only valid for private documents
@@ -167,12 +167,12 @@ if __name__ == "__main__":
 
     # Initialize the agent with all configured components
     agent, tools_dict = initialize_agent(
-        "medrax/docs/system_prompts.txt",
+        "oralagent/docs/system_prompts.txt",
         tools_to_use=selected_tools,
         model_dir="/data/OralGPT/OralGPT-expert-model-repository",  # Change this to the path of the model weights
         temp_dir="temp",  # Change this to the path of the temporary directory
         device="cuda",  # Change this to the device you want to use
-        model="gpt-5-mini",  # Change this to the model you want to use, e.g. gpt-4o-mini
+        model="gpt-5.4",  # Change this to the model you want to use, e.g. gpt-4o-mini
         temperature=0.7,
         # top_p=0.95,
         rag_config=rag_config,

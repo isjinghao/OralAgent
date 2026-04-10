@@ -129,7 +129,7 @@ Base your answer only on the provided images and case information."""
 
             for subfig in subfigures:
                 if "local_path" in subfig:
-                    image_paths.append("medrax/data/" + subfig["local_path"])
+                    image_paths.append("../data/" + subfig["local_path"])
 
     if not image_paths:
         print(f"No local images found for case {case_id}, question {question_id}")
@@ -265,7 +265,7 @@ def count_total_questions() -> tuple[int, int]:
 
 def main():
     # Load the cases with local paths
-    with open("medrax/data/updated_cases.json", "r") as file:
+    with open("../data/updated_cases.json", "r") as file:
         data = json.load(file)
 
     # Initialize model and tokenizer

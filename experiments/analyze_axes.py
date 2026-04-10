@@ -364,7 +364,7 @@ if __name__ == "__main__":
     parser.add_argument("benchmark_dir", nargs="?", help="Path to benchmark questions directory")
     parser.add_argument(
         "--model",
-        choices=["llava-med", "chexagent", "llama", "gpt4", "medrax"],
+        choices=["llava-med", "chexagent", "llama", "gpt4", "oralagent"],
         default="gpt4",
         help="Specify model format (default: gpt4)",
     )
@@ -377,7 +377,7 @@ if __name__ == "__main__":
         results = analyze_llama_results(args.results_file, args.max_questions)
     elif args.model == "chexagent":
         results = analyze_chexagent_results(args.results_file, args.max_questions)
-    elif args.model == "medrax":
+    elif args.model == "oralagent":
         results = analyze_gpt4_results(args.results_file, args.max_questions)
     else:
         parser.error(f"Unsupported model: {args.model}")

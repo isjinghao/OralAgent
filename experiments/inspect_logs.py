@@ -119,8 +119,8 @@ def determine_model_type(entry: dict) -> str:
         return "llama"
     elif "chexagent" in model:
         return "chexagent"
-    elif "medrax" in model:
-        return "medrax"
+    elif "oralagent" in model or "medrax" in model:
+        return "oralagent"
     else:
         return "unknown"
 

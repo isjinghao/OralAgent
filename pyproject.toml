@@ -3,9 +3,9 @@ requires = ["setuptools>=45", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "medrax"
+name = "oralagent"
 version = "0.1.0"
-description = "medical reasoning agent for chest x-ray"
+description = "OralAgent: dental/oral multimodal reasoning agent"
 authors = [
     {name = "Adibvafa Fallahpour", email = "adibvafa.fallahpour@mail.utoronto.ca"},
 ]
@@ -77,7 +77,7 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["medrax*"]
+include = ["oralagent*"]
 exclude = ["med_env*", "demo*"]
 
 [tool.black]

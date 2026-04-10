@@ -203,8 +203,8 @@ def create_demo(agent, tools_dict):
         with gr.Column():
             gr.Markdown(
                 """
-            # 🏥 MedRAX
-            Medical Reasoning Agent for Chest X-ray
+            # 🦷 OralAgent
+            Multimodal Reasoning Agent for Dental Image Analysis
             """
             )
 
@@ -220,7 +220,7 @@ def create_demo(agent, tools_dict):
                         label="Agent",
                         avatar_images=(
                             None,
-                            "assets/medrax_logo.jpg",
+                            "assets/logo_OralAgent.png",
                         ),
                     )
                     with gr.Row():
