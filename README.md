@@ -25,6 +25,7 @@ OralAgent orchestrates **vision–language reasoning** with **modality-aware rou
 
 - **Gradio chat UI** (`main.py`) — upload images or DICOM, multi-turn chat.
 - **FastAPI service** (`launch_OralAgent.py`) — OpenAI-style `POST /v1/chat/completions` for integration.
+- **Local-brain FastAPI service** (`launch_OralAgent_local.py`) — same API, but uses a locally served LLM (Lingshu, HuatuoGPT, HealthGPT, etc.) as the agent's reasoning backend.
 - **Multi-GPU workers** — `gunicorn` + `uvicorn` via `run_launch_OralAgent_multi_workers.sh` and `gunicorn_conf.py`.
 
 ---
@@ -118,6 +119,14 @@ python launch_OralAgent.py
 ```
 
 Default bind is `0.0.0.0:8124` with reload; adjust `expert_model_dir`, `ROOT`, `model_name`, and tool list inside `launch_OralAgent.py` / `get_tools` as needed.
+
+### FastAPI with a local model as the brain
+
+```bash
+python launch_OralAgent_local.py
+```
+
+Uses a locally served LLM (e.g. Lingshu, HuatuoGPT, HealthGPT via `launch_server.py` or vLLM) as the agent's reasoning backend. Switch `backend = "custom"` in `startup_event` and set `base_url` (e.g. `http://localhost:8125/v1`) to point at the local model; `api_key` is not required.
 
 ### Multi-GPU / production-style workers
 
