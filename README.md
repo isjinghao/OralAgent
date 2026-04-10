@@ -1,14 +1,171 @@
-## Launch Server for HTTP Request
-```python
+<div align="center">
+
+<img src="assets/logo_OralAgent.png" alt="OralAgent logo" width="320"/>
+
+# OralAgent
+
+**A multimodal reasoning agent for dental and oral-maxillofacial imaging** — tool use, RAG over oral corpora, and a Gradio UI or OpenAI-compatible HTTP API.
+
+[![Paper MMOral](https://img.shields.io/badge/Paper-MMOral-NeurIPS%202025-6366f1?style=flat-square)](YOUR_MMORAL_PAPER_URL)
+[![Paper OralGPT-Omni](https://img.shields.io/badge/Paper-OralGPT--Omni-CVPR%202026-0ea5e9?style=flat-square)](YOUR_ORALGPT_OMNI_PAPER_URL)
+[![Model weights](https://img.shields.io/badge/HuggingFace-Models-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](YOUR_HF_MODEL_URL)
+[![Benchmark / data](https://img.shields.io/badge/HuggingFace-Benchmark-ffbf00?style=flat-square&logo=huggingface&logoColor=white)](YOUR_HF_BENCHMARK_OR_DATASET_URL)
+[![GitHub](https://img.shields.io/badge/GitHub-Repository-181717?style=flat-square&logo=github)](YOUR_GITHUB_REPO_URL)
+[![License](https://img.shields.io/badge/License-See%20LICENSE-blue?style=flat-square)](LICENSE)
+
+[English](#oralagent) · [Custom links](#custom-links-table) · [快速配置（中文）](#quick-config-zh)
+
+</div>
+
+---
+
+## OralAgent
+
+OralAgent orchestrates **vision–language reasoning** with **modality-aware routing** and a library of **oral/dental expert tools** (panoramic X-ray, periapical, cephalometric, intraoral imaging, cytopathology, histopathology, etc.), optional **OralGPT-Omni** integration, and **RAG** backed by an oral corpus. It is built with **LangGraph / LangChain** and ships with:
+
+- **Gradio chat UI** (`main.py`) — upload images or DICOM, multi-turn chat.
+- **FastAPI service** (`launch_OralAgent.py`) — OpenAI-style `POST /v1/chat/completions` for integration.
+- **Multi-GPU workers** — `gunicorn` + `uvicorn` via `run_launch_OralAgent_multi_workers.sh` and `gunicorn_conf.py`.
+
+> **Logo:** place your image at `assets/logo_OralAgent.png` (or change the path in the banner above).
+
+---
+
+<a id="custom-links-table"></a>
+
+## Links & badges (fill these for sharing)
+
+Replace the placeholder URLs in the badge block at the top of this file, and update the table below so visitors can find models, benchmarks, and demos in one place.
+
+| Resource | URL (replace `YOUR_*`) |
+|----------|-------------------------|
+| GitHub repository | `YOUR_GITHUB_REPO_URL` |
+| Project / demo page | `YOUR_PROJECT_OR_DEMO_URL` |
+| MMOral (NeurIPS 2025) paper | `YOUR_MMORAL_PAPER_URL` |
+| OralGPT-Omni (CVPR 2026) paper | `YOUR_ORALGPT_OMNI_PAPER_URL` |
+| OralGPT-Plus (CVPR 2026) paper | `YOUR_ORALGPT_PLUS_PAPER_URL` |
+| Expert model weights (e.g. Hugging Face) | `YOUR_HF_MODEL_URL` |
+| Benchmark / dataset (e.g. Hugging Face) | `YOUR_HF_BENCHMARK_OR_DATASET_URL` |
+| Oral corpus / RAG documents (if public) | `YOUR_ORAL_CORPUS_URL` |
+
+---
+
+## Requirements
+
+- **Python** ≥ 3.10 (see `pyproject.toml`)
+- **NVIDIA GPU + CUDA** strongly recommended (vision tools and embeddings are GPU-oriented)
+- An **OpenAI-compatible API** (OpenAI, Azure, DashScope, vLLM, Ollama, etc.) for the chat model
+
+---
+
+## Installation
+
+```bash
+git clone YOUR_GITHUB_REPO_URL
+cd OralAgent   # use the folder name of this package inside your clone (e.g. OralGPT-Agent/OralAgent)
+
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+
+pip install -e .
+```
+
+**Note:** `pyproject.toml` pins a specific `transformers` git revision and includes `faiss-gpu`. If `faiss-gpu` fails on your platform, install a CPU variant or adjust dependencies locally to match your environment.
+
+---
+
+## Configuration
+
+### 1. Environment variables
+
+Create a `.env` in the project root (do not commit secrets). Typical variables:
+
+```bash
+OPENAI_API_KEY=your_key
+# Optional: custom base URL for OpenAI-compatible providers
+# OPENAI_BASE_URL=https://api.openai.com/v1
+```
+
+For local OpenAI-compatible servers (e.g. Ollama):
+
+```bash
+export OPENAI_BASE_URL=http://127.0.0.1:11434/v1
+export OPENAI_API_KEY=ollama
+```
+
+### 2. Model weights directory (`model_dir`)
+
+Expert checkpoints and configs (DINO / MaskDINO / BioMedCLIP modality ID, RAG embeddings, etc.) are resolved from a single **`model_dir`** on disk.
+
+In **`main.py`** and **`launch_OralAgent.py`**, set paths such as:
+
+- `model_dir` / `expert_model_dir` → directory containing OralGPT expert weights and `categories_*.json` / `config_*` files as expected by `oralagent/tools/get_tools.py`.
+- **`main.py`** also references modality identification weights, e.g. `OralGPT_Modality_Identification_BioMedCLIP_8modalities.pth` under the same tree.
+
+Download or sync files from **`YOUR_HF_MODEL_URL`** (or your release page) into that folder.
+
+### 3. Tools and RAG
+
+- **Which tools load:** edit `DEFAULT_SELECTED_TOOL_NAMES` in `oralagent/tools/get_tools.py` (comment or uncomment tool names). The default in-repo may be minimal (e.g. RAG-only); enable panoramic / periapical / other tools when weights are available.
+- **RAG:** in `main.py`, adjust `RAGConfig` (`persist_dir`, `use_OralCorpus`, `corpus_language`, `local_docs_dir`, embedding/rerank model IDs) to match your machines and **`YOUR_ORAL_CORPUS_URL`** if you host documents locally.
+
+---
+
+## Running
+
+### Gradio UI (recommended for first run)
+
+```bash
+python main.py
+```
+
+Default launch uses `demo.launch(...)` with host/port as set in `main.py` (e.g. `0.0.0.0:8552`). Change `model`, `model_dir`, and `device` in `main.py` first.
+
+### FastAPI (single process, dev)
+
+```bash
 python launch_OralAgent.py
 ```
 
-```python
-ORAL_AGENT_MAX_WORKERS_PER_GPU=2 ./run_launch_OralAgent_multi_workers.sh 
+Default bind is `0.0.0.0:8124` with reload; adjust `expert_model_dir`, `ROOT`, `model_name`, and tool list inside `launch_OralAgent.py` / `get_tools` as needed.
+
+### Multi-GPU / production-style workers
+
+```bash
+pip install gunicorn "uvicorn[standard]"
+# Optional tuning, see script comments:
+# ORAL_AGENT_MAX_WORKERS_PER_GPU=2 ./run_launch_OralAgent_multi_workers.sh
+./run_launch_OralAgent_multi_workers.sh
 ```
 
+See `gunicorn_conf.py` and `gpu_utils.py` for worker count and `CUDA_VISIBLE_DEVICES` behavior.
+
+---
+
+## Benchmarks and experiments
+
+Scripts under `experiments/` support evaluation and analysis (e.g. MMOral-style benchmarks). Point datasets to **`YOUR_HF_BENCHMARK_OR_DATASET_URL`** or local paths as in each script’s arguments. **`quickstart.py`** can run lightweight API-based evaluation when the benchmark is configured similarly to the Hugging Face dataset layout expected by the script.
+
+---
+
+## Repository layout (high level)
+
+| Path | Role |
+|------|------|
+| `oralagent/` | Agent, tools, prompts, RAG assets |
+| `oralagent/tools/get_tools.py` | Tool registry and default tool list |
+| `main.py` | Gradio app entry |
+| `launch_OralAgent.py` | FastAPI app and `/v1/chat/completions` |
+| `interface.py` | Gradio chat UI |
+| `experiments/` | Benchmarks and analysis |
+| `benchmark/`, `data/` | Data layouts (as used by your workflows) |
+
+---
+
 ## Citation
-If you find this work useful, please cite our paper:
+
+If you use this repository or the associated work, please cite the relevant papers:
+
 ```bibtex
 @article{hao2025mmoral,
   title={Towards Better Dental AI: A Multimodal Benchmark and Instruction Dataset for Panoramic X-ray Analysis},
@@ -40,288 +197,28 @@ If you find this work useful, please cite our paper:
 }
 ```
 
-<!--
+---
 
-<h1 align="center">
-🤖 OralAgent: Medical Reasoning Agent for Chest X-ray
-</h1>
-<p align="center"> <a href="https://arxiv.org/abs/2502.02673" target="_blank"><img src="https://img.shields.io/badge/arXiv-ICML 2025-FF6B6B?style=for-the-badge&logo=arxiv&logoColor=white" alt="arXiv"></a> <a href="https://github.com/bowang-lab/MedRAX"><img src="https://img.shields.io/badge/GitHub-Code-4A90E2?style=for-the-badge&logo=github&logoColor=white" alt="GitHub"></a> <a href="https://huggingface.co/datasets/wanglab/chest-agent-bench"><img src="https://img.shields.io/badge/HuggingFace-Dataset-FFBF00?style=for-the-badge&logo=huggingface&logoColor=white" alt="HuggingFace Dataset"></a> </p>
+<a id="quick-config-zh"></a>
 
-![](assets/demo_fast.gif?autoplay=1)
+## 快速配置摘要
 
-<br>
-
-## Abstract
-Chest X-rays (CXRs) play an integral role in driving critical decisions in disease management and patient care. While recent innovations have led to specialized models for various CXR interpretation tasks, these solutions often operate in isolation, limiting their practical utility in clinical practice. We present OralAgent, the first versatile AI agent that seamlessly integrates state-of-the-art CXR analysis tools and multimodal large language models into a unified framework. OralAgent dynamically leverages these models to address complex medical queries without requiring additional training. To rigorously evaluate its capabilities, we introduce ChestAgentBench, a comprehensive benchmark containing 2,500 complex medical queries across 7 diverse categories. Our experiments demonstrate that OralAgent achieves state-of-the-art performance compared to both open-source and proprietary models, representing a significant step toward the practical deployment of automated CXR interpretation systems.
-<br><br>
-
-
-## OralAgent
-OralAgent is built on a robust technical foundation:
-- **Core Architecture**: Built on LangChain and LangGraph frameworks
-- **Language Model**: Uses GPT-4o with vision capabilities as the backbone LLM
-- **Deployment**: Supports both local and cloud-based deployments
-- **Interface**: Production-ready interface built with Gradio
-- **Modular Design**: Tool-agnostic architecture allowing easy integration of new capabilities
-
-### Integrated Tools
-- **Visual QA**: Utilizes CheXagent and LLaVA-Med for complex visual understanding and medical reasoning
-- **Segmentation**: Employs MedSAM and PSPNet model trained on ChestX-Det for precise anatomical structure identification
-- **Grounding**: Uses Maira-2 for localizing specific findings in medical images
-- **Report Generation**: Implements SwinV2 Transformer trained on CheXpert Plus for detailed medical reporting
-- **Disease Classification**: Leverages DenseNet-121 from TorchXRayVision for detecting 18 pathology classes
-- **X-ray Generation**: Utilizes RoentGen for synthetic CXR generation
-- **Utilities**: Includes DICOM processing, visualization tools, and custom plotting capabilities
-<br><br>
-
-
-## ChestAgentBench
-We introduce ChestAgentBench, a comprehensive evaluation framework with 2,500 complex medical queries across 7 categories, built from 675 expert-curated clinical cases. The benchmark evaluates complex multi-step reasoning in CXR interpretation through:
-
-- Detection
-- Classification
-- Localization
-- Comparison
-- Relationship
-- Diagnosis
-- Characterization
-
-Download the benchmark: [ChestAgentBench on Hugging Face](https://huggingface.co/datasets/wanglab/chest-agent-bench)
-```
-huggingface-cli download wanglab/chestagentbench --repo-type dataset --local-dir chestagentbench
-```
-
-Unzip the Eurorad figures to your local `MedMAX` directory.
-```
-unzip chestagentbench/figures.zip
-```
-
-To evaluate with GPT-4o, set your OpenAI API key and run the quickstart script.
-```
-export OPENAI_API_KEY="<your-openai-api-key>"
-python quickstart.py \
-    --model chatgpt-4o-latest \
-    --temperature 0.2 \
-    --max-cases 2 \
-    --log-prefix chatgpt-4o-latest \
-    --use-urls
-```
-
-
-<br>
-
-## Installation
-### Prerequisites
-- Python 3.8+
-- CUDA/GPU for best performance
-
-### Installation Steps
-```bash
-# Clone the repository
-git clone https://github.com/<your-org>/OralAgent.git
-cd OralAgent
-
-# Install package
-pip install -e .
-```
-
-### Getting Started
-```bash
-# Start the Gradio interface
-python main.py
-```
-or if you run into permission issues
-```bash
-sudo -E env "PATH=$PATH" python main.py
-```
-You need to setup the `model_dir` inside `main.py` to the directory where you want to download or already have the weights of above tools from Hugging Face.
-Comment out the tools that you do not have access to.
-Make sure to setup your OpenAI API key in `.env` file!
-<br><br><br>
-
-
-## Tool Selection and Initialization
-
-OralAgent supports selective tool initialization, allowing you to use only the tools you need. Tools can be specified when initializing the agent (look at `main.py`):
-
-```python
-selected_tools = [
-    "ImageVisualizerTool",
-    "ChestXRayClassifierTool",
-    "ChestXRaySegmentationTool",
-    # Add or remove tools as needed
-]
-
-agent, tools_dict = initialize_agent(
-    "oralagent/docs/system_prompts.txt",
-    tools_to_use=selected_tools,
-    model_dir="/model-weights"
-)
-```
-
-<br><br>
-## Automatically Downloaded Models
-
-The following tools will automatically download their model weights when initialized:
-
-### Classification Tool
-```python
-ChestXRayClassifierTool(device=device)
-```
-
-### Segmentation Tool
-```python
-ChestXRaySegmentationTool(device=device)
-```
-
-### Grounding Tool
-```python
-XRayPhraseGroundingTool(
-    cache_dir=model_dir, 
-    temp_dir=temp_dir, 
-    load_in_8bit=True, 
-    device=device
-)
-```
-- Maira-2 weights download to specified `cache_dir`
-- 8-bit and 4-bit quantization available for reduced memory usage
-
-### LLaVA-Med Tool
-```python
-LlavaMedTool(
-    cache_dir=model_dir, 
-    device=device, 
-    load_in_8bit=True
-)
-```
-- Automatic weight download to `cache_dir`
-- 8-bit and 4-bit quantization available for reduced memory usage
-
-### Report Generation Tool
-```python
-ChestXRayReportGeneratorTool(
-    cache_dir=model_dir, 
-    device=device
-)
-```
-
-### Visual QA Tool
-```python
-XRayVQATool(
-    cache_dir=model_dir, 
-    device=device
-)
-```
-- CheXagent weights download automatically
-
-### MedSAM Tool
-```
-Support for MedSAM segmentation will be added in a future update.
-```
-
-### Utility Tools
-No additional model weights required:
-```python
-ImageVisualizerTool()
-DicomProcessorTool(temp_dir=temp_dir)
-```
-<br>
-
-## Manual Setup Required
-
-### Image Generation Tool
-```python
-ChestXRayGeneratorTool(
-    model_path=f"{model_dir}/roentgen", 
-    temp_dir=temp_dir, 
-    device=device
-)
-```
-- RoentGen weights require manual setup:
-  1. Contact authors: https://github.com/StanfordMIMI/RoentGen
-  2. Place weights in `{model_dir}/roentgen`
-  3. Optional tool, can be excluded if not needed
-<br>
-
-## Configuration Notes
-
-### Required Parameters
-- `model_dir` or `cache_dir`: Base directory for model weights that Hugging Face uses
-- `temp_dir`: Directory for temporary files
-- `device`: "cuda" for GPU, "cpu" for CPU-only
-
-### Memory Management
-- Consider selective tool initialization for resource constraints
-- Use 8-bit quantization where available
-- Some tools (LLaVA-Med, Grounding) are more resource-intensive
-<br>
-
-### Local LLMs
-If you are running a local LLM using frameworks like [Ollama](https://ollama.com/) or [LM Studio](https://lmstudio.ai/), you need to configure your environment variables accordingly. For example:
-```
-export OPENAI_BASE_URL="http://localhost:11434/v1"
-export OPENAI_API_KEY="ollama"
-```
-<br>
-
-### Optional: OpenAI-compatible Providers
-
-OralAgent supports OpenAI-compatible APIs, allowing regional or local LLM providers to serve as alternative backends.
-
-For example, to use **Qwen3-VL** via [Alibaba Cloud DashScope](https://bailian.console.aliyun.com/?tab=model#/model-market), set the following environment variables:
-
-```bash
-export OPENAI_BASE_URL="https://dashscope.aliyuncs.com/compatible-mode/v1"
-export OPENAI_API_KEY="<your-dashscope-api-key>"
-export OPENAI_MODEL="qwen3-vl-235b-a22b-instruct"
-```
-<br>
-
-## Star History
-<div align="center">
-  
-[![Star History Chart](https://api.star-history.com/svg?repos=bowang-lab/MedRAX&type=Date)](https://star-history.com/#bowang-lab/MedRAX&Date)
-
-</div>
-<br>
-
-
-## Authors
-- **Adibvafa Fallahpour**¹²³⁴ * (adibvafa.fallahpour@mail.utoronto.ca)
-- ****Jun Ma****²³ *
-- **Alif Munim**³⁵ *
-- ****Hongwei Lyu****³
-- ****Bo Wang****¹²³⁶
-
-¹ Department of Computer Science, University of Toronto, Toronto, Canada <br>
-² Vector Institute, Toronto, Canada <br>
-³ University Health Network, Toronto, Canada <br>
-⁴ Cohere, Toronto, Canada <br>
-⁵ Cohere Labs, Toronto, Canada <br>
-⁶ Department of Laboratory Medicine and Pathobiology, University of Toronto, Toronto, Canada
-
-<br>
-* Equal contribution
-<br><br>
-
-
-## Citation
-If you find this work useful, please cite our paper:
-```bibtex
-@misc{fallahpour2025medraxmedicalreasoningagent,
-      title={MedRAX: Medical Reasoning Agent for Chest X-ray}, 
-      author={Adibvafa Fallahpour and Jun Ma and Alif Munim and Hongwei Lyu and Bo Wang},
-      year={2025},
-      eprint={2502.02673},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG},
-      url={https://arxiv.org/abs/2502.02673}, 
-}
-```
+1. 将 Logo 放到 **`assets/logo_OralAgent.png`**，并替换 README 顶部所有 **`YOUR_*`** 链接。  
+2. 配置 **`.env`**（`OPENAI_API_KEY` 等）。  
+3. 在 **`main.py`** / **`launch_OralAgent.py`** 中把 **`model_dir`**（及 `ROOT`）改成你存放 OralGPT 专家权重的目录。  
+4. 在 **`oralagent/tools/get_tools.py`** 里按需启用工具；显存不足时少开工具或使用量化（若工具支持）。  
+5. **`python main.py`** 体验 Gradio；需要 HTTP 对接时运行 **`launch_OralAgent.py`** 或 **`run_launch_OralAgent_multi_workers.sh`**。
 
 ---
-<p align="center">
-Made with ❤️ at University of Toronto, Vector Institute, and University Health Network
-</p>
 
--->
+## License
+
+See [`LICENSE`](LICENSE).
+
+---
+
+<div align="center">
+
+**OralAgent** — dental multimodal reasoning with tools and RAG.
+
+</div>
