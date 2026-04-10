@@ -19,32 +19,26 @@
 
 ## OralAgent
 
-OralAgent orchestrates **vision–language reasoning** with **modality-aware routing** and a library of **oral/dental expert tools** (panoramic X-ray, periapical, cephalometric, intraoral imaging, cytopathology, histopathology, etc.), optional **OralGPT-Omni** integration, and **RAG** backed by an oral corpus. It is built with **LangGraph / LangChain** and ships with:
+OralAgent orchestrates **vision–language reasoning** with **modality-aware routing** and a library of **oral/dental expert tools** (panoramic X-ray, periapical, cephalometric, intraoral imaging, cytopathology, histopathology, etc.), optional **OralGPT-Omni** integration, and **RAG** backed by an OralCorpus (368 widely-used classical dental textbooks). It is built with **LangGraph / LangChain** and ships with:
 
 - **Gradio chat UI** (`main.py`) — upload images or DICOM, multi-turn chat.
 - **FastAPI service** (`launch_OralAgent.py`) — OpenAI-style `POST /v1/chat/completions` for integration.
 - **Multi-GPU workers** — `gunicorn` + `uvicorn` via `run_launch_OralAgent_multi_workers.sh` and `gunicorn_conf.py`.
 
-> **Logo:** place your image at `assets/logo_OralAgent.png` (or change the path in the banner above).
-
 ---
 
 <a id="custom-links-table"></a>
 
-## Links & badges (fill these for sharing)
-
-Replace the placeholder URLs in the badge block at the top of this file, and update the table below so visitors can find models, benchmarks, and demos in one place.
+## Links & badges
 
 | Resource | URL (replace `YOUR_*`) |
 |----------|-------------------------|
-| GitHub repository | `YOUR_GITHUB_REPO_URL` |
-| Project / demo page | `YOUR_PROJECT_OR_DEMO_URL` |
-| MMOral (NeurIPS 2025) paper | `YOUR_MMORAL_PAPER_URL` |
-| OralGPT-Omni (CVPR 2026) paper | `YOUR_ORALGPT_OMNI_PAPER_URL` |
-| OralGPT-Plus (CVPR 2026) paper | `YOUR_ORALGPT_PLUS_PAPER_URL` |
-| Expert model weights (e.g. Hugging Face) | `YOUR_HF_MODEL_URL` |
-| Benchmark / dataset (e.g. Hugging Face) | `YOUR_HF_BENCHMARK_OR_DATASET_URL` |
-| Oral corpus / RAG documents (if public) | `YOUR_ORAL_CORPUS_URL` |
+| MMOral (NeurIPS 2025) paper | `https://arxiv.org/pdf/2509.09254` |
+| OralGPT-Omni (CVPR 2026) paper | `https://arxiv.org/abs/2511.22055` |
+| OralGPT-Plus (CVPR 2026) paper | `https://arxiv.org/abs/2603.06366` |
+| Dental ToolHub (e.g. Hugging Face) | `https://huggingface.co/OralGPT/OralAgent-ToolHub` |
+| OralQA-ZH Benchmark | `https://huggingface.co/datasets/OralGPT/OralQA-ZH` |
+| Oral corpus / RAG documents | `https://huggingface.co/datasets/OralGPT/OralCorpus` |
 
 ---
 
@@ -59,12 +53,8 @@ Replace the placeholder URLs in the badge block at the top of this file, and upd
 ## Installation
 
 ```bash
-git clone YOUR_GITHUB_REPO_URL
+git clone https://github.com/isjinghao/OralAgent.git
 cd OralAgent   # use the folder name of this package inside your clone (e.g. OralGPT-Agent/OralAgent)
-
-python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
-
 pip install -e .
 ```
 
@@ -98,14 +88,13 @@ Expert checkpoints and configs (DINO / MaskDINO / BioMedCLIP modality ID, RAG em
 In **`main.py`** and **`launch_OralAgent.py`**, set paths such as:
 
 - `model_dir` / `expert_model_dir` → directory containing OralGPT expert weights and `categories_*.json` / `config_*` files as expected by `oralagent/tools/get_tools.py`.
-- **`main.py`** also references modality identification weights, e.g. `OralGPT_Modality_Identification_BioMedCLIP_8modalities.pth` under the same tree.
 
-Download or sync files from **`YOUR_HF_MODEL_URL`** (or your release page) into that folder.
+Download or sync files from **`https://huggingface.co/OralGPT/OralAgent-ToolHub`** into that folder.
 
 ### 3. Tools and RAG
 
-- **Which tools load:** edit `DEFAULT_SELECTED_TOOL_NAMES` in `oralagent/tools/get_tools.py` (comment or uncomment tool names). The default in-repo may be minimal (e.g. RAG-only); enable panoramic / periapical / other tools when weights are available.
-- **RAG:** in `main.py`, adjust `RAGConfig` (`persist_dir`, `use_OralCorpus`, `corpus_language`, `local_docs_dir`, embedding/rerank model IDs) to match your machines and **`YOUR_ORAL_CORPUS_URL`** if you host documents locally.
+- **Which tools load:** edit `DEFAULT_SELECTED_TOOL_NAMES` in `oralagent/tools/get_tools.py` (comment or uncomment tool names). 
+- **RAG:** in `main.py`, adjust `RAGConfig` (`persist_dir`, `use_OralCorpus`, `corpus_language`, `local_docs_dir`, embedding/rerank model IDs) to match your machines and **`https://huggingface.co/datasets/OralGPT/OralCorpus`** if you host documents locally.
 
 ---
 
@@ -137,12 +126,6 @@ pip install gunicorn "uvicorn[standard]"
 ```
 
 See `gunicorn_conf.py` and `gpu_utils.py` for worker count and `CUDA_VISIBLE_DEVICES` behavior.
-
----
-
-## Benchmarks and experiments
-
-Scripts under `experiments/` support evaluation and analysis (e.g. MMOral-style benchmarks). Point datasets to **`YOUR_HF_BENCHMARK_OR_DATASET_URL`** or local paths as in each script’s arguments. **`quickstart.py`** can run lightweight API-based evaluation when the benchmark is configured similarly to the Hugging Face dataset layout expected by the script.
 
 ---
 
@@ -201,11 +184,10 @@ If you use this repository or the associated work, please cite the relevant pape
 
 ## 快速配置摘要
 
-1. 将 Logo 放到 **`assets/logo_OralAgent.png`**，并替换 README 顶部所有 **`YOUR_*`** 链接。  
-2. 配置 **`.env`**（`OPENAI_API_KEY` 等）。  
-3. 在 **`main.py`** / **`launch_OralAgent.py`** 中把 **`model_dir`**（及 `ROOT`）改成你存放 OralGPT 专家权重的目录。  
-4. 在 **`oralagent/tools/get_tools.py`** 里按需启用工具；显存不足时少开工具或使用量化（若工具支持）。  
-5. **`python main.py`** 体验 Gradio；需要 HTTP 对接时运行 **`launch_OralAgent.py`** 或 **`run_launch_OralAgent_multi_workers.sh`**。
+1. 配置 **`.env`**（`OPENAI_API_KEY` 等）。  
+2. 在 **`main.py`** / **`launch_OralAgent.py`** 中把 **`model_dir`**（及 `ROOT`）改成你存放 OralGPT 专家权重的目录。  
+3. 在 **`oralagent/tools/get_tools.py`** 里按需启用工具；显存不足时少开工具或使用量化（若工具支持）。  
+4. **`python main.py`** 体验 Gradio；需要 HTTP 对接时运行 **`launch_OralAgent.py`** 或 **`run_launch_OralAgent_multi_workers.sh`**。
 
 ---
 
