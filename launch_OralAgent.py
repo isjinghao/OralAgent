@@ -279,9 +279,33 @@ def _extract_output_image_paths_from_text(text: str) -> List[str]:
 
     suffix_pattern = r"(?:png|jpg|jpeg|webp|bmp)"
     keys = "|".join(re.escape(key) for key in OUTPUT_IMAGE_KEYS)
-    keyed_pattern = rf"""['"](?:{keys})['"]\s*:\s*['"]([^'"]+\.{suffix_pattern})['"]"""
-    markdown_pattern = rf"""!\[[^\]]*\]\(([^)]+\.{suffix_pattern})\)"""
-    return re.findall(keyed_pattern, text, flags=re.I) + re.findall(markdown_pattern, text, flags=re.I)
+    patterns = [
+        rf"""['"](?:{keys})['"]\s*:\s*['"]([^'"]+\.{suffix_pattern})['"]""",
+        rf"""(?:{keys}|image path|image\(s\)|processed output image\(s\)|returned processed image path\(s\)|annotated visualization image path)\s*:\s*`?([^`\s,;]+\.{suffix_pattern})`?""",
+        rf"""!\[[^\]]*\]\(([^)]+\.{suffix_pattern})\)""",
+        rf"""`([^`\n\r]+\.{suffix_pattern})`""",
+    ]
+    paths: List[str] = []
+    for pattern in patterns:
+        for match in re.findall(pattern, text, flags=re.I):
+            if isinstance(match, tuple):
+                match = next((part for part in match if part), "")
+            paths.append(str(match).strip().strip("`'\"").rstrip(".,;)]"))
+
+    for match in re.findall(
+        rf"""(?<![A-Za-z0-9_./-])((?:temp|outputs?|results?)/[^\s`'"<>]+\.{suffix_pattern})""",
+        text,
+        flags=re.I,
+    ):
+        paths.append(str(match).strip().rstrip(".,;)]"))
+
+    deduped: List[str] = []
+    seen: set[str] = set()
+    for path in paths:
+        if path and path not in seen:
+            seen.add(path)
+            deduped.append(path)
+    return deduped
 
 
 def _request_base_url(request: Request) -> str:
