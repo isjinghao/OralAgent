@@ -1,5 +1,6 @@
 import warnings
 import json
+import base64
 from pathlib import Path
 from datetime import datetime
 from dotenv import load_dotenv
@@ -14,7 +15,8 @@ from oralagent.utils import (
 from langgraph.checkpoint.memory import MemorySaver
 from oralagent.tools import *
 from langchain_core.runnables import Runnable
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 import os
@@ -23,12 +25,27 @@ import time
 import uuid
 
 warnings.filterwarnings("ignore")
+PROJECT_ROOT = Path(__file__).resolve().parent
 _ = load_dotenv()
 
 # 请求日志目录：在此目录下以「本次 OralAgent 启动时间」为子文件夹落盘；设为空字符串可关闭
 DEFAULT_REQUEST_LOG_DIR = os.getenv("ORALAGENT_REQUEST_LOG_DIR", "logs/requests")
 
 OralAgent = FastAPI()
+UPLOAD_DIR = PROJECT_ROOT / "temp" / "uploads"
+PUBLIC_FILE_ROOTS = [
+    (PROJECT_ROOT / "temp").resolve(),
+    Path("temp").resolve(),
+]
+IMAGE_SUFFIXES = {".png", ".jpg", ".jpeg", ".webp", ".bmp"}
+OUTPUT_IMAGE_KEYS = {
+    "visualization_path",
+    "segmentation_image_path",
+    "output_path",
+    "processed_image_path",
+    "generated_image_path",
+    "image_path",
+}
 
 # 声明全局变量（不再使用全局 thread，每次请求用独立 thread_id 隔离状态）
 agent = None
@@ -126,6 +143,193 @@ def _sanitize_log_basename(name: str, max_len: int = 180) -> str:
     return safe[:max_len] if len(safe) > max_len else safe
 
 
+def _image_suffix_from_mime(mime: str) -> str:
+    mime = (mime or "").lower()
+    if "png" in mime:
+        return ".png"
+    if "webp" in mime:
+        return ".webp"
+    if "bmp" in mime:
+        return ".bmp"
+    return ".jpg"
+
+
+def _safe_upload_filename(name: str, suffix: str) -> str:
+    filename = _sanitize_log_basename(os.path.basename(name or ""), max_len=120)
+    if filename and Path(filename).suffix.lower() in IMAGE_SUFFIXES:
+        return filename
+    if filename:
+        return f"{filename}{suffix}"
+    return f"{uuid.uuid4().hex}{suffix}"
+
+
+def _save_data_url_image(data_url: str, requested_name: Optional[str] = None) -> Optional[str]:
+    """Save an OpenAI-style data:image/...;base64 payload and return server-local path."""
+    if not isinstance(data_url, str) or not data_url.startswith("data:image/"):
+        return None
+
+    match = re.match(r"^data:(?P<mime>image/[^;]+);base64,(?P<data>.+)$", data_url, re.S)
+    if not match:
+        return None
+
+    UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+    suffix = _image_suffix_from_mime(match.group("mime"))
+    filename = _safe_upload_filename(requested_name or "", suffix)
+    target = UPLOAD_DIR / filename
+    if target.exists():
+        target = UPLOAD_DIR / f"{target.stem}_{uuid.uuid4().hex[:8]}{target.suffix}"
+
+    try:
+        target.write_bytes(base64.b64decode(match.group("data")))
+    except Exception as exc:
+        raise ValueError(f"Invalid base64 image payload: {exc}") from exc
+    return str(target.resolve())
+
+
+def _materialize_base64_images(messages: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    """Convert incoming base64 image_url blocks into real files before Agent preprocessing."""
+    for msg in messages:
+        content = msg.get("content")
+        if not isinstance(content, list):
+            continue
+
+        replacements: Dict[str, str] = {}
+        for item in content:
+            if not isinstance(item, dict) or item.get("type") != "image_url":
+                continue
+            image_url = item.get("image_url") or {}
+            if not isinstance(image_url, dict):
+                continue
+
+            old_path = image_url.get("image_path") or ""
+            saved_path = _save_data_url_image(image_url.get("url"), old_path)
+            if not saved_path:
+                continue
+
+            if old_path:
+                replacements[str(old_path)] = saved_path
+            image_url["image_path"] = saved_path
+
+        if not replacements:
+            continue
+
+        for item in content:
+            if not isinstance(item, dict) or item.get("type") != "text":
+                continue
+            text = item.get("text")
+            if not isinstance(text, str):
+                continue
+            for old_path, new_path in replacements.items():
+                text = text.replace(f"image_path: {old_path}", f"image_path: {new_path}")
+            item["text"] = text
+
+    return messages
+
+
+def _path_is_relative_to(path: Path, root: Path) -> bool:
+    try:
+        path.resolve().relative_to(root.resolve())
+        return True
+    except ValueError:
+        return False
+
+
+def _resolve_image_file_path(raw_path: str) -> Optional[Path]:
+    if not raw_path:
+        return None
+    raw_path = raw_path.strip().strip("'\"")
+    if raw_path.startswith("data:") or raw_path.startswith("http://") or raw_path.startswith("https://"):
+        return None
+
+    path = Path(raw_path)
+    candidates = [path]
+    if not path.is_absolute():
+        candidates.extend([PROJECT_ROOT / path, Path.cwd() / path])
+
+    for candidate in candidates:
+        resolved = candidate.resolve()
+        if resolved.is_file() and resolved.suffix.lower() in IMAGE_SUFFIXES:
+            return resolved
+    return None
+
+
+def _extract_input_image_paths(messages: List[Dict[str, Any]]) -> set[str]:
+    paths: set[str] = set()
+    for msg in messages:
+        content = msg.get("content")
+        if isinstance(content, str) and "image_path:" in content:
+            paths.add(content.split("image_path:", 1)[1].strip().split()[0])
+        if not isinstance(content, list):
+            continue
+        for item in content:
+            if not isinstance(item, dict):
+                continue
+            if item.get("type") == "text" and isinstance(item.get("text"), str) and "image_path:" in item["text"]:
+                paths.add(item["text"].split("image_path:", 1)[1].strip().split()[0])
+            if item.get("type") == "image_url":
+                image_url = item.get("image_url") or {}
+                if isinstance(image_url, dict) and image_url.get("image_path"):
+                    paths.add(str(image_url["image_path"]))
+    return paths
+
+
+def _extract_output_image_paths_from_text(text: str) -> List[str]:
+    if not text:
+        return []
+
+    suffix_pattern = r"(?:png|jpg|jpeg|webp|bmp)"
+    keys = "|".join(re.escape(key) for key in OUTPUT_IMAGE_KEYS)
+    keyed_pattern = rf"""['"](?:{keys})['"]\s*:\s*['"]([^'"]+\.{suffix_pattern})['"]"""
+    markdown_pattern = rf"""!\[[^\]]*\]\(([^)]+\.{suffix_pattern})\)"""
+    return re.findall(keyed_pattern, text, flags=re.I) + re.findall(markdown_pattern, text, flags=re.I)
+
+
+def _request_base_url(request: Request) -> str:
+    proto = request.headers.get("x-forwarded-proto") or request.url.scheme
+    host = request.headers.get("x-forwarded-host") or request.headers.get("host")
+    if host:
+        return f"{proto}://{host}".rstrip("/")
+    return str(request.base_url).rstrip("/")
+
+
+def _public_url_for_file(path: Path, request: Request) -> Optional[str]:
+    resolved = path.resolve()
+    for root in PUBLIC_FILE_ROOTS:
+        if not _path_is_relative_to(resolved, root):
+            continue
+        try:
+            rel = resolved.relative_to(PROJECT_ROOT.resolve()).as_posix()
+        except ValueError:
+            rel = resolved.relative_to(root.resolve()).as_posix()
+        return f"{_request_base_url(request)}/files/{rel}"
+    return None
+
+
+def _build_output_images(paths: List[str], input_paths: set[str], request: Request) -> List[Dict[str, str]]:
+    images: List[Dict[str, str]] = []
+    seen: set[str] = set()
+    resolved_inputs = {
+        str(path.resolve())
+        for raw in input_paths
+        for path in [_resolve_image_file_path(raw)]
+        if path
+    }
+
+    for raw_path in paths:
+        path = _resolve_image_file_path(raw_path)
+        if not path:
+            continue
+        resolved = str(path.resolve())
+        if resolved in seen or resolved in resolved_inputs:
+            continue
+        url = _public_url_for_file(path, request)
+        if not url:
+            continue
+        seen.add(resolved)
+        images.append({"url": url, "name": path.name})
+    return images
+
+
 def get_agent(
     tools,
     prompt_file,
@@ -201,6 +405,8 @@ def run_OralAgent(
 
     final_response = None
     stream_events: List[Dict[str, Any]] = []
+    input_image_paths = _extract_input_image_paths(messages)
+    output_image_paths: List[str] = []
     # 汇总本请求内所有 LLM 调用的 token 消耗
     total_input_tokens = 0
     total_output_tokens = 0
@@ -214,6 +420,11 @@ def run_OralAgent(
             if isinstance(v, dict) and "messages" in v:
                 step_messages = [_serialize_message_for_log(m) for m in v["messages"]]
                 step_log = {"node": node_name, "messages": step_messages}
+                for m in v["messages"]:
+                    if isinstance(m, ToolMessage):
+                        output_image_paths.extend(
+                            _extract_output_image_paths_from_text(getattr(m, "content", "") or "")
+                        )
                 # 本步 token 消耗（来自 AIMessage.usage_metadata）
                 step_input = 0
                 step_output = 0
@@ -235,6 +446,7 @@ def run_OralAgent(
                 stream_events.append(step_log)
 
     final_response = final_response["messages"][-1].content.strip()
+    output_image_paths.extend(_extract_output_image_paths_from_text(final_response))
     agent_state = agent.workflow.get_state(thread)
     end_time = time.time()
     duration_sec = round(end_time - start_time, 3)
@@ -281,11 +493,26 @@ def run_OralAgent(
             import traceback
             print(f"[RequestLog] Failed to write {log_file}: {e}\n{traceback.format_exc()}")
 
-    return final_response, str(agent_state)
+    return final_response, str(agent_state), output_image_paths, input_image_paths
 
 @OralAgent.get("/test")
 def test_endpoint():
     return {"status": "OralAgent is working"}
+
+
+@OralAgent.get("/files/{file_path:path}")
+def public_file_endpoint(file_path: str):
+    requested = Path(file_path)
+    candidates = [(PROJECT_ROOT / requested).resolve()]
+    candidates.extend((root / requested).resolve() for root in PUBLIC_FILE_ROOTS)
+
+    for candidate in candidates:
+        allowed = any(_path_is_relative_to(candidate, root) for root in PUBLIC_FILE_ROOTS)
+        if allowed and candidate.is_file() and candidate.suffix.lower() in IMAGE_SUFFIXES:
+            return FileResponse(candidate)
+
+    raise HTTPException(status_code=404, detail="File not found")
+
 
 @OralAgent.on_event("startup")
 async def startup_event():
@@ -323,28 +550,32 @@ async def startup_event():
 
 # 添加 API 路由
 @OralAgent.post("/v1/chat/completions")
-def run_agent_endpoint(request: ChatCompletionRequest):
+def run_agent_endpoint(chat_request: ChatCompletionRequest, request: Request):
     try:
         request_id = str(uuid.uuid4())
+        messages = _materialize_base64_images(chat_request.messages)
         # 每次请求使用新的 thread_id，多次请求之间状态互不影响；若配置了日志目录则写入请求级日志便于统计工具调用
-        response, state = run_OralAgent(
+        response, state, output_image_paths, input_image_paths = run_OralAgent(
             agent=agent,
-            messages=request.messages,
+            messages=messages,
             request_id=request_id,
             request_log_dir=DEFAULT_REQUEST_LOG_DIR or None,
             request_log_session_dir=REQUEST_LOG_SESSION_DIR,
         )
+        output_images = _build_output_images(output_image_paths, input_image_paths, request)
         return {
             "id": f"chatcmpl-{request_id.replace('-', '')[:24]}",
             "object": "chat.completion",
             "created": int(time.time()),  # 当前时间戳
             "response": response,
+            "output_images": output_images,
             "choices": [
                 {
                     "index": 0,
                     "message": {
                         "role": "assistant",
                         "content": response,  # 使用生成的响应内容
+                        "images": output_images,
                         "annotations": [],
                         "refusal": None,
                     }
